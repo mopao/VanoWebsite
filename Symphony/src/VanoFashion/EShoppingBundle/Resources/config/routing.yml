@@ -1,0 +1,3 @@
+vano_fashion_e_shopping_homepage:
+    path:     /
+    defaults: { _controller: VanoFashionEShoppingBundle:Default:index }
