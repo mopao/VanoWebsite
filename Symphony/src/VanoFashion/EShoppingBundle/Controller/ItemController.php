@@ -4,10 +4,10 @@ namespace VanoFashion\EShoppingBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController extends Controller
+class ItemController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('VanoFashionEShoppingBundle:Default:index.html.twig');
+        return $this->render('VanoFashionEShoppingBundle:Item:index.html.twig');
     }
 }

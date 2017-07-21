@@ -1,7 +1,5 @@
 vano_fashion_e_shopping:
     resource: "@VanoFashionEShoppingBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   vanofashion/
 
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+

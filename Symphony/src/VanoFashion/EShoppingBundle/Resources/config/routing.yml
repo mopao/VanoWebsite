@@ -1,3 +1,43 @@
 vano_fashion_e_shopping_homepage:
     path:     /
-    defaults: { _controller: VanoFashionEShoppingBundle:Default:index }
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:index }
+
+vano_fashion_e_shopping_view_customerType:
+    path: /{customerType}/{catalogType}/{_locale}/{filter}{page}
+    defaults:
+        _controller: VanoFashionEShoppingBundle:Item:viewCustomerType 
+        locale: en 
+        page: 1 
+        catalogType:catalog         
+
+    requirements:
+        locale: en|fr
+        page:   \d*
+        catalogType: sale|catalog
+        filter: \w*
+
+vano_fashion_e_shopping_view_itemCategory:
+    path: /{customerType}/{catalogType}/{itemCategory}/{_locale}/{filter}{page}
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:viewItemCategory , locale: en , page: 1 , catalogType:catalog}
+    requirements:
+        locale: en|fr
+        page:   \d*
+        catalogType: sale|catalog
+        filter: \w*
+
+
+vano_fashion_e_shopping_view_itemtype:
+    path: /{customerType}/{catalogType}/{itemCategory}/{itemType}/{_locale}/{filter}{page}
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:viewItemType , locale: en , page: 1 , catalogType:catalog}
+    requirements:
+        locale: en|fr
+        page:   \d*
+        catalogType: sale|catalog
+        filter: \w*
+
+vano_fashion_e_shopping_view_item:
+    path: /item/{id}/{_locale}
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:viewItem , locale: en }
+    requirements:
+        locale: en|fr
+
