@@ -3,7 +3,7 @@ vano_fashion_e_shopping_homepage:
     defaults: { _controller: VanoFashionEShoppingBundle:Item:index }
 
 vano_fashion_e_shopping_view_customerType:
-    path: /{customerType}/{catalogType}/{_locale}/list{filter}{page}
+    path: /{customerType}/{catalogType}/{_locale}/list/{page}
     defaults:
         _controller: VanoFashionEShoppingBundle:Item:CustomerType 
         locale: en 
@@ -14,26 +14,24 @@ vano_fashion_e_shopping_view_customerType:
         locale: en|fr
         page:   \d*
         catalogType: sale|catalog
-        filter: \w*
 
 vano_fashion_e_shopping_view_itemProduct:
-    path: /{customerType}/{catalogType}/{itemProduct}/{_locale}/list{filter}{page}
+    path: /{customerType}/{catalogType}/{itemProduct}/{_locale}/list/{page}
     defaults: { _controller: VanoFashionEShoppingBundle:Item:viewProduct , locale: en , page: 1 , catalogType:catalog}
     requirements:
         locale: en|fr
         page:   \d*
         catalogType: sale|catalog
-        filter: \w*
+
 
 
 vano_fashion_e_shopping_view_itemCategory:
-    path: /{customerType}/{catalogType}/{itemProduct}/{itemCategory}/{_locale}/list{filter}{page}
+    path: /{customerType}/{catalogType}/{itemProduct}/{itemCategory}/{_locale}/list/{page}
     defaults: { _controller: VanoFashionEShoppingBundle:Item:viewCategory , locale: en , page: 1 , catalogType:catalog}
     requirements:
         locale: en|fr
         page:   \d*
         catalogType: sale|catalog
-        filter: \w*
 
 vano_fashion_e_shopping_view_item:
     path: /item/{id}/{_locale}
@@ -42,7 +40,7 @@ vano_fashion_e_shopping_view_item:
         locale: en|fr
 
 vano_fashion_e_shopping_website_management_item_list:
-    path: /website management/{_locale}/item/list{filter}{page}
+    path: /website management/{_locale}/item/list/{page}
     defaults: { _controller: VanoFashionEShoppingBundle:Item:managementView , locale: en , page: 1 }
     requirements:
         locale: en|fr
