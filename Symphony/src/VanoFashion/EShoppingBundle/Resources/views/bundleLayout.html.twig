@@ -1,0 +1,24 @@
+{% extends "::generalLayout.html.twig" %}
+
+
+{% block title %}
+
+  {{ parent() }} shopping
+
+{% endblock %}
+
+
+{% block body %}
+
+
+  {# On définit un sous-titre commun à toutes les pages du bundle, par exemple #}
+
+  <h1>Items</h1>
+
+  
+  {% block vanofashioneshopping_body %}
+
+  {% endblock %}
+
+
+{% endblock %}
