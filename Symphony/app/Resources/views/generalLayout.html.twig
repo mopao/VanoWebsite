@@ -14,6 +14,7 @@
 
 	  {% block stylesheets%} 	    
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lobster+Two" />
 
 	  <style type="text/css">
 
@@ -169,6 +170,7 @@
 	    left: 60%;
 	    right: auto;
 	    text-align: left;
+	    background-color:   #e5e7e9;
 	    transform: translate(-50%, 0);
 	 }
 
@@ -194,6 +196,51 @@
 		border:1px solid #4a235a;
 	}
 
+	footer{
+		background-color:  #EAEDED ;
+	}
+
+	
+
+	div.footer-menu > ul  {
+		list-style:none !important;		
+	}
+
+	div.footer-menu > ul li a {
+		color:  #2e4053 ;
+	  	text-decoration: none;
+	}
+
+	.footer-menu--header{
+		font-weight: bold;
+		font-size: 15px;
+
+	}
+
+	.copyright-text{
+		text-align: center;
+		font-family: "Lobster Two";
+		color:   #5b2c6f  ;
+		font-size: 16px;
+		
+
+	}
+
+	footer > div.row{
+		border-top: 1px solid  #b2babb ;
+		padding-top: 10px;
+
+
+	}
+	.headline{		
+		padding: 0px;
+		background-color: #fff;
+	}
+	.affix {
+       top: 0;
+      width: 100%;
+    }
+
 	  </style>
       
 	  {% endblock %}
@@ -205,142 +252,176 @@
 
 	<body>
     <div class="police">
-    <div class="container-fluid">
-      <div class="row discount">
-      {% block discount %}
-      <p class="text-center" >  here is for discount's messages </p>
-      {%endblock%}
-     </div>
-	  <div  class="row">
-	  	  <div class="col-sm-1">  </div>
-	  	  <div class="col-sm-3"> 
-		  	  <span style= "padding-right: 20px">Currency: 
-		  	    <span class="dropdown">
-				  <span class="dropdown-toggle"  data-toggle="dropdown"><span class="glyphicon glyphicon-usd"></span>
-				  <span class="caret"></span></span>
-				  <ul id="currency" class="dropdown-menu">
-				    <li><a href="#"><span class="glyphicon glyphicon-euro"></span></a></li>			    
-				    <li><a href="#"><span class="glyphicon glyphicon-usd"></span></a></li>
-				    <li><a href="#">Cad </a></li>
-				    <li><a href="#">Fcfa </a></li>
-				  </ul>
-				  </span> 
-			    </span>
+    <div class="container-fluid headline " data-spy="affix" data-offset-top="30" >
+	    <div class="container-fluid">
+	      <div class="row discount">
+	      {% block discount %}
+	      <p class="text-center" >  here is for discount's messages </p>
+	      {%endblock%}
+	     </div>
+		  <div  class="row">
+		  	  <div class="col-sm-1">  </div>
+		  	  <div class="col-sm-3"> 
+			  	  <span style= "padding-right: 20px">Currency: 
+			  	    <span class="dropdown">
+					  <span class="dropdown-toggle"  data-toggle="dropdown"><span class="glyphicon glyphicon-usd"></span>
+					  <span class="caret"></span></span>
+					  <ul id="currency" class="dropdown-menu">
+					    <li><a href="#"><span class="glyphicon glyphicon-euro"></span></a></li>			    
+					    <li><a href="#"><span class="glyphicon glyphicon-usd"></span></a></li>
+					    <li><a href="#">Cad </a></li>
+					    <li><a href="#">Fcfa </a></li>
+					  </ul>
+					  </span> 
+				    </span>
 
-			    <span > <span style= "padding-right: 5px" class="glyphicon glyphicon-globe"></span>Language: <a id="langFr" class="lien" href="" >Fr</a>|<a id="langEn" class="lien" href="" >En</a>
-			    </span>
+				    <span > <span style= "padding-right: 5px" class="glyphicon glyphicon-globe"></span>Language: <a id="langFr" class="lien" href="" >Fr</a>|<a id="langEn" class="lien" href="" >En</a>
+				    </span>
 
-            </div>
+	            </div>
 
-            <div class="col-sm-5"> 
-             	{% image 'bundles/vanofashioneshopping/images/logo3.png' %}
-			   <img style= "padding-top: 10px" class="img-responsive logo" src="{{ asset_url }}" alt="Logo" width="180" height="175"> 
-			    {% endimage %}
-            </div>
+	            <div class="col-sm-5"> 
+	             	{% image 'bundles/vanofashioneshopping/images/logo3.png' %}
+				   <img style= "padding-top: 10px" class="img-responsive logo" src="{{ asset_url }}" alt="Logo" width="180" height="175"> 
+				    {% endimage %}
+	            </div>
 
-            <div class="col-sm-1">
-            	<a class="lien" href="" ><span class="glyphicon glyphicon-user"></span> 
-            		<span id="userNickname"> My area </span> </a>
-            </div>
+	            <div class="col-sm-1">
+	            	<a class="lien" href="" ><span class="glyphicon glyphicon-user"></span> 
+	            		<span id="userNickname"> My area </span> </a>
+	            </div>
 
-            <div class="col-sm-1">
-            	<a class="lien" href="" > <span id="userCart"> My cart </span>
-            	<span class="glyphicon glyphicon-shopping-cart"></span>
-                </a>
-            </div>
-            <div class="col-sm-1">  </div>
-	    
-	  </div>
-	    
-	</div>
+	            <div class="col-sm-1">
+	            	<a class="lien" href="" > <span id="userCart"> My cart </span>
+	            	<span class="glyphicon glyphicon-shopping-cart"></span>
+	                </a>
+	            </div>
+	            <div class="col-sm-1">  </div>
+		    
+		  </div>
+		    
+		</div>   
 
-
-   
-
-    <nav class="navbar navbar-default navbar-fixed">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	      </button>	     
-	    </div>
-	    <div class="collapse navbar-collapse" id="myNavbar">
-	      <ul class=" col-sm-2"> </ul>
-	      <ul class="nav navbar-nav col-sm-6">
-	        <li class="dropdown dropdown-large menu ">
-	        	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Men</a>
-	        	<ul class="dropdown-menu dropdown-menu-large container center">
-	        	  <li class="col-sm-3">
-	        	  	
-				      <a href="#">
-				      	{% image 'bundles/vanofashioneshopping/images/model_new_arrivals.jpg' %}
-				        <img src="{{ asset_url }}" alt="Lights" style="width:100%">
-				        {% endimage %}
-				        <div class="text-center dropdown-menu-new-arrival" >
-				          <p >New Arrivals</p>
-				        </div>
-				      </a>
-				    
-	        	  </li>
-		          <li class="col-sm-3"> 
-		          	<ul>
-						<li class="dropdown-header">Shop by product</li>
-						<li><a href="#">Clothing</a></li>						
-						<li><a href="#">Bag</a></li>
-						<li><a href="#">Shoes</a></li>
-						<li><a href="#">Accessories</a></li>
-						<li><a href="#">Jewelry</a></li>
-						<li><a href="#">More ...</a></li>
-					</ul>
-		          </li>
-		          <li class="col-sm-3">
-		          	<ul>
-						<li class="dropdown-header">Shop by Designer</li>
-						<li><a href="#">Ralph Lauren</a></li>
-						<li><a href="#">Tommy </a></li>
-						<li><a href="#">Calvin Klein</a></li>
-						<li><a href="#">Diesel</a></li>
-						<li><a href="#">Guess</a></li>
-						<li > <a href="#">More ...</a> </li>
-						
-					</ul>
-		          </li>
-		          <li class="col-sm-3">
-		          	<ul>
-						<li class="dropdown-header">Shop by occasion</li>
-						<li><a href="#">Business</a></li>
-						<li><a href="#">Party</a></li>
-						<li><a href="#">Vacation</a></li>						
-						<li><a href="#">Wedding</a></li>
-						<li><a href="#">Beach</a></li>
-						<li><a href="#">More ...</a></li>
-					</ul>
-		          </li>
-		        </ul>
-	        </li>
-		    <li class="menu"><a href="#menu2">Women</a></li>
-		    <li class="menu"><a href="#menu3">Designers</a></li>
-		    <li class="menu"><a href="#home">Website Management</a></li>
-	      </ul>
-	      <form class="navbar-form navbar-right  col-sm-3">
-	        <div class="input-group">
-			    <input type="text" id="search-input" class="btn btn-default" placeholder="Search">
-			    <div class="input-group-btn">
-			      <button id="btn-search" class="btn btn-default" type="submit">
-			        <i class="glyphicon glyphicon-search"></i>
-			      </button>
-			    </div>
+	    <nav class="navbar navbar-default navbar-fixed">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>	     
 		    </div>
-          </form> 
-	    </div>
-	  </div>
-    </nav> 
+		    <div class="collapse navbar-collapse" id="myNavbar">
+		      <ul class=" col-sm-2"> </ul>
+		      <ul class="nav navbar-nav col-sm-6">
+		        <li class="dropdown dropdown-large menu ">
+		        	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Men</a>
+		        	<ul class="dropdown-menu dropdown-menu-large container center">
+		        	  <li class="col-sm-3">
+		        	  	
+					      <a href="#">
+					      	{% image 'bundles/vanofashioneshopping/images/model_new_arrivals.jpg' %}
+					        <img src="{{ asset_url }}" alt="Lights" style="width:100%">
+					        {% endimage %}
+					        <div class="text-center dropdown-menu-new-arrival" >
+					          <p >New Arrivals</p>
+					        </div>
+					      </a>
+					    
+		        	  </li>
+			          <li class="col-sm-3"> 
+			          	<ul>
+							<li class="dropdown-header">Shop by product</li>
+							<li><a href="#">Clothing</a></li>						
+							<li><a href="#">Bag</a></li>
+							<li><a href="#">Shoes</a></li>
+							<li><a href="#">Accessories</a></li>
+							<li><a href="#">Jewelry</a></li>
+							<li><a href="#">More ...</a></li>
+						</ul>
+			          </li>
+			          <li class="col-sm-3">
+			          	<ul>
+							<li class="dropdown-header">Shop by Designer</li>
+							<li><a href="#">Ralph Lauren</a></li>
+							<li><a href="#">Tommy </a></li>
+							<li><a href="#">Calvin Klein</a></li>
+							<li><a href="#">Diesel</a></li>
+							<li><a href="#">Guess</a></li>
+							<li > <a href="#">More ...</a> </li>
+							
+						</ul>
+			          </li>
+			          <li class="col-sm-3">
+			          	<ul>
+							<li class="dropdown-header">Shop by occasion</li>
+							<li><a href="#">Business</a></li>
+							<li><a href="#">Party</a></li>
+							<li><a href="#">Vacation</a></li>						
+							<li><a href="#">Wedding</a></li>
+							<li><a href="#">Beach</a></li>
+							<li><a href="#">More ...</a></li>
+						</ul>
+			          </li>
+			        </ul>
+		        </li>
+			    <li class="menu"><a href="#menu2">Women</a></li>
+			    <li class="menu"><a href="#menu3">Designers</a></li>
+			    <li class="menu"><a href="#home">Website Management</a></li>
+		      </ul>
+		      <form class="navbar-form navbar-right  col-sm-3">
+		        <div class="input-group">
+				    <input type="text" id="search-input" class="btn btn-default" placeholder="Search">
+				    <div class="input-group-btn">
+				      <button id="btn-search" class="btn btn-default" type="submit">
+				        <i class="glyphicon glyphicon-search"></i>
+				      </button>
+				    </div>
+			    </div>
+	          </form> 
+		    </div>
+		  </div>
+	    </nav> 
 	
-	
+    </div>	
   
   
+    <div id="home" >
+      <h3>HOME</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+    <div id="menu1" >
+      <h3>Menu 1</h3>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div id="menu2" >
+      <h3>Menu 2</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+    <div id="menu3" >
+      <h3>Menu 3</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
+
+
+    <div id="home" >
+      <h3>HOME</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+    <div id="menu1" >
+      <h3>Menu 1</h3>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div id="menu2" >
+      <h3>Menu 2</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+    <div id="menu3" >
+      <h3>Menu 3</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
+
+
     <div id="home" >
       <h3>HOME</h3>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -366,6 +447,44 @@
     {% endblock %}
 
     </div>
+
+    <footer class="container-fluid  ">
+        <div class="row">
+	    	<div class="col-sm-4 footer-menu "> 
+	    		<ul>
+	    			
+	    			<li class="footer-menu--header">Customer service</li>
+	    			<li><a href="">Contact us</a></li>
+	    			
+
+	    		</ul></div>
+	    	<div class="col-sm-4 footer-menu"> 
+	    		<ul>	    			
+	    			<li class="footer-menu--header">VanoFashion</li>
+	    			<li><a href="">About us</a></li>
+	    			<li><a href="">Privacy policy</a></li>
+	    			
+	    			
+	    		</ul>
+	    	</div>
+	    	<div class="col-sm-4 footer-menu">
+	    		<ul>	    			
+	    			<li class="footer-menu--header">Shopping Online</li>
+	    			<li><a href="">Prices &amp Currencies</a></li>
+	    			<li><a href="">available payment</a></li>
+	    			<li><a href="">shipment information</a></li>
+	    			<li><a href="">return policy</a></li>
+	    			<li><a href="">Terms &amp conditions </a></li>
+	    		</ul>
+	    	</div>
+    	</div>
+
+    	<div class="row copyright-text">
+    		&copy 2018-<script>document.write(new Date().getFullYear())</script> 
+    		<span id="company-name"> VanoFashion </span>
+    	</div>
+       
+   </footer>
 
     {% block javascripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
