@@ -1,0 +1,25 @@
+
+
+.home-headline{
+	
+	border: 1px solid  #5C1F79;
+	color:  black;
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+img.home-model-img{
+	width: 100%;
+    height: 40%;    
+}
+
+div.home-product > div{
+	padding-left: 10px;
+}
+
+.desc-home-model-img{
+	text-align: center;
+	font-weight: bold;
+	font-size: 17px;
+	text-transform: uppercase;	
+}

@@ -3,7 +3,17 @@
 
 {% block title %}
 
-  Accueil - {{ parent() }}
+  Home - {{ parent() }}
+
+{% endblock %}
+
+{% block stylesheets%}
+{{ parent() }}
+
+{% stylesheets 'bundles/vanofashioneshopping/css/home.css' filter='cssrewrite' %}
+<link rel="stylesheet" href="{{ asset_url }}"  />
+{% endstylesheets %}
+
 
 {% endblock %}
 
@@ -11,7 +21,94 @@
 {% block vanofashioneshopping_body %}
 
 
-  <h2>Liste des annonces</h2>
+  <div class="container-fluid">
+    <div class="row home-headline">
+
+    <div class="col-sm-4 text-center">
+       <h4>MEN</h4>
+    </div>
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4 text-center">
+       <h4>WOMEN</h4>
+    </div>
+  </div>
+
+  <div class="row home-product">     
+
+      <div class="col-sm-6 " > 
+      <div class="row">
+
+        <a href="">          
+          {% image 'bundles/vanofashioneshopping/images/home_suit_model_men.jpg' %}
+                  <img src="{{ asset_url }}" alt=" man model wearing a suit" class="home-model-img">
+          {% endimage %}
+          <div class="desc-home-model-img"> suits</div>
+
+        </a>
+      </div> 
+
+      <div class="row">
+        <a href="">
+          {% image 'bundles/vanofashioneshopping/images/home_jeans_model_men.jpg' %}
+                  <img src="{{ asset_url }}" alt=" man model wearing a suit" class="home-model-img">
+          {% endimage %}
+          <div class="desc-home-model-img"> jeans</div>
+        </a> 
+      </div>
+
+      <div class="row">
+        <a href="">
+          {% image 'bundles/vanofashioneshopping/images/home_basket_model_men.jpg' %}
+                  <img src="{{ asset_url }}" alt=" man model wearing a suit" class="home-model-img">
+          {% endimage %}
+          <div class="desc-home-model-img"> shoes</div>
+
+        </a> 
+      </div>
+        
+      </div>  
+
+      <div class="col-sm-6 ">
+        <div class="row">
+          <a href="">
+          {% image 'bundles/vanofashioneshopping/images/home_dress_model_women.jpg' %}
+                  <img src="{{ asset_url }}" alt=" woman model wearing a dress" class="home-model-img" >
+          {% endimage %}
+          <div class="desc-home-model-img"> dress</div>
+        </a>
+        </div>
+
+        <div class="row">
+          <a href="">
+          {% image 'bundles/vanofashioneshopping/images/home_jeans_model_women.jpg' %}
+                  <img src="{{ asset_url }}" alt=" man model wearing a suit" class="home-model-img">
+          {% endimage %}
+          <div class="desc-home-model-img"> jeans </div>
+
+          </a>
+        </div>
+
+        <div class="row">
+          <a href="">
+          {% image 'bundles/vanofashioneshopping/images/home_escarpin_model_women.jpg' %}
+                  <img src="{{ asset_url }}" alt=" man model wearing a suit" class="home-model-img">
+          {% endimage %}
+          <div class="desc-home-model-img"> shoes</div>
+        </a>
+        </div>
+      </div>
+
+  </div> 
+
+  
+
+  
+ 
+  
+  </div>
+
+  
+  
 
 
   

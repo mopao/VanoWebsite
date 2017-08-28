@@ -15,244 +15,19 @@
 	  {% block stylesheets%} 	    
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lobster+Two" />
+	  {% stylesheets 'bundles/vanofashioneshopping/css/general.css' filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+      {% endstylesheets %}
 
-	  <style type="text/css">
-
-	  .discount {
-	  		 height: 35px ;
-	  		 background-color:  #EAEDED ; 
-	  		 padding-top: 7px ; 
-	  		 color:#5C1F79;
-	  		 border-bottom: 1px solid #5C1F79;
-	  		 border-top: 1px solid #5C1F79;
-
-	  }
-
-	  .police{
-	  	color:     #2e4053  ;
-	  	text-transform: capitalize;
-	  }
-
-	  a.lien {
-	  	color:  #2e4053 ;
-	  	text-decoration: none;
-
-	  }
-
-	  ul[id="currency"].dropdown-menu li {
-	  	 border: 1px solid  #eaecee ;
-	  	 border-radius: 5px;
-	  	 text-align: center;	  	  
-	  }
-
-	  ul.dropdown-menu{
-	  	min-width: 65px;
-	  }
-	  
-	  .logo{
-	  	display: block;
-        margin: auto;
-	  }
-
-	  .navbar{
-	  	background-color: #5C1F79;
-	  	margin-top: 15px;	  	
-	  }
-
-	  .nav.navbar-nav > li > a {
-        color: white;
-        padding-right: 45px;
-        padding-bottom: 18px;
-        text-transform: uppercase;
-        text-decoration: none;
-      } 
-
-      .nav.navbar-nav .dropdown-menu li a {
-        color: #2e4053;
-        
-      } 
-
-      .nav.navbar-nav li a:hover {        
-        background-color:    #fff;
-        color: #5C1F79;
-      }   
-
-         
-
-      #search-input {
-       width: 100px;
-       transition: ease-in-out, width .35s ease-in-out;
-      }
-
-      #search-input:focus {
-       width: 250px;
-      }
-
-      .nav.navbar-nav .dropdown-menu {
-       display: none;
-      }
-      .nav.navbar-nav .dropdown:hover  .dropdown-menu {
-       display: block;
-      }
-
-      .dropdown-large {
-        position: static !important;
-      }
-
-      .dropdown-menu-large {
-	  margin-left: 16px;
-	  margin-right: 16px;
-	  padding: 20px 0px;
-	  }
-	  .dropdown-menu-large > li > ul {
-	  padding: 0;
-	  margin: 0;
-	  }
-	  .dropdown-menu-large > li > ul > li {
-	  list-style: none;
-	  }
-	  .dropdown-menu-large > li > ul > li > a {
-	  display: block;
-	  padding: 3px 20px;
-	  clear: both;
-	  font-weight: normal;
-	  line-height: 1.428571429;
-	  color: #333333;
-	  white-space: normal;
-	  }
-	  .dropdown-menu-large > li ul > li > a:hover,
-	  .dropdown-menu-large > li ul > li > a:focus {
-	  text-decoration: none;
-	  color: #262626;
-	  background-color: #f5f5f5;
-	  }
-	 .dropdown-menu-large .disabled > a,
-	 .dropdown-menu-large .disabled > a:hover,
-	 .dropdown-menu-large .disabled > a:focus {
-	  color: #999999;
-	 }
-	 .dropdown-menu-large .disabled > a:hover,
-	 .dropdown-menu-large .disabled > a:focus {
-	  text-decoration: none;
-	  background-color: transparent;
-	  background-image: none;
-	  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
-	  cursor: not-allowed;
-	 }
-	 .dropdown-menu-large .dropdown-header {
-	  color: #4a235a;
-	  font-size: 18px;
-	  font-weight: bold;
-	 }
-	 @media (max-width: 768px) {
-	   .dropdown-menu-large {
-	    margin-left: 0 ;
-	    margin-right: 0 ;
-	    }
-		.dropdown-menu-large > li {
-		    margin-bottom: 30px;
-		 }
-		 .dropdown-menu-large > li:last-child {
-		    margin-bottom: 0;
-		 }
-		 .dropdown-menu-large .dropdown-header {
-		    padding: 3px 15px !important;
-		 }
-
-	 }
-
-	 
-
-     .navbar-nav>li>.dropdown-menu {
-	    margin-top: 6px;
-	    border-top-left-radius: 0;
-	    border-top-right-radius: 0;
-	    left: 60%;
-	    right: auto;
-	    text-align: left;
-	    background-color:   #e5e7e9;
-	    transform: translate(-50%, 0);
-	 }
-
-	.dropdown-menu:before {
-	  position: absolute;
-	  top: -7px;
-	  left: 50%;
-	  right: auto;
-	  display: inline-block;
-	  border-right: 7px solid transparent;
-	  border-bottom: 7px solid #ccc;
-	  border-left: 7px solid transparent;
-	  border-bottom-color: rgba(0, 0, 0, 0.2);
-	  content: '';
-	}
-
-	.dropdown-menu-new-arrival{
-		text-transform: uppercase; 
-		color: #4a235a;  
-		margin-top:8px ; 
-		padding-top:5px ; 
-		width:100% ; 
-		border:1px solid #4a235a;
-	}
-
-	footer{
-		background-color:  #EAEDED ;
-	}
-
-	
-
-	div.footer-menu > ul  {
-		list-style:none !important;		
-	}
-
-	div.footer-menu > ul li a {
-		color:  #2e4053 ;
-	  	text-decoration: none;
-	}
-
-	.footer-menu--header{
-		font-weight: bold;
-		font-size: 15px;
-
-	}
-
-	.copyright-text{
-		text-align: center;
-		font-family: "Lobster Two";
-		color:   #5b2c6f  ;
-		font-size: 16px;
-		
-
-	}
-
-	footer > div.row{
-		border-top: 1px solid  #b2babb ;
-		padding-top: 10px;
-
-
-	}
-	.headline{		
-		padding: 0px;
-		background-color: #fff;
-	}
-	.affix {
-       top: 0;
-      width: 100%;
-    }
-
-	  </style>
-      
 	  {% endblock %}
-
 
 
 	</head>
 
 
-	<body>
+	<body >
     <div class="police">
-    <div class="container-fluid headline " data-spy="affix" data-offset-top="30" >
+    <div class="container-fluid  " >
 	    <div class="container-fluid">
 	      <div class="row discount">
 	      {% block discount %}
@@ -282,7 +57,7 @@
 
 	            <div class="col-sm-5"> 
 	             	{% image 'bundles/vanofashioneshopping/images/logo3.png' %}
-				   <img style= "padding-top: 10px" class="img-responsive logo" src="{{ asset_url }}" alt="Logo" width="180" height="175"> 
+				   <img  class="img-responsive logo" src="{{ asset_url }}" alt="Logo" width="180" height="175"> 
 				    {% endimage %}
 	            </div>
 
@@ -386,59 +161,7 @@
     </div>	
   
   
-    <div id="home" >
-      <h3>HOME</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    </div>
-    <div id="menu1" >
-      <h3>Menu 1</h3>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    <div id="menu2" >
-      <h3>Menu 2</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-    </div>
-    <div id="menu3" >
-      <h3>Menu 3</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-    </div>
-
-
-    <div id="home" >
-      <h3>HOME</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    </div>
-    <div id="menu1" >
-      <h3>Menu 1</h3>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    <div id="menu2" >
-      <h3>Menu 2</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-    </div>
-    <div id="menu3" >
-      <h3>Menu 3</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-    </div>
-
-
-    <div id="home" >
-      <h3>HOME</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    </div>
-    <div id="menu1" >
-      <h3>Menu 1</h3>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    <div id="menu2" >
-      <h3>Menu 2</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-    </div>
-    <div id="menu3" >
-      <h3>Menu 3</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-    </div>
-  </div>
+   
 
 
 
