@@ -1,16 +1,88 @@
-.discount {
-	  		 height: 35px ;
-	  		 background-color:  #EAEDED ; 
-	  		 padding-top: 7px ; 
-	  		 color:#5C1F79;
-	  		 border-bottom: 1px solid #5C1F79;
-	  		 border-top: 1px solid #5C1F79;
+	/* for message discount's animation */
+	.discount {
+		  		 height: 35px ;
+		  		 background-color:  #EAEDED ; 
+		  		 padding-top: 7px ; 
+		  		 color:#5C1F79;
+		  		 border-bottom: 1px solid #5C1F79;
+		  		 border-top: 1px solid #5C1F79;
+		  		 -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+			     -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+			     animation-name: example;
+			     animation-duration: 2s;			     
+			     animation-iteration-count: infinite;
+			     animation-direction: alternate;
+			     -webkit-transition: width 2s; /* For Safari 3.1 to 6.0 */
+                 transition: width 2s;	
+              }
 
-	  }
+		  /* Safari 4.0 - 8.0 */
+		@-webkit-keyframes example {
+		    from {
+		    	color: #2e4053;
+		    }
+		    to {
+		    	color: #5C1F79;
+		    	font-size: 21px;
+		    	font-weight: bold;	
+		    	text-shadow: 2px 2px 5px #2e4053;	    	
+		    }
+		}
+
+		/* Standard syntax */
+		@keyframes example {
+		    from {
+		    	color: #2e4053;
+		    }
+		    to {
+		    	color: #5C1F79;
+		    	font-size: 21px;
+		    	font-weight: bold;
+		    	text-shadow: 2px 2px 5px #2e4053;		    	
+		    }
+		}
+
+		/* for the logo rotation */
+		@-webkit-keyframes rotating /* Safari and Chrome */ {
+		  from {
+		    -webkit-transform: rotateY(0deg);
+		    -o-transform: rotateY(0deg);
+		    transform: rotateY(0deg);
+		  }
+		  to {
+		    -webkit-transform: rotateY(360deg);
+		    -o-transform: rotateY(360deg);
+		    transform: rotateY(360deg);
+		  }
+		}
+		@keyframes rotating {
+		  from {
+		    -ms-transform: rotateY(0deg);
+		    -moz-transform: rotateY(0deg);
+		    -webkit-transform: rotateY(0deg);
+		    -o-transform: rotateY(0deg);
+		    transform: rotateY(0deg);
+		  }
+		  to {
+		    -ms-transform: rotateY(360deg);
+		    -moz-transform: rotateY(360deg);
+		    -webkit-transform: rotateY(360deg);
+		    -o-transform: rotateY(360deg);
+		    transform: rotateY(360deg);
+		  }
+		}
+		.rotating {
+		  -webkit-animation: rotating 6s linear infinite;
+		  -moz-animation: rotating 6s linear infinite;
+		  -ms-animation: rotating 6s linear infinite;
+		  -o-animation: rotating 6s linear infinite;
+		  animation: rotating 6s linear infinite;
+		}
+		/* general font */
 
 	  .police{
 	  	color:     #2e4053  ;
-	  	text-transform: capitalize;
+	  	text-transform: capitalize;	  	
 	  }
 
 	  a, a:hover, a:visited{
@@ -39,7 +111,7 @@
 
 	  .navbar{
 	  	background-color: #5C1F79;
-	  	margin-top: 15px;	  	
+	  	margin-top: 15px;
 	  }
 
 	  .nav.navbar-nav > li > a {
@@ -60,19 +132,21 @@
         color: #5C1F79;
       }   
 
-         
-
-      #search-input {
+       
+      .search-input {
        width: 100px;
        transition: ease-in-out, width .35s ease-in-out;
+       border-top-left-radius: 10px;
+       border-bottom-left-radius:10px;
       }
 
-      #search-input:focus {
+      .search-input:focus {
        width: 250px;
       }
 
       .nav.navbar-nav .dropdown-menu {
        display: none;
+
       }
       .nav.navbar-nav .dropdown:hover  .dropdown-menu {
        display: block;
@@ -109,19 +183,7 @@
 	  color: #262626;
 	  background-color: #f5f5f5;
 	  }
-	 .dropdown-menu-large .disabled > a,
-	 .dropdown-menu-large .disabled > a:hover,
-	 .dropdown-menu-large .disabled > a:focus {
-	  color: #999999;
-	 }
-	 .dropdown-menu-large .disabled > a:hover,
-	 .dropdown-menu-large .disabled > a:focus {
-	  text-decoration: none;
-	  background-color: transparent;
-	  background-image: none;
-	  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
-	  cursor: not-allowed;
-	 }
+	 
 	 .dropdown-menu-large .dropdown-header {
 	  color: #4a235a;
 	  font-size: 18px;
