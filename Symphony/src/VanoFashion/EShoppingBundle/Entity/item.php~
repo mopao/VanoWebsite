@@ -285,28 +285,5 @@ class item
     {
         return $this->itemLabel;
     }
-
-    /**
-     * Set stock
-     *
-     * @param \VanoFashion\EShoppingBundle\Entity\itemStock $stock
-     *
-     * @return item
-     */
-    public function setStock(\VanoFashion\EShoppingBundle\Entity\itemStock $stock = null)
-    {
-        $this->stock = $stock;
-
-        return $this;
-    }
-
-    /**
-     * Get stock
-     *
-     * @return \VanoFashion\EShoppingBundle\Entity\itemStock
-     */
-    public function getStock()
-    {
-        return $this->stock;
-    }
 }
+
