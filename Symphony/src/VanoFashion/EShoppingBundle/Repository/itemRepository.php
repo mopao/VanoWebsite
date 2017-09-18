@@ -2,6 +2,9 @@
 
 namespace VanoFashion\EShoppingBundle\Repository;
 
+
+use Doctrine\ORM\QueryBuilder;
+
 /**
  * itemRepository
  *
@@ -10,4 +13,111 @@ namespace VanoFashion\EShoppingBundle\Repository;
  */
 class itemRepository extends \Doctrine\ORM\EntityRepository
 {
+
+  /**
+   * get all items
+   */
+	public function getItems(){
+
+		$qb=$this->createQueryBuilder('i')
+                 ->innerJoin('i.stock', 's')
+                 ->addSelect('s');
+
+        $qb->innerJoin('i.type', 't')
+           ->addSelect('t');
+
+        $qb->innerJoin('i.product', 'p')
+           ->addSelect('p');
+
+        $qb->innerJoin('i.images', 'img')
+           ->addSelect('img');
+        
+
+        return $qb->getQuery()
+                  ->getResult();
+
+	}
+
+   /**
+   * get  items belonging to a given product
+   */
+  public function getItemsInProduct($product){
+
+    $qb=$this->createQueryBuilder('i')
+                 ->innerJoin('i.stock', 's')
+                 ->addSelect('s');
+
+        $qb->innerJoin('i.type', 't')
+           ->addSelect('t');
+
+        $qb->innerJoin('i.product', 'p')
+           ->addSelect('p');
+
+        $qb->innerJoin('i.images', 'img')
+           ->addSelect('img');
+
+        $qb->where('p.name = :product');
+        $qb->setParameter('id',$product);
+        
+
+        return $qb->getQuery()
+                  ->getResult();
+
+  }
+
+  /**
+   * get  items belonging to a given itemType
+   */
+  public function getItemsInProduct($type){
+
+    $qb=$this->createQueryBuilder('i')
+                 ->innerJoin('i.stock', 's')
+                 ->addSelect('s');
+
+        $qb->innerJoin('i.type', 't')
+           ->addSelect('t');
+
+        $qb->innerJoin('i.product', 'p')
+           ->addSelect('p');
+
+        $qb->innerJoin('i.images', 'img')
+           ->addSelect('img');
+
+        $qb->where('t.type = :type');
+        $qb->setParameter('type',$type);
+        
+
+        return $qb->getQuery()
+                  ->getResult();
+
+  }
+
+
+
+  /**
+   * get item with a given id
+   */
+
+  public function getItem($id){
+
+    $qb=$this->createQueryBuilder('i')
+                 ->innerJoin('i.stock', 's')
+                 ->addSelect('s');
+
+        $qb->innerJoin('i.type', 't')
+           ->addSelect('t');
+
+        $qb->innerJoin('i.product', 'p')
+           ->addSelect('p');
+
+        $qb->innerJoin('i.images', 'img')
+           ->addSelect('img');
+        
+        $qb->where('i.id = :id');
+        $qb->setParameter('id',$id);
+
+        return $qb->getQuery()
+                  ->getSingleResult();
+
+  }
 }

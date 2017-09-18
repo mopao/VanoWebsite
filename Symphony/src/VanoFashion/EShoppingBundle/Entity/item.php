@@ -14,9 +14,29 @@ class item
 {
 
     /**
+     * represent item
+     */
+    /**
+     * @ORM\OneToMany(targetEntity="VanoFashion\EShoppingBundle\Entity\Image", mappedBy="item")
+     */
+    private $images; 
+    /**
+     * @ORM\ManyToOne(targetEntity="VanoFashion\EShoppingBundle\Entity\itemType")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $type;
+    /**
+     * @ORM\ManyToOne(targetEntity="VanoFashion\EShoppingBundle\Entity\itemProduct")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $product;
+    
+    /**
      * @ORM\OneToOne(targetEntity="VanoFashion\EShoppingBundle\Entity\itemStock", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)   
      */
     private $stock;
+
 
     /**
      * @var int
@@ -83,6 +103,11 @@ class item
      */
     private $itemLabel;
 
+
+
+    public function __construct(){
+        $this->available=true;
+    }
 
     /**
      * Get id
@@ -286,6 +311,56 @@ class item
         return $this->itemLabel;
     }
 
+    
+
+    /**
+     * Set product
+     *
+     * @param \VanoFashion\EShoppingBundle\Entity\itemProduct $product
+     *
+     * @return item
+     */
+    public function setProduct(\VanoFashion\EShoppingBundle\Entity\itemProduct $product)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return \VanoFashion\EShoppingBundle\Entity\itemProduct
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * Set type
+     *
+     * @param \VanoFashion\EShoppingBundle\Entity\itemType $type
+     *
+     * @return item
+     */
+    public function setType(\VanoFashion\EShoppingBundle\Entity\itemType $type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return \VanoFashion\EShoppingBundle\Entity\itemType
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
     /**
      * Set stock
      *
@@ -293,7 +368,7 @@ class item
      *
      * @return item
      */
-    public function setStock(\VanoFashion\EShoppingBundle\Entity\itemStock $stock = null)
+    public function setStock(\VanoFashion\EShoppingBundle\Entity\itemStock $stock)
     {
         $this->stock = $stock;
 
@@ -308,5 +383,48 @@ class item
     public function getStock()
     {
         return $this->stock;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add image
+     *
+     * @param \VanoFashion\EShoppingBundle\Entity\Image $image
+     *
+     * @return item
+     */
+    public function addImage(\VanoFashion\EShoppingBundle\Entity\Image $image)
+    {
+        
+        $this->images[] = $image;
+        $image->setItem($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \VanoFashion\EShoppingBundle\Entity\Image $image
+     */
+    public function removeImage(\VanoFashion\EShoppingBundle\Entity\Image $image)
+    {
+        $this->images->removeElement($image);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 }

@@ -10,8 +10,13 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="item_stock")
  * @ORM\Entity(repositoryClass="VanoFashion\EShoppingBundle\Repository\itemStockRepository")
  */
+
+
 class itemStock
 {
+    /**
+     * represent item's stock
+     */
     /**
      * @var int
      *
@@ -56,7 +61,11 @@ class itemStock
      */
     private $dateOfEnd;
 
+    
+    public function __construct(){
 
+        $this->addingDate= new \Datetime();
+    }
     /**
      * Get id
      *

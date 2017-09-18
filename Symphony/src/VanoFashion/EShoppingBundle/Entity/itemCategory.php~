@@ -72,46 +72,5 @@ class itemCategory
     {
         return $this->name;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add product
-     *
-     * @param \VanoFashion\EShoppingBundle\Entity\itemProduct $product
-     *
-     * @return itemCategory
-     */
-    public function addProduct(\VanoFashion\EShoppingBundle\Entity\itemProduct $product)
-    {
-        $this->products[] = $product;
-        $product->setCategory($this);
-
-        return $this;
-    }
-
-    /**
-     * Remove product
-     *
-     * @param \VanoFashion\EShoppingBundle\Entity\itemProduct $product
-     */
-    public function removeProduct(\VanoFashion\EShoppingBundle\Entity\itemProduct $product)
-    {
-        $this->products->removeElement($product);
-    }
-
-    /**
-     * Get products
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getProducts()
-    {
-        return $this->products;
-    }
 }
+

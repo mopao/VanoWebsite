@@ -10,8 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="item_type")
  * @ORM\Entity(repositoryClass="VanoFashion\EShoppingBundle\Repository\itemTypeRepository")
  */
+
+
 class itemType
 {
+
+    /**
+     * represent item's type
+     */
     /**
      * @var int
      *
