@@ -2,6 +2,8 @@
 
 namespace VanoFashion\EShoppingBundle\Repository;
 
+use Doctrine\ORM\QueryBuilder;
+
 /**
  * itemCategoryRepository
  *
@@ -10,4 +12,19 @@ namespace VanoFashion\EShoppingBundle\Repository;
  */
 class itemCategoryRepository extends \Doctrine\ORM\EntityRepository
 {
+
+	/**
+	 *get category with its products
+	 */
+
+	public function getCategoryWithProducts(){
+
+		$qb=$this->createQueryBuilder('c')
+                 ->innerJoin('c.products', 'p')
+                 ->addSelect('p');
+
+        return $qb->getQuery()
+                  ->getResult();
+
+	}
 }

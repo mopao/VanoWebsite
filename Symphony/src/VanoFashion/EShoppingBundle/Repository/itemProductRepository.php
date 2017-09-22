@@ -10,4 +10,10 @@ namespace VanoFashion\EShoppingBundle\Repository;
  */
 class itemProductRepository extends \Doctrine\ORM\EntityRepository
 {
+
+	
+
+	
+
+
 }

@@ -71,7 +71,7 @@ class item
     /**
      * @var array
      *
-     * @ORM\Column(name="descrip", type="array", nullable=true)
+     * @ORM\Column(name="descrip", type="string", length=255, nullable=true)
      */
     private $descrip;
 
@@ -105,9 +105,6 @@ class item
 
 
 
-    public function __construct(){
-        $this->available=true;
-    }
 
     /**
      * Get id
@@ -390,6 +387,7 @@ class item
     public function __construct()
     {
         $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->available=true;
     }
 
     /**

@@ -1,0 +1,46 @@
+
+.nav.nav-pills.nav-stacked > li > div:first-child{
+        color: black;
+        padding: 5px;
+        font-size: 14px;
+        text-transform: uppercase;
+        text-align: center;
+        background-color: #C899D4;
+        text-decoration: none;
+        cursor:pointer;
+        border: 2px solid #2e4053;
+        border-radius: 25px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        margin-top: 5px;
+
+        
+      }
+
+
+ul.nav.nav-pills.nav-stacked{
+    margin-top: 20px;
+    margin-bottom: 20px;    
+    list-style:none !important; 
+} 
+
+
+.active{
+	background-color: #bb9bc2;
+	color: #2e4053;
+}
+.nav.nav-pills.nav-stacked > li > div > ul > li{
+
+ 	background-color: #E2DFE8;
+    list-style:none !important; 
+    
+
+ }
+
+ div#item-menuItem , div#product-menuItem, div#category-menuItem ,
+ div#discount-menuItem , div#user-menuItem , div#customer-menuItem {
+    display: none;
+ }
+
+
+ 

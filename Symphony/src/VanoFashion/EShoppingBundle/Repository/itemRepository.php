@@ -41,7 +41,7 @@ class itemRepository extends \Doctrine\ORM\EntityRepository
    /**
    * get  items belonging to a given product
    */
-  public function getItemsInProduct($product){
+  public function getItemsByProduct($products){
 
     $qb=$this->createQueryBuilder('i')
                  ->innerJoin('i.stock', 's')
@@ -56,9 +56,36 @@ class itemRepository extends \Doctrine\ORM\EntityRepository
         $qb->innerJoin('i.images', 'img')
            ->addSelect('img');
 
-        $qb->where('p.name = :product');
-        $qb->setParameter('id',$product);
         
+        $qb->where($qb->expr()->in('p.name', $products));
+
+        return $qb->getQuery()
+                  ->getResult();
+
+  }
+
+  /**
+   * get  items belonging to the given products 
+   * and itemTypes
+   */
+  public function getItemsByProductAndTypes($products, $types){
+
+    $qb=$this->createQueryBuilder('i')
+                 ->innerJoin('i.stock', 's')
+                 ->addSelect('s');
+
+        $qb->innerJoin('i.type', 't')
+           ->addSelect('t');
+
+        $qb->innerJoin('i.product', 'p')
+           ->addSelect('p');
+
+        $qb->innerJoin('i.images', 'img')
+           ->addSelect('img');
+
+        
+        $qb->where($qb->expr()->in('p.name', $products));
+        $qb->andWhere($qb->expr()->in('t.type', $types));
 
         return $qb->getQuery()
                   ->getResult();
@@ -68,7 +95,7 @@ class itemRepository extends \Doctrine\ORM\EntityRepository
   /**
    * get  items belonging to a given itemType
    */
-  public function getItemsInProduct($type){
+  public function getItemsByTYpe($types){
 
     $qb=$this->createQueryBuilder('i')
                  ->innerJoin('i.stock', 's')
@@ -83,8 +110,8 @@ class itemRepository extends \Doctrine\ORM\EntityRepository
         $qb->innerJoin('i.images', 'img')
            ->addSelect('img');
 
-        $qb->where('t.type = :type');
-        $qb->setParameter('type',$type);
+       
+       $qb->where($qb->expr()->in('t.type', $types));
         
 
         return $qb->getQuery()
