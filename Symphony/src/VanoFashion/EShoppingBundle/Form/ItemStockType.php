@@ -5,9 +5,12 @@ namespace VanoFashion\EShoppingBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\*;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
-class itemStockType extends AbstractType
+class ItemStockType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -21,8 +24,8 @@ class itemStockType extends AbstractType
                     'EU' => 'eu',
                     
              ),))
-                ->add('quantity', integerType::class)
-                ->add('addingDate', DateTimeType::class);
+                ->add('quantity', integerType::class);
+                //->add('addingDate', DateTimeType::class);
     }
     
     /**
@@ -31,7 +34,7 @@ class itemStockType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'VanoFashion\EShoppingBundle\Entity\itemStock'
+            'data_class' => 'VanoFashion\EShoppingBundle\Entity\ItemStock'
         ));
     }
 

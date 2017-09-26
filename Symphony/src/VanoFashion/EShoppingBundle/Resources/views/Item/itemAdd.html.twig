@@ -1,0 +1,36 @@
+{% extends "VanoFashionEShoppingBundle:Item:websiteManagement.html.twig" %}
+
+
+{% block title %}
+
+   {{ parent() }} - add item
+
+{% endblock %}
+
+
+{% block vanofashioneshopping_management_body %}
+
+{% if app.flashes  %}
+
+	{% for label, message in app.flashes %}
+
+	 <div class="alert alert-{{label}}">
+        <STRONG> {{label}}!</STRONG>  {{ message }}
+    </div>
+
+	{% endfor %}
+
+{% else %}
+    
+	<div class="page-header">
+	<h2 class="text-center"> Adding an item  </h2>
+	</div>
+	<div >
+
+    {{ include("VanoFashionEShoppingBundle:Item:itemForm.html.twig") }}
+
+    </div>
+
+{% endif %}
+
+{% endblock %}

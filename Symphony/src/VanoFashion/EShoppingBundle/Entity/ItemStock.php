@@ -5,14 +5,14 @@ namespace VanoFashion\EShoppingBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * itemStock
+ * ItemStock
  *
  * @ORM\Table(name="item_stock")
- * @ORM\Entity(repositoryClass="VanoFashion\EShoppingBundle\Repository\itemStockRepository")
+ * @ORM\Entity(repositoryClass="VanoFashion\EShoppingBundle\Repository\ItemStockRepository")
  */
 
 
-class itemStock
+class ItemStock
 {
     /**
      * represent item's stock

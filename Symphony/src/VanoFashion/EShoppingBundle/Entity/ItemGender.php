@@ -5,14 +5,14 @@ namespace VanoFashion\EShoppingBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * itemType
+ * ItemGender
  *
- * @ORM\Table(name="item_type")
- * @ORM\Entity(repositoryClass="VanoFashion\EShoppingBundle\Repository\itemTypeRepository")
+ * @ORM\Table(name="item_gender")
+ * @ORM\Entity(repositoryClass="VanoFashion\EShoppingBundle\Repository\ItemGenderRepository")
  */
 
 
-class itemType
+class ItemGender
 {
 
     /**
@@ -30,9 +30,9 @@ class itemType
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=255, unique=true)
+     * @ORM\Column(name="gender", type="string", length=255, unique=true)
      */
-    private $type;
+    private $gender;
 
 
     /**
@@ -45,28 +45,29 @@ class itemType
         return $this->id;
     }
 
+    
+
     /**
-     * Set type
+     * Set gender
      *
-     * @param string $type
+     * @param string $gender
      *
-     * @return itemType
+     * @return ItemGender
      */
-    public function setType($type)
+    public function setGender($gender)
     {
-        $this->type = $type;
+        $this->gender = $gender;
 
         return $this;
     }
 
     /**
-     * Get type
+     * Get gender
      *
      * @return string
      */
-    public function getType()
+    public function getGender()
     {
-        return $this->type;
+        return $this->gender;
     }
 }
-

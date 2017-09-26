@@ -4,7 +4,14 @@ namespace VanoFashion\EShoppingBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use VanoFashion\EShoppingBundle\Form\*;
+use VanoFashion\EShoppingBundle\Form\ItemCategoryType;
+use VanoFashion\EShoppingBundle\Entity\ItemCategory;
+use VanoFashion\EShoppingBundle\Form\ItemProductType;
+use VanoFashion\EShoppingBundle\Entity\ItemProduct;
+use VanoFashion\EShoppingBundle\Form\ItemGenderType;
+use VanoFashion\EShoppingBundle\Entity\ItemGender;
+use VanoFashion\EShoppingBundle\Form\ItemType;
+use VanoFashion\EShoppingBundle\Entity\Item;
 
 class ItemController extends Controller
 {   
@@ -90,12 +97,12 @@ class ItemController extends Controller
     public function itemAddAction($_locale, Request $request)
     {
 
-        $item = new item();
-        $form = $this->createForm(itemType::class, $item);
+        $item = new Item();
+        $form = $this->createForm(ItemType::class, $item);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
           $em = $this->getDoctrine()->getManager();
-          $em->persist($advert);
+          $em->persist($item);
           $em->flush();
 
           $request->getSession()->getFlashBag()->add('notice', 'Item has been registered !');
@@ -103,7 +110,7 @@ class ItemController extends Controller
           //return $this->redirectToRoute('oc_platform_view', array('id' => $advert->getId()));
         }
 
-        return $this->render('VanoFashionEShoppingBundle:item:itemAdd.html.twig', array(
+        return $this->render('VanoFashionEShoppingBundle:Item:itemAdd.html.twig', array(
           'form' => $form->createView()));
 
     }
@@ -125,6 +132,137 @@ class ItemController extends Controller
     {
 
     }
+
+
+    /**
+     *return the view for the adding of items product
+     *
+     */
+    public function itemProductAddAction($_locale, Request $request)
+    {
+
+        $product = new ItemProduct();
+        $form = $this->createForm(ItemProductType::class, $product);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+          $em = $this->getDoctrine()->getManager();
+          $em->persist($product);
+          $em->flush();
+
+          $request->getSession()->getFlashBag()->add('success', 'item product has been registered !');
+
+          //return $this->redirectToRoute('oc_platform_view', array('id' => $advert->getId()));
+        }
+
+        return $this->render('VanoFashionEShoppingBundle:Item:itemProductAdd.html.twig', array(
+          'form' => $form->createView()));
+
+    }
+    
+    /**
+     *return the view for the editing of item product
+     *
+     */
+    public function itemProductEditAction($_locale, $id)
+    {
+
+    }
+    
+    /**
+     * delete an item product
+     *
+     */
+    public function itemProductDeleteAction($_locale, $id)
+    {
+
+    }
+
+    /**
+     *return the view for the adding of item category
+     *
+     */
+    public function itemCategoryAddAction($_locale, Request $request)
+    {
+
+        $category = new ItemCategory();
+        $form = $this->createForm(ItemCategoryType::class, $category);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+          $em = $this->getDoctrine()->getManager();
+          $em->persist($category);
+          $em->flush();
+
+          $request->getSession()->getFlashBag()->add('success', 'items category has been registered !');
+
+          //return $this->redirectToRoute('oc_platform_view', array('id' => $advert->getId()));
+        }
+
+        return $this->render('VanoFashionEShoppingBundle:Item:itemCategoryAdd.html.twig', array(
+          'form' => $form->createView()));
+
+    }
+    
+    /**
+     *return the view for the editing of item category
+     *
+     */
+    public function itemCategoryEditAction($_locale, $id)
+    {
+
+    }
+    
+    /**
+     * delete an item category
+     *
+     */
+    public function itemCategoryDeleteAction($_locale, $id)
+    {
+
+    }
+
+    /**
+     *return the view for the adding of items gender
+     *
+     */
+    public function itemGenderAddAction($_locale, Request $request)
+    {
+
+        $gender = new ItemGender();
+        $form = $this->createForm(ItemGenderType::class, $gender);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+          $em = $this->getDoctrine()->getManager();
+          $em->persist($gender);
+          $em->flush();
+
+          $request->getSession()->getFlashBag()->add('success', 'items gender has been registered !');
+
+          //return $this->redirectToRoute('oc_platform_view', array('id' => $advert->getId()));
+        }
+
+        return $this->render('VanoFashionEShoppingBundle:Item:itemGenderAdd.html.twig', array(
+          'form' => $form->createView()));
+
+    }
+    
+    /**
+     *return the view for the editing of items gender
+     *
+     */
+    public function itemGenderEditAction($_locale, $id)
+    {
+
+    }
+    
+    /**
+     * delete an item gender
+     *
+     */
+    public function itemGenderDeleteAction($_locale, $id)
+    {
+
+    }
+
 
 
 

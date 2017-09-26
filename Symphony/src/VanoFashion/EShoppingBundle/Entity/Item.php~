@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
  * item
  *
  * @ORM\Table(name="item")
- * @ORM\Entity(repositoryClass="VanoFashion\EShoppingBundle\Repository\itemRepository")
+ * @ORM\Entity(repositoryClass="VanoFashion\EShoppingBundle\Repository\ItemRepository")
  */
-class item
+class Item
 {
 
     /**
@@ -21,18 +21,18 @@ class item
      */
     private $images; 
     /**
-     * @ORM\ManyToOne(targetEntity="VanoFashion\EShoppingBundle\Entity\itemType")
+     * @ORM\ManyToOne(targetEntity="VanoFashion\EShoppingBundle\Entity\ItemGender")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $type;
+    private $gender;
     /**
-     * @ORM\ManyToOne(targetEntity="VanoFashion\EShoppingBundle\Entity\itemProduct")
+     * @ORM\ManyToOne(targetEntity="VanoFashion\EShoppingBundle\Entity\ItemProduct")
      * @ORM\JoinColumn(nullable=false)
      */
     private $product;
     
     /**
-     * @ORM\OneToOne(targetEntity="VanoFashion\EShoppingBundle\Entity\itemStock", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="VanoFashion\EShoppingBundle\Entity\ItemStock", cascade={"persist","remove"})
      * @ORM\JoinColumn(nullable=false)   
      */
     private $stock;
@@ -102,6 +102,9 @@ class item
      * @ORM\Column(name="itemLabel", type="string", length=255, nullable=true)
      */
     private $itemLabel;
+
+
+    private $files;
 
 
 
@@ -334,29 +337,7 @@ class item
         return $this->product;
     }
 
-    /**
-     * Set type
-     *
-     * @param \VanoFashion\EShoppingBundle\Entity\itemType $type
-     *
-     * @return item
-     */
-    public function setType(\VanoFashion\EShoppingBundle\Entity\itemType $type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return \VanoFashion\EShoppingBundle\Entity\itemType
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
+   
 
     /**
      * Set stock
@@ -424,5 +405,29 @@ class item
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * Set gender
+     *
+     * @param \VanoFashion\EShoppingBundle\Entity\ItemGender $gender
+     *
+     * @return Item
+     */
+    public function setGender(\VanoFashion\EShoppingBundle\Entity\ItemGender $gender)
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    /**
+     * Get gender
+     *
+     * @return \VanoFashion\EShoppingBundle\Entity\ItemGender
+     */
+    public function getGender()
+    {
+        return $this->gender;
     }
 }

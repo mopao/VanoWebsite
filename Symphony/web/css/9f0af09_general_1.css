@@ -82,7 +82,7 @@
 
 	  .police{
 	  	color:     #2e4053  ;
-	  	text-transform: capitalize;	  	
+	  		  	
 	  }
 
 	  a, a:hover, a:visited{
@@ -285,4 +285,12 @@
 	.affix {
        top: 0;
       width: 100%;
+    }
+
+    .form{
+    	background-color: #C7C1C8; 
+    }
+
+    h1{
+    	font-weight: bold;
     }

@@ -5,21 +5,21 @@ namespace VanoFashion\EShoppingBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * itemCategory
+ * ItemCategory
  *
  * @ORM\Table(name="item_category")
- * @ORM\Entity(repositoryClass="VanoFashion\EShoppingBundle\Repository\itemCategoryRepository")
+ * @ORM\Entity(repositoryClass="VanoFashion\EShoppingBundle\Repository\ItemCategoryRepository")
  */
 
 
-class itemCategory
+class ItemCategory
 {
     /**
      * represent item's category
      */
 
     /**
-     * @ORM\OneToMany(targetEntity="VanoFashion\EShoppingBundle\Entity\itemProduct", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="VanoFashion\EShoppingBundle\Entity\ItemProduct", mappedBy="category")
      */
     private $products;
     /**
@@ -36,7 +36,7 @@ class itemCategory
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
-    private $name;
+    private $nameCategory;
 
 
     /**
@@ -49,29 +49,7 @@ class itemCategory
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return itemCategory
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
+    
     /**
      * Constructor
      */
@@ -83,11 +61,11 @@ class itemCategory
     /**
      * Add product
      *
-     * @param \VanoFashion\EShoppingBundle\Entity\itemProduct $product
+     * @param \VanoFashion\EShoppingBundle\Entity\ItemProduct $product
      *
      * @return itemCategory
      */
-    public function addProduct(\VanoFashion\EShoppingBundle\Entity\itemProduct $product)
+    public function addProduct(\VanoFashion\EShoppingBundle\Entity\ItemProduct $product)
     {
         $this->products[] = $product;
         $product->setCategory($this);
@@ -98,9 +76,9 @@ class itemCategory
     /**
      * Remove product
      *
-     * @param \VanoFashion\EShoppingBundle\Entity\itemProduct $product
+     * @param \VanoFashion\EShoppingBundle\Entity\ItemProduct $product
      */
-    public function removeProduct(\VanoFashion\EShoppingBundle\Entity\itemProduct $product)
+    public function removeProduct(\VanoFashion\EShoppingBundle\Entity\ItemProduct $product)
     {
         $this->products->removeElement($product);
     }

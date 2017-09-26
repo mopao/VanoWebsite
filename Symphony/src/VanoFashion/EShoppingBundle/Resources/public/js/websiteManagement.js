@@ -23,4 +23,8 @@ $(document).ready(function(){
     $("#discount-menu").click(function(){
         $("#discount-menuItem").slideToggle();        
     });
+
+    $("#gender-menu").click(function(){
+        $("#gender-menuItem").slideToggle();        
+    });
 });

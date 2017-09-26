@@ -5,13 +5,13 @@ namespace VanoFashion\EShoppingBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * itemProduct
+ * ItemProduct
  *
  * @ORM\Table(name="item_product")
- * @ORM\Entity(repositoryClass="VanoFashion\EShoppingBundle\Repository\itemProductRepository")
+ * @ORM\Entity(repositoryClass="VanoFashion\EShoppingBundle\Repository\ItemProductRepository")
  */
 
-class itemProduct
+class ItemProduct
 {
 
     /**
@@ -19,7 +19,7 @@ class itemProduct
      */
 
     /**
-     * @ORM\ManyToOne(targetEntity="VanoFashion\EShoppingBundle\Entity\itemCategory", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="VanoFashion\EShoppingBundle\Entity\ItemCategory", inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
@@ -78,11 +78,11 @@ class itemProduct
     /**
      * Set category
      *
-     * @param \VanoFashion\EShoppingBundle\Entity\itemCategory $category
+     * @param \VanoFashion\EShoppingBundle\Entity\ItemCategory $category
      *
      * @return itemProduct
      */
-    public function setCategory(\VanoFashion\EShoppingBundle\Entity\itemCategory $category)
+    public function setCategory(\VanoFashion\EShoppingBundle\Entity\ItemCategory $category)
     {
         $this->category = $category;
 
@@ -92,7 +92,7 @@ class itemProduct
     /**
      * Get category
      *
-     * @return \VanoFashion\EShoppingBundle\Entity\itemCategory
+     * @return \VanoFashion\EShoppingBundle\Entity\ItemCategory
      */
     public function getCategory()
     {

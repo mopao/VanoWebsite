@@ -38,8 +38,36 @@ ul.nav.nav-pills.nav-stacked{
  }
 
  div#item-menuItem , div#product-menuItem, div#category-menuItem ,
- div#discount-menuItem , div#user-menuItem , div#customer-menuItem {
+ div#discount-menuItem , div#user-menuItem , div#customer-menuItem, 
+ div#gender-menuItem{
     display: none;
+ }
+
+ .btn-submit{
+    background-color: #5A429E;
+    color: white;
+ }
+
+ .btn-submit:hover{
+
+    background-color: #85159B;
+    color: white;
+ }
+
+
+ .btn-reset{
+    margin-left: 20px;
+    background-color: #B89FD5;
+ }
+
+ .btn-reset:hover{
+
+    background-color: #CCBBD0;
+    
+ }
+
+ .form-btn{
+    margin-top: 45px;
  }
 
 

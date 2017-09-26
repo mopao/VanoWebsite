@@ -19,7 +19,7 @@ class Image
      * represent item's image
      */ 
     /**
-     * @ORM\ManyToOne(targetEntity="VanoFashion\EShoppingBundle\Entity\item" , inversedBy="images")
+     * @ORM\ManyToOne(targetEntity="VanoFashion\EShoppingBundle\Entity\Item" , inversedBy="images")
      * @ORM\JoinColumn(nullable=false)
      */
     private $item;
@@ -143,7 +143,7 @@ class Image
      *
      * @return Image
      */
-    public function setItem(\VanoFashion\EShoppingBundle\Entity\item $item)
+    public function setItem(\VanoFashion\EShoppingBundle\Entity\Item $item)
     {
         $this->item = $item;
 

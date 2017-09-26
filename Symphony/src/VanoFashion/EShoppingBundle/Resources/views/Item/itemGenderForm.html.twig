@@ -1,0 +1,39 @@
+
+<h3> Complete the form below to add an Items gender</h3>
+
+<div class="well">
+
+	{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+    {# form's general errors. #}
+    {{ form_errors(form) }}
+
+    <div class="form-group">
+
+    	{# Generate label. #}
+	    {{ form_label(form.gender, "Gender:", {'label_attr': {'class': 'col-md-2 control-label'}}) }}
+
+	    {# errors display. #}
+	    {{ form_errors(form.gender) }}
+        <div class="col-md-5">
+	    {# Generate input. #}
+	    {{ form_widget(form.gender, {'attr': {'class': 'form-control'}}) }}
+	    </div>
+
+    </div>
+
+    <div class="form-group  form-btn text-center ">
+
+        {# Generate buttons save and reset. #}
+
+    	{{ form_widget(form.save, {'attr': {'class': 'btn btn-submit btn-lg'}}) }}
+    	{{ form_widget(form.reset, {'attr': {'class': 'btn btn-reset btn-lg'}}) }}
+
+    </div>
+
+
+	{{ form_rest(form) }}
+  
+    {{ form_end(form) }}
+
+</div>

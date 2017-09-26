@@ -40,6 +40,10 @@ vano_fashion_e_shopping_view_item:
     requirements:
         _locale: en|fr
 
+
+
+
+
 vano_fashion_e_shopping_website_management_item_list:
     path: /websitemanagement/{_locale}/item/list/{page}
     defaults: { _controller: VanoFashionEShoppingBundle:Item:managementListItemView , _locale: en , page: 1 }
@@ -60,16 +64,99 @@ vano_fashion_e_shopping_website_management_item_delete:
     requirements:
         _locale: en|fr
 
+vano_fashion_e_shopping_website_management_item_add:
+    path: /websitemanagement/{_locale}/item/add
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:itemAdd , _locale: en }
+    requirements:
+        _locale: en|fr
+
+
 vano_fashion_e_shopping_website_management:
     path: /websitemanagement/{_locale}
     defaults: { _controller: VanoFashionEShoppingBundle:Item:websitemanagement , _locale: en }
     requirements:
         _locale: en|fr
 
-vano_fashion_e_shopping_website_management_item_add:
-    path: /websitemanagement/{_locale}/item/add
-    defaults: { _controller: VanoFashionEShoppingBundle:Item:itemAdd , _locale: en }
+
+vano_fashion_e_shopping_website_management_itemcategory_list:
+    path: /websitemanagement/{_locale}/itemCategory/list/{page}
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:managementListItemCategoryView , _locale: en , page: 1 }
     requirements:
         _locale: en|fr
+        page:   \d*
+
+
+vano_fashion_e_shopping_website_management_itemcategory_edit:
+    path: /websitemanagement/{_locale}/itemCategory/edit/{id}
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:itemCategoryEdit , _locale: en }
+    requirements:
+        _locale: en|fr
+
+vano_fashion_e_shopping_website_management_itemcategory_delete:
+    path: /websitemanagement/{_locale}/itemCategory/delete/{id}
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:itemCategoryDelete , _locale: en }
+    requirements:
+        _locale: en|fr
+
+vano_fashion_e_shopping_website_management_itemcategory_add:
+    path: /websitemanagement/{_locale}/itemCategory/add
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:itemCategoryAdd , _locale: en }
+    requirements:
+        _locale: en|fr
+
+
+vano_fashion_e_shopping_website_management_itemproduct_list:
+    path: /websitemanagement/{_locale}/itemProduct/list/{page}
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:managementListItemProductView , _locale: en , page: 1 }
+    requirements:
+        _locale: en|fr
+        page:   \d*
+
+
+vano_fashion_e_shopping_website_management_itemproduct_edit:
+    path: /websitemanagement/{_locale}/itemProduct/edit/{id}
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:itemProductEdit , _locale: en }
+    requirements:
+        _locale: en|fr
+
+vano_fashion_e_shopping_website_management_itemproduct_delete:
+    path: /websitemanagement/{_locale}/itemProduct/delete/{id}
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:itemProductDelete , _locale: en }
+    requirements:
+        _locale: en|fr
+
+vano_fashion_e_shopping_website_management_itemproduct_add:
+    path: /websitemanagement/{_locale}/itemProduct/add
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:itemProductAdd , _locale: en }
+    requirements:
+        _locale: en|fr
+
+vano_fashion_e_shopping_website_management_itemgender_list:
+    path: /websitemanagement/{_locale}/itemGender/list/{page}
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:managementListItemGenderView , _locale: en , page: 1 }
+    requirements:
+        _locale: en|fr
+        page:   \d*
+
+
+vano_fashion_e_shopping_website_management_itemgender_edit:
+    path: /websitemanagement/{_locale}/itemGender/edit/{id}
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:itemGenderEdit , _locale: en }
+    requirements:
+        _locale: en|fr
+
+vano_fashion_e_shopping_website_management_itemgender_delete:
+    path: /websitemanagement/{_locale}/itemGender/delete/{id}
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:itemGenderDelete , _locale: en }
+    requirements:
+        _locale: en|fr
+
+vano_fashion_e_shopping_website_management_itemgender_add:
+    path: /websitemanagement/{_locale}/itemGender/add
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:itemGenderAdd , _locale: en }
+    requirements:
+        _locale: en|fr
+
+
 
 
