@@ -31,7 +31,7 @@ class ItemType extends AbstractType
                 ->add('brand', TextType::class)
                 ->add('available' , CheckboxType::class, array('required' => false))
                 ->add('itemLabel', TextType::class)
-                ->add('files',  FileType::class,  array('multiple' =>true , 'label'=>'images' )                   )
+                ->add('files',  FileType::class,  array('multiple' =>true , 'label'=>'Images' )                   )
                 ->add('gender', EntityType::class, array(
                         'class'        => 'VanoFashionEShoppingBundle:ItemGender',
                         'choice_label' => 'gender',

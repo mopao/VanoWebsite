@@ -3,6 +3,7 @@
 namespace VanoFashion\EShoppingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * item
@@ -17,7 +18,7 @@ class Item
      * represent item
      */
     /**
-     * @ORM\OneToMany(targetEntity="VanoFashion\EShoppingBundle\Entity\Image", mappedBy="item")
+     * @ORM\OneToMany(targetEntity="VanoFashion\EShoppingBundle\Entity\Image", mappedBy="item",cascade={"remove"})
      */
     private $images; 
     /**
@@ -103,11 +104,9 @@ class Item
      */
     private $itemLabel;
 
-
     private $files;
-
-
-
+    private $oldFileNames;
+    
     
     public function getFiles()
     {
@@ -115,12 +114,120 @@ class Item
     }
 
     
-    public function setFiles(array $files)
+    public function setFiles(array $files=null)
     {
         $this->files = $files;
 
+        if($this->images!==null){
+
+            foreach ($image as $this->images) {
+
+                $oldFileNames[]=$image->getUrl();
+            }
+
+            $this->images->clear();
+
+        }
+
+
+        
+
         return $this;
     }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+      public function preUpload()
+      {
+        
+        if (null === $this->files) {
+          return;
+        }
+
+
+        foreach ($file as $this->files) {
+
+            if ($file instanceof UploadedFile) {
+
+                $image = new \VanoFashion\EShoppingBundle\Entity\Image();
+                $image->setAlt($file->getClientOriginalName());
+                $fileName=md5(uniqid()).'.'.$file->guessExtension();
+                $image->setUrl($fileName);                
+                $this->images->addImage($image);
+                
+                
+            }
+        }
+
+        
+      }
+
+
+       /**
+       * @ORM\PostPersist()
+       * @ORM\PostUpdate()
+       */
+      public function upload()
+      {
+        
+        if (null === $this->files) {
+          return;
+        }
+
+        // remove old images item
+        if (null !== $this->oldFileNames) {
+          foreach ($oldFileName as $oldFileNames) {
+              if (file_exists($oldFileName)) {
+                unlink($oldFileName);
+              }
+          }
+
+          $this->oldFileNames= array();
+          
+        }
+
+        $nbImages=count($this->files);
+
+        // move picture to the directory /web/bundles/vanofashioneshopping/images
+        for ($i=0; $i < nbImages ; $i++) { 
+            if($this->files[$i] instanceof UploadedFile){
+
+                $this->files[$i]->move($this->getParameter('%kernel.project_dir%/web/bundles/vanofashioneshopping/images'),
+                $this->images->get($i)->getUrl());
+
+            }
+        }
+      }
+
+
+      /**
+       * @ORM\PreRemove()
+       */
+      public function preRemoveUpload()
+      {
+
+        foreach ($image as $this->images) {
+            $this->oldFileNames[]=$image->getUrl();
+        }
+      }
+
+      /**
+       * @ORM\PostRemove()
+       */
+      public function removeUpload()
+      {
+        // remove all item images
+        foreach ($fileName as $this->oldFileNames) {
+            if (file_exists($fileName)) {
+              // delete the image file
+              unlink($fileName);
+            }
+        }
+
+        $this->oldFileNames[]=  array();
+      }
 
     /**
      * Get id
@@ -382,6 +489,7 @@ class Item
     {
         $this->images = new \Doctrine\Common\Collections\ArrayCollection();
         $this->available=true;
+        $this->oldFileNames= array();
     }
 
     /**
