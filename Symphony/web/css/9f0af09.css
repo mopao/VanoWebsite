@@ -82,10 +82,11 @@
 
 	  .police{
 	  	color:     #2e4053  ;
+	  	
 	  		  	
 	  }
 
-	  a, a:hover, a:visited{
+	  a, a:hover{
 	  	color:  #2e4053 ;
 	  	text-decoration: none;
 
@@ -287,10 +288,10 @@
       width: 100%;
     }
 
-    .form{
-    	background-color: #C7C1C8; 
-    }
-
+   
     h1{
     	font-weight: bold;
     }
+
+    
+   

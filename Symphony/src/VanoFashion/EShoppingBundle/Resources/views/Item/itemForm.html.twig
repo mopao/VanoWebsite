@@ -3,9 +3,193 @@
 
 	{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
+	{# form's general errors. #}
+    {{ form_errors(form) }}
+
+    
+    <div class="form-group">
+
+    	{# Generate label. #}
+	    {{ form_label(form.codeItem, "Code:", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+
+	    {# errors display. #}
+	    {{ form_errors(form.codeItem) }}
+        <div class="col-sm-10">
+	    {# Generate input. #}
+	    {{ form_widget(form.codeItem, {'attr': {'class': 'form-control'}}) }}
+	    </div>
+
+    </div>
+
+    <div class="form-group">
+
+    	{# Generate label. #}
+	    {{ form_label(form.title, "Name:", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+
+	    {# errors display. #}
+	    {{ form_errors(form.title) }}
+        <div class="col-sm-10">
+	    {# Generate input. #}
+	    {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+	    </div>
+
+    </div>
+
+    <div class="form-group">
+
+    	{# Generate label. #}
+	    {{ form_label(form.color, "Color:", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+
+	    {# errors display. #}
+	    {{ form_errors(form.color) }}
+        <div class="col-sm-10">
+	    {# Generate input. #}
+	    {{ form_widget(form.color, {'attr': {'class': 'form-control'}}) }}
+	    </div>
+
+    </div>
+
+    <div class="form-group">
+
+    	{# Generate label. #}
+	    {{ form_label(form.descrip, "Description:", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+
+	    {# errors display. #}
+	    {{ form_errors(form.descrip) }}
+        <div class="col-sm-10">
+	    {# Generate input. #}
+	    {{ form_widget(form.descrip, {'attr': {'class': 'form-control'}}) }}
+	    </div>
+
+    </div>
+
+    <div class="form-group">
+
+    	{# Generate label. #}
+	    {{ form_label(form.price, "Price:", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+
+	    {# errors display. #}
+	    {{ form_errors(form.price) }}
+        <div class="col-sm-10">
+	    {# Generate input. #}
+	    {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
+	    </div>
+
+    </div>
+
+    <div class="form-group">
+
+    	{# Generate label. #}
+	    {{ form_label(form.brand, "Brand:", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+
+	    {# errors display. #}
+	    {{ form_errors(form.brand) }}
+        <div class="col-sm-10">
+	    {# Generate input. #}
+	    {{ form_widget(form.brand, {'attr': {'class': 'form-control'}}) }}
+	    </div>
+
+    </div>
+    
+
+    <div class="form-group">
+
+    	{# Generate label. #}
+	    {{ form_label(form.itemLabel, "Label:", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+
+	    {# errors display. #}
+	    {{ form_errors(form.itemLabel) }}
+        <div class="col-sm-10">
+	    {# Generate input. #}
+	    {{ form_widget(form.itemLabel, {'attr': {'class': 'form-control'}}) }}
+	    </div>
+
+    </div>
+
+    <div class="form-group">
+
+    	{# Generate label. #}
+	    {{ form_label(form.product, "Product type:", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+
+	    {# errors display. #}
+	    {{ form_errors(form.product) }}
+        <div class="col-sm-10 ">
+	    {# Generate input. #}
+	    {{ form_widget(form.product, {'attr': {'class': 'text-capitalize'}}) }}
+	    </div>
+
+    </div>
+
+    <div class="form-group">
+
+    	{# Generate label. #}
+	    {{ form_label(form.gender, "Item's gender:", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+
+	    {# errors display. #}
+	    {{ form_errors(form.gender) }}
+        <div class="col-sm-10 text-capitalize">
+	    {# Generate input. #}
+	    {{ form_widget(form.gender) }}
+	    </div>
+
+    </div>
+
+    
+
+    <div class="form-group">
+
+    	{# Generate label. #}
+	    {{ form_label(form.files, "Image(s):", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+
+	    {# errors display. #}
+	    {{ form_errors(form.product) }}
+        <div class="col-sm-10">
+	    {# Generate input. #}
+	    {{ form_widget(form.files) }}
+	    </div>
+
+    </div>
+
+     <div class="form-group">
+
+    	
+    	{# Generate label. #}
+	    {{ form_label(form.stocks, "Stock(s):", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+
+	    <div class="col-sm-10" >            
+            {# Generate input. #}
+	        {{ form_widget(form.stocks) }}
+	        <a href="#" id="add_stock" class="  btn btn-default"> Ajouter un stock </a>
+	    </div>	    
+
+    
+       </div>
+
+    <div class="form-group">
+
+    	{# Generate label. #}
+	    {{ form_label(form.available, "Available", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+	    {# errors display. #}
+	    {{ form_errors(form.available) }}
+        <div class="col-sm-3">
+	    {# Generate input. #}
+	    {{ form_widget(form.available, {'attr': {'class': 'form-control'}}) }}
+	    </div>
+
+    </div>
+
+	 <div class="form-group  form-btn text-center ">
+
+        {# Generate buttons save and reset. #}
+
+    	{{ form_widget(form.save, {'attr': {'class': 'btn btn-submit btn-lg'}}) }}
+    	{{ form_widget(form.reset, {'attr': {'class': 'btn btn-reset btn-lg'}}) }}
+
+    </div>
 
 
-	{{ form_widget(form) }}
+	{{ form_rest(form) }}
   
     {{ form_end(form) }}
 

@@ -44,8 +44,13 @@ ul.nav.nav-pills.nav-stacked{
  }
 
  .btn-submit{
+    text-decoration: none;
     background-color: #5A429E;
     color: white;
+    border: 2px solid #B4AF91;
+    border-radius: 15px;
+    min-width: 60px;
+
  }
 
  .btn-submit:hover{
@@ -58,7 +63,26 @@ ul.nav.nav-pills.nav-stacked{
  .btn-reset{
     margin-left: 20px;
     background-color: #B89FD5;
+    border: 2px solid #B4AF91;
+    border-radius: 15px;
+    text-decoration: none;
+    min-width: 60px;
  }
+
+ .btn-delete{
+    text-decoration: none;
+    margin-left: 20px;
+    background-color: #32363E;
+    border: 2px solid #B4AF91;
+    border-radius: 15px;
+    color: white;    
+    min-width: 60px;
+ }
+ .btn-delete:hover{
+    background-color:#5D6B84;
+    color: white;
+ }
+ 
 
  .btn-reset:hover{
 
@@ -69,6 +93,35 @@ ul.nav.nav-pills.nav-stacked{
  .form-btn{
     margin-top: 45px;
  }
+
+ .list{
+    border-top: 1px solid #667882;
+    padding-bottom: 5px;
+    padding-top: 5px;
+ }
+
+ .list-first{    
+    padding-bottom: 5px;
+    padding-top: 5px;
+ }
+
+ #dropdown-nbperpage{
+    margin-left: -17px;
+    margin-bottom: 5px;
+ }
+#dropdown-nbperpage li a:hover{
+    background-color: #C0BFA9;
+
+}
+
+div.text-nb-result{
+    color: #99A1A0;
+    margin-right: 0px;
+    padding-top: 10px;
+    margin-bottom: 0px;
+
+}
+
 
 
  

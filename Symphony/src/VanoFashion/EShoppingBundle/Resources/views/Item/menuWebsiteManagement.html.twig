@@ -13,7 +13,7 @@
   	<div  id="product-menu"> Product </div>
   	<div id="product-menuItem">
 	<ul>
-		<li><a href="">List of products </a></li>
+		<li><a href="{{ path('vano_fashion_e_shopping_website_management_itemproduct_list') }}">List of products </a></li>
 	    <li><a href=" {{ path('vano_fashion_e_shopping_website_management_itemproduct_add') }} "> Add product </a></li>
     </ul>
     </div>
@@ -22,7 +22,7 @@
   	<div id="category-menu"> Category </div>
   	<div id="category-menuItem">
 	<ul>
-		<li><a href="">List of categories </a></li>
+		<li><a href="{{ path('vano_fashion_e_shopping_website_management_itemcategory_list') }}">List of categories </a></li>
 	    <li><a href="{{ path('vano_fashion_e_shopping_website_management_itemcategory_add') }} "> 
         add category 
       </a></li>
@@ -33,7 +33,7 @@
     <div id="gender-menu"> Gender </div>
     <div id="gender-menuItem">
   <ul>
-    <li><a href="">List of items gender </a></li>            
+    <li><a href="{{ path('vano_fashion_e_shopping_website_management_itemgender_list') }}">List of items gender </a></li>            
     <li><a href="{{ path('vano_fashion_e_shopping_website_management_itemgender_add') }}">
       Add items gender</a></li>     
   </ul>

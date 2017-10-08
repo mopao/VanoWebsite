@@ -4,12 +4,14 @@ namespace VanoFashion\EShoppingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * item
  *
  * @ORM\Table(name="item")
  * @ORM\Entity(repositoryClass="VanoFashion\EShoppingBundle\Repository\ItemRepository")
+ *@ORM\HasLifecycleCallbacks()
  */
 class Item
 {
@@ -18,7 +20,7 @@ class Item
      * represent item
      */
     /**
-     * @ORM\OneToMany(targetEntity="VanoFashion\EShoppingBundle\Entity\Image", mappedBy="item",cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="VanoFashion\EShoppingBundle\Entity\Image", mappedBy="item",cascade={"persist","remove"})
      */
     private $images; 
     /**
@@ -32,11 +34,11 @@ class Item
      */
     private $product;
     
-    /**
-     * @ORM\OneToOne(targetEntity="VanoFashion\EShoppingBundle\Entity\ItemStock", cascade={"persist","remove"})
-     * @ORM\JoinColumn(nullable=false)   
-     */
-    private $stock;
+     /**
+     * @ORM\OneToMany(targetEntity="VanoFashion\EShoppingBundle\Entity\ItemStock", mappedBy="item",cascade={"persist","remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */    
+     private $stocks;
 
 
     /**
@@ -103,6 +105,12 @@ class Item
      * @ORM\Column(name="itemLabel", type="string", length=255, nullable=true)
      */
     private $itemLabel;
+
+    /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
+     */
+    private $slug;
 
     private $files;
     private $oldFileNames;
@@ -457,41 +465,6 @@ class Item
         return $this->product;
     }
 
-   
-
-    /**
-     * Set stock
-     *
-     * @param \VanoFashion\EShoppingBundle\Entity\itemStock $stock
-     *
-     * @return item
-     */
-    public function setStock(\VanoFashion\EShoppingBundle\Entity\itemStock $stock)
-    {
-        $this->stock = $stock;
-
-        return $this;
-    }
-
-    /**
-     * Get stock
-     *
-     * @return \VanoFashion\EShoppingBundle\Entity\itemStock
-     */
-    public function getStock()
-    {
-        return $this->stock;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->available=true;
-        $this->oldFileNames= array();
-    }
-
     /**
      * Add image
      *
@@ -550,5 +523,75 @@ class Item
     public function getGender()
     {
         return $this->gender;
+    }
+
+    /**
+     * Add stock
+     *
+     * @param \VanoFashion\EShoppingBundle\Entity\ItemStock $stock
+     *
+     * @return Item
+     */
+    public function addStock(\VanoFashion\EShoppingBundle\Entity\ItemStock $stock)
+    {
+        $this->stocks[] = $stock;
+        $stock->setItem($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove stock
+     *
+     * @param \VanoFashion\EShoppingBundle\Entity\ItemStock $stock
+     */
+    public function removeStock(\VanoFashion\EShoppingBundle\Entity\ItemStock $stock)
+    {
+        $this->stocks->removeElement($stock);
+    }
+
+    /**
+     * Get stocks
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStocks()
+    {
+        return $this->stocks;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->stocks = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->available=true;
+        $this->oldFileNames= array();
+    }
+
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Item
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

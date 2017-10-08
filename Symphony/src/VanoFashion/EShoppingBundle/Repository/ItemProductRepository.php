@@ -2,6 +2,9 @@
 
 namespace VanoFashion\EShoppingBundle\Repository;
 
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 /**
  * ItemProductRepository
  *
@@ -10,6 +13,29 @@ namespace VanoFashion\EShoppingBundle\Repository;
  */
 class ItemProductRepository extends \Doctrine\ORM\EntityRepository
 {
+
+
+	/**
+	 *get products in database
+	 */
+
+	public function getProducts($page, $nbPerPage){
+
+		$qb=$this->createQueryBuilder('p')
+                 //->innerJoin('c.products', 'p')
+                 //->addSelect('p')
+                 ->orderBy('p.name', 'ASC')
+                 ->getQuery();         
+
+         $qb->setFirstResult(($page-1) * $nbPerPage);      
+
+         $qb->setMaxResults($nbPerPage);       
+
+        return new Paginator($qb, true);
+
+        
+
+	}
 
 	
 

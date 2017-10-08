@@ -34,6 +34,18 @@ class ItemGender
      */
     private $gender;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="addingDate", type="datetime")
+     */
+    private $addingDate;
+
+    /**
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
 
     /**
      * Get id
@@ -69,5 +81,58 @@ class ItemGender
     public function getGender()
     {
         return $this->gender;
+    }
+
+    public function __construct(){
+
+        $this->addingDate= new \Datetime();
+    }
+
+    /**
+     * Set addingDate
+     *
+     * @param \DateTime $addingDate
+     *
+     * @return ItemGender
+     */
+    public function setAddingDate($addingDate)
+    {
+        $this->addingDate = $addingDate;
+
+        return $this;
+    }
+
+    /**
+     * Get addingDate
+     *
+     * @return \DateTime
+     */
+    public function getAddingDate()
+    {
+        return $this->addingDate;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return ItemGender
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

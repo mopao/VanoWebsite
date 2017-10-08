@@ -12,6 +12,10 @@ use VanoFashion\EShoppingBundle\Form\ItemGenderType;
 use VanoFashion\EShoppingBundle\Entity\ItemGender;
 use VanoFashion\EShoppingBundle\Form\ItemType;
 use VanoFashion\EShoppingBundle\Entity\Item;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Symfony\Component\HttpFoundation\Response;
 
 class ItemController extends Controller
 {   
@@ -105,7 +109,7 @@ class ItemController extends Controller
           $em->persist($item);
           $em->flush();
 
-          $request->getSession()->getFlashBag()->add('notice', 'Item has been registered !');
+          $this->get('session')->getFlashBag()->add('notice', 'Item has been registered !');
 
           //return $this->redirectToRoute('oc_platform_view', array('id' => $advert->getId()));
         }
@@ -145,13 +149,25 @@ class ItemController extends Controller
         $form = $this->createForm(ItemProductType::class, $product);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-          $em = $this->getDoctrine()->getManager();
-          $em->persist($product);
-          $em->flush();
 
-          $request->getSession()->getFlashBag()->add('success', 'item product has been registered !');
+          try {
 
-          //return $this->redirectToRoute('oc_platform_view', array('id' => $advert->getId()));
+             $em = $this->getDoctrine()->getManager();
+             $em->persist($product);
+             $em->flush();
+
+             $this->get('session')->getFlashBag()->add('success', 'The product has been registered successfully !');
+             return $this->redirectToRoute('vano_fashion_e_shopping_website_management_itemproduct_list');
+              
+          } catch (UniqueConstraintViolationException $e) {
+
+            $this->get('session')->getFlashBag()->add('info', 'This product already exists in database !');
+            return $this->render('VanoFashionEShoppingBundle:Item:itemProductAdd.html.twig', array(
+          'form' => $form->createView()));
+              
+          }         
+
+          
         }
 
         return $this->render('VanoFashionEShoppingBundle:Item:itemProductAdd.html.twig', array(
@@ -172,8 +188,94 @@ class ItemController extends Controller
      * delete an item product
      *
      */
-    public function itemProductDeleteAction($_locale, $id)
+    public function itemProductDeleteAction( $id )
     {
+
+        $response = new Response(); 
+
+        try {
+
+            $em = $this->getDoctrine()->getManager();                       
+            $product=$em->getRepository('VanoFashionEShoppingBundle:ItemProduct')->find($id);
+            if (!$product) {
+                throw $this->createNotFoundException(
+                    'No product found for id '.$id
+                );
+            }
+            else{
+
+                $em->remove($product);
+                $em->flush(); 
+                $response->setContent("Request successfully processed");    
+                $response->setStatusCode(Response::HTTP_OK);
+                return $response;
+            }
+            
+        } catch (NotFoundHttpException $e) {
+
+            $response->setContent("The resource has not been found");    
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);    
+            return $response;        
+        }
+
+    }
+
+    /**
+     * return the view for the list of items categories
+     * at management side
+     */
+
+    public function managementListProductViewAction($_locale, $page, Request $request){
+
+       try {
+
+         if ($page < 1) {
+      
+            throw new NotFoundHttpException("page does'nt exist!");
+
+        }
+
+        $limit=10;   
+        if($request->query->get('limit')) {
+            $limit=$request->query->get('limit');
+        }
+
+
+        $products= $this->getDoctrine()
+        ->getManager()
+        ->getRepository('VanoFashionEShoppingBundle:ItemProduct')
+        ->getProducts($page, $limit);
+
+        $total=count($products);
+        $nbPages = ceil($total / $limit);
+        
+
+        if ($page > $nbPages) {
+
+          throw $this->createNotFoundException("page does'nt exist!");
+
+        }
+
+        return $this->render('VanoFashionEShoppingBundle:Item:managementListProduct.html.twig',
+            array(
+                  'products' => $products,
+                  'nbPages'     => $nbPages,
+                  'page'        => $page,
+                  'limit'       =>$limit,
+                  'total'       =>$total
+                  ));
+           
+       } catch (NotFoundHttpException $e) {
+        $this->get('session')->getFlashBag()->add('warning', $e->getMessage());
+        return $this->render('VanoFashionEShoppingBundle:Item:managementListProduct.html.twig',
+            array(
+                  'products' => $products,
+                  'nbPages'     => $nbPages,
+                  'page'        => 1,
+                  'limit'       =>$limit,
+                  'total'       =>$total
+                  ));           
+       }
 
     }
 
@@ -188,13 +290,25 @@ class ItemController extends Controller
         $form = $this->createForm(ItemCategoryType::class, $category);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-          $em = $this->getDoctrine()->getManager();
-          $em->persist($category);
-          $em->flush();
+         
+          try {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($category);
+            $em->flush();  
+          
+            $this->get('session')->getFlashBag()->add('success', 'The category has been registered successfully!');
+            return $this->redirectToRoute('vano_fashion_e_shopping_website_management_itemcategory_list');
+              
+          } catch (UniqueConstraintViolationException $e) {
 
-          $request->getSession()->getFlashBag()->add('success', 'items category has been registered !');
+            $this->get('session')->getFlashBag()->add('info', 'This category already exists in database !');
+            return $this->render('VanoFashionEShoppingBundle:Item:itemCategoryAdd.html.twig', array(
+          'form' => $form->createView()));
+              
+          }
+          
 
-          //return $this->redirectToRoute('oc_platform_view', array('id' => $advert->getId()));
+          
         }
 
         return $this->render('VanoFashionEShoppingBundle:Item:itemCategoryAdd.html.twig', array(
@@ -215,10 +329,99 @@ class ItemController extends Controller
      * delete an item category
      *
      */
-    public function itemCategoryDeleteAction($_locale, $id)
+    public function itemCategoryDeleteAction( $id)
     {
 
+        $response = new Response(); 
+
+        try {
+
+            $em = $this->getDoctrine()->getManager();                       
+            $category=$em->getRepository('VanoFashionEShoppingBundle:ItemCategory')->find($id);
+            if (!$category) {
+                throw $this->createNotFoundException(
+                    'No product found for id '.$id
+                );
+            }
+            else{
+
+                $em->remove($category);
+                $em->flush(); 
+                $response->setContent("Request successfully processed");    
+                $response->setStatusCode(Response::HTTP_OK);
+                return $response;
+            }
+            
+        } catch (NotFoundHttpException $e) {
+
+            $response->setContent("The resource has not been found");    
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);    
+            return $response;        
+        }
+
     }
+    
+    /**
+     * return the view for the list of items categories
+     * at management side
+     */
+
+    public function managementListCategoryViewAction($_locale, $page, Request $request){
+
+       try {
+
+         if ($page < 1) {
+      
+            throw new NotFoundHttpException("page does'nt exist!");
+
+        }
+
+        $limit=10;   
+        if($request->query->get('limit')) {
+            $limit=$request->query->get('limit');
+        }
+
+
+        $categories= $this->getDoctrine()
+        ->getManager()
+        ->getRepository('VanoFashionEShoppingBundle:ItemCategory')
+        ->getCategories($page, $limit);
+
+        $total=count($categories);
+        $nbPages = ceil($total / $limit);
+        
+
+        if ($page > $nbPages) {
+
+          throw $this->createNotFoundException("page does'nt exist!");
+
+        }
+
+        return $this->render('VanoFashionEShoppingBundle:Item:managementListCategory.html.twig',
+            array(
+                  'categories' => $categories,
+                  'nbPages'     => $nbPages,
+                  'page'        => $page,
+                  'limit'       =>$limit,
+                  'total'       =>$total
+                  ));
+           
+       } catch (NotFoundHttpException $e) {
+        $this->get('session')->getFlashBag()->add('warning', $e->getMessage());
+        return $this->render('VanoFashionEShoppingBundle:Item:managementListCategory.html.twig',
+            array(
+                  'categories' => $categories,
+                  'nbPages'     => $nbPages,
+                  'page'        => 1,
+                  'limit'       =>$limit,
+                  'total'       =>$total
+                  ));           
+       }
+
+    }
+
+    
+
 
     /**
      *return the view for the adding of items gender
@@ -231,13 +434,25 @@ class ItemController extends Controller
         $form = $this->createForm(ItemGenderType::class, $gender);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-          $em = $this->getDoctrine()->getManager();
-          $em->persist($gender);
-          $em->flush();
 
-          $request->getSession()->getFlashBag()->add('success', 'items gender has been registered !');
+            try {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($gender);
+                $em->flush(); 
+              
+                $this->get('session')->getFlashBag()->add('success', 'The items gender has been registered successfully!');
+                return $this->redirectToRoute('vano_fashion_e_shopping_website_management_itemgender_list');
+                  
+            } catch (UniqueConstraintViolationException $e) {
 
-          //return $this->redirectToRoute('oc_platform_view', array('id' => $advert->getId()));
+                $this->get('session')->getFlashBag()->add('info', 'This gender already exists in database !');
+                return $this->render('VanoFashionEShoppingBundle:Item:itemGenderAdd.html.twig', array(
+              'form' => $form->createView()));
+              
+            }
+          
+
+          
         }
 
         return $this->render('VanoFashionEShoppingBundle:Item:itemGenderAdd.html.twig', array(
@@ -260,6 +475,73 @@ class ItemController extends Controller
      */
     public function itemGenderDeleteAction($_locale, $id)
     {
+        $response = new Response(); 
+
+        try {
+
+            $em = $this->getDoctrine()->getManager();                       
+            $gender=$em->getRepository('VanoFashionEShoppingBundle:ItemGender')->find($id);
+            if (!$gender) {
+                throw $this->createNotFoundException(
+                    'No product found for id '.$id
+                );
+            }
+            else{
+
+                $em->remove($gender);
+                $em->flush(); 
+                $response->setContent("Request successfully processed");    
+                $response->setStatusCode(Response::HTTP_OK);
+                return $response;
+            }
+            
+        } catch (NotFoundHttpException $e) {
+
+            $response->setContent("The resource has not been found");    
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);    
+            return $response;        
+        }
+
+
+    }
+
+    /**
+     * return the view for the list of items genders
+     * at management side
+     */
+
+    public function managementListGenderViewAction($_locale, $page, Request $request){
+
+       try {
+
+         if ($page != 1 ) {
+      
+            throw new NotFoundHttpException("page does'nt exist!");
+
+        }       
+
+
+        $genders= $this->getDoctrine()
+        ->getManager()
+        ->getRepository('VanoFashionEShoppingBundle:ItemGender')
+        ->findAll();
+
+        $total=count($genders);       
+        
+        return $this->render('VanoFashionEShoppingBundle:Item:managementListGender.html.twig',
+            array(
+                  'genders' => $genders,                  
+                  'total'       =>$total
+                  ));
+           
+       } catch (NotFoundHttpException $e) {
+        $this->get('session')->getFlashBag()->add('warning', $e->getMessage());
+        return $this->render('VanoFashionEShoppingBundle:Item:managementListGender.html.twig',
+            array(
+                  'genders' => $genders,
+                  'total'       =>$total
+                  ));           
+       }
 
     }
 

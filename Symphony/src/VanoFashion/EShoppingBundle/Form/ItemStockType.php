@@ -17,14 +17,15 @@ class ItemStockType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('itemSize', NumberType::class)
+        $builder->add('itemSize', NumberType::class , array('label'=> 'Size:',
+            'label_attr' => array('class' => ' control-label')))
                 ->add('typeSize', ChoiceType::class, array(
                     'choices'  => array(
                     'US' => 'us',
                     'EU' => 'eu',
                     
-             ),))
-                ->add('quantity', integerType::class);
+             ), 'label'=> 'Size type:'))
+                ->add('quantity', integerType::class ,  array('label'=> 'Quantity:'));
                 //->add('addingDate', DateTimeType::class);
     }
     

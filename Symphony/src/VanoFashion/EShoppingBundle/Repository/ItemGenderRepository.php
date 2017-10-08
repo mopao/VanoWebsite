@@ -10,4 +10,6 @@ namespace VanoFashion\EShoppingBundle\Repository;
  */
 class ItemGenderRepository extends \Doctrine\ORM\EntityRepository
 {
+
+	
 }

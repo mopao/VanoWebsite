@@ -1,0 +1,93 @@
+{% extends "VanoFashionEShoppingBundle:Item:websiteManagement.html.twig" %}
+
+
+{% block title %}
+
+   {{ parent() }} - list of items categories
+
+{% endblock %}
+
+
+{% block vanofashioneshopping_management_body %}
+
+
+  
+	   
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ label }}">
+           <STRONG> {{label}}: </STRONG> {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+<h1 class="text-center"> List of items categories</h1>
+<div class="row">
+<div class="col-sm-8"></div>
+<div class="col-sm-2 text-nb-result"> Result(s): <span id="nb-results">{{total}}</span></div>
+<div class="col-sm-2"> 
+	<div class="dropdown" id="dropdown-nbperpage">
+	    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" 
+	    >
+	    	Number per page
+	    <span class="caret"></span></button>
+	    <ul class="dropdown-menu">
+	      <li>
+	      	<a href="{{ path('vano_fashion_e_shopping_website_management_itemcategory_list')}}?limit=10">10</a></li>
+	      <li><a href="{{ path('vano_fashion_e_shopping_website_management_itemcategory_list')}}?limit=15">15</a></li>
+	      <li><a href="{{ path('vano_fashion_e_shopping_website_management_itemcategory_list')}}?limit=20">20</a></li>
+	      <li><a href="{{ path('vano_fashion_e_shopping_website_management_itemcategory_list')}}?limit=25">25</a></li>
+	      <li><a href="{{ path('vano_fashion_e_shopping_website_management_itemcategory_list')}}?limit=30">30</a></li>
+	    </ul>
+    </div>
+</div>
+</div>
+<div class="well">
+
+	{% for category in categories %}
+	
+		{% if  loop.first %}
+		<div class="row list-first" id="{{category.id}}">
+			 <div class="col-sm-9">   <a href="" > {{category.name|capitalize}} 
+			 	</a>
+			 </div>
+			 <div class="col-sm-1"> <a href="" class="btn btn-submit btn-sm"> Edit </a></div> 
+			 <div class="col-sm-2"> <button class="btn btn-delete btn-sm"
+			 	onclick="deleteCategory('{{category.id}}')"> Delete</button></div>
+		</div>
+	    {% else %}
+
+	    <div class="row list" id="{{category.id}}">
+			 <div class="col-sm-9">  <a href="" > {{category.name|capitalize}} 
+			 	</a>
+			 </div>
+			 <div class="col-sm-1"> <a href="" class="btn btn-submit btn-sm"> Edit </a></div> 
+			 <div class="col-sm-2"> <button class="btn btn-delete btn-sm" 
+			 	onclick="deleteCategory('{{category.id}}')"> Delete</button></div>
+		</div>
+
+    	{% endif%} 
+    {% endfor %}
+
+
+</div>
+
+<ul class="pagination">
+
+  {# On utilise la fonction range(a, b) qui crée un tableau de valeurs entre a et b #}
+
+  {% for p in range(1, nbPages) %}
+
+    <li{% if p == page %} class="active"{% endif %}>
+
+      <a href="{{ path('vano_fashion_e_shopping_website_management_itemcategory_list', {'page': p}) }}?limit={{limit}}">{{ p }}</a>
+
+    </li>
+
+  {% endfor %}
+
+</ul>
+
+
+{% endblock %}

@@ -31,7 +31,7 @@ class ItemType extends AbstractType
                 ->add('brand', TextType::class)
                 ->add('available' , CheckboxType::class, array('required' => false))
                 ->add('itemLabel', TextType::class)
-                ->add('files',  FileType::class,  array('multiple' =>true , 'label'=>'Images' )                   )
+                ->add('files',  FileType::class,  array('multiple' =>true ) )
                 ->add('gender', EntityType::class, array(
                         'class'        => 'VanoFashionEShoppingBundle:ItemGender',
                         'choice_label' => 'gender',
@@ -39,10 +39,13 @@ class ItemType extends AbstractType
                       ))
                 ->add('product', EntityType::class, array(
                         'class'        => 'VanoFashionEShoppingBundle:ItemProduct',
-                        'choice_label' => 'name',
-                        'expanded'     => true
+                        'choice_label' => 'name'                        
                       ))
-                ->add('stock', ItemStockType::class)
+                ->add('stocks',  CollectionType::class, array(
+                                'entry_type'   => ItemStockType::class,
+                                'allow_add'    => true,
+                                'allow_delete' => true
+                              ))
                 ->add('save',      SubmitType::class)
                 ->add('reset',       ResetType::class);
     }

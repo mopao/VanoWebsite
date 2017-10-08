@@ -1,0 +1,64 @@
+{% extends "VanoFashionEShoppingBundle:Item:websiteManagement.html.twig" %}
+
+
+{% block title %}
+
+   {{ parent() }} - list of items genders
+
+{% endblock %}
+
+
+{% block vanofashioneshopping_management_body %}
+
+
+  
+	   
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ label }}">
+           <STRONG> {{label}}: </STRONG> {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+<h1 class="text-center"> List of items genders</h1>
+<div class="row">
+<div class="col-sm-8"></div>
+<div class="col-sm-2 text-nb-result"> Result(s): <span id="nb-results">{{total}}</span></div>
+<div class="col-sm-2"> 
+	
+</div>
+</div>
+<div class="well">
+
+	{% for gender in genders %}
+	
+		{% if  loop.first %}
+		<div class="row list-first" id="{{gender.id}}">
+			 <div class="col-sm-10">    {{gender.gender|capitalize}} 
+			 	
+			 </div>
+			 
+			 <div class="col-sm-2"> <button class="btn btn-delete btn-sm"
+			 	onclick="deleteGender('{{gender.id}}')"> Delete</button></div>
+		</div>
+	    {% else %}
+
+	    <div class="row list" id="{{gender.id}}">
+			 <div class="col-sm-10">   {{gender.gender|capitalize}} 
+			 	
+			 </div>			 
+			 <div class="col-sm-2"> <button class="btn btn-delete btn-sm" 
+			 	onclick="deleteGender('{{gender.id}}')"> Delete</button></div>
+		</div>
+
+    	{% endif%} 
+    {% endfor %}
+
+
+</div>
+
+
+
+{% endblock %}
