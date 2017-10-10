@@ -20,7 +20,12 @@ class ItemProductType extends AbstractType
         $builder->add('name', TextType::class)
                 ->add('category' , EntityType::class, array(
                         'class'        => 'VanoFashionEShoppingBundle:ItemCategory',
-                        'choice_label' => 'name',
+                        'choice_label' => 'name'
+                        
+                      ))
+                ->add('gender' , EntityType::class, array(
+                        'class'        => 'VanoFashionEShoppingBundle:ItemGender',
+                        'choice_label' => 'gender',
                         'expanded'     => true
                       ))
                 ->add('save',      SubmitType::class)

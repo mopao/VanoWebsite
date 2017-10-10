@@ -10,27 +10,29 @@
 
 {% block vanofashioneshopping_management_body %}
 
-{% if app.flashes  %}
 
-	{% for label, message in app.flashes %}
 
-	 <div class="alert alert-{{label}}">
-        <STRONG> {{label}}!</STRONG>  {{ message }}
-    </div>
+	
 
-	{% endfor %}
 
-{% else %}
     
 	<div class="page-header">
 	<h2 class="text-center"> Adding an items Product </h2>
 	</div>
+
+	{% for label, messages in app.flashes %}
+	    {% for message in messages %}
+	        <div class="alert alert-{{ label }}">
+	           <STRONG> {{label}}: </STRONG> {{ message }}
+	        </div>
+	    {% endfor %}
+    {% endfor %}
 	<div >
 
     {{ include("VanoFashionEShoppingBundle:Item:itemProductForm.html.twig") }}
 
     </div>
 
-{% endif %}
+
 
 {% endblock %}

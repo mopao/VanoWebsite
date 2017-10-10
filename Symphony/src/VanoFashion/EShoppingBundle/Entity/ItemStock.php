@@ -123,7 +123,7 @@ class ItemStock
      */
     public function setTypeSize($typeSize)
     {
-        $this->typeSize = $typeSize;
+        $this->typeSize = strtolower($typeSize);
 
         return $this;
     }

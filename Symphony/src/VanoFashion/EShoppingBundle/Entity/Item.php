@@ -280,7 +280,7 @@ class Item
      */
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->title = strtolower($title);
 
         return $this;
     }
@@ -304,7 +304,7 @@ class Item
      */
     public function setColor($color)
     {
-        $this->color = $color;
+        $this->color = strtolower($color);
 
         return $this;
     }
@@ -328,7 +328,7 @@ class Item
      */
     public function setDescrip($descrip)
     {
-        $this->descrip = $descrip;
+        $this->descrip = strtolower($descrip);
 
         return $this;
     }
@@ -376,7 +376,7 @@ class Item
      */
     public function setBrand($brand)
     {
-        $this->brand = $brand;
+        $this->brand = strtolower($brand);
 
         return $this;
     }
@@ -424,7 +424,7 @@ class Item
      */
     public function setItemLabel($itemLabel)
     {
-        $this->itemLabel = $itemLabel;
+        $this->itemLabel = strtolower($itemLabel);
 
         return $this;
     }

@@ -68,7 +68,7 @@ class ItemGender
      */
     public function setGender($gender)
     {
-        $this->gender = $gender;
+        $this->gender = strtolower($gender);
 
         return $this;
     }

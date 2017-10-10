@@ -37,6 +37,20 @@
 
     </div>
 
+    <div class="form-group">
+
+        {# Generate label. #}
+        {{ form_label(form.gender, "Gender:", {'label_attr': {'class': 'col-md-2 control-label'}}) }}
+
+        {# errors display. #}
+        {{ form_errors(form.gender) }}
+        <div class="col-md-5 text-capitalize">
+        {# Generate input. #}
+        {{ form_widget(form.gender) }}
+        </div>
+
+    </div>
+
 
      <div class="form-group  form-btn text-center ">
 

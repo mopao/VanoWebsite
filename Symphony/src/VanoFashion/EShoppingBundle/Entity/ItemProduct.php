@@ -26,6 +26,12 @@ class ItemProduct
     private $category;
 
     /**
+     * @ORM\ManyToOne(targetEntity="VanoFashion\EShoppingBundle\Entity\ItemGender")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $gender;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -79,7 +85,7 @@ class ItemProduct
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = strtolower($name);
 
         return $this;
     }
@@ -193,5 +199,29 @@ class ItemProduct
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set gender
+     *
+     * @param \VanoFashion\EShoppingBundle\Entity\ItemGender $gender
+     *
+     * @return ItemProduct
+     */
+    public function setGender(\VanoFashion\EShoppingBundle\Entity\ItemGender $gender)
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    /**
+     * Get gender
+     *
+     * @return \VanoFashion\EShoppingBundle\Entity\ItemGender
+     */
+    public function getGender()
+    {
+        return $this->gender;
     }
 }

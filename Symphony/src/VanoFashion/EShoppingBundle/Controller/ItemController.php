@@ -473,7 +473,7 @@ class ItemController extends Controller
      * delete an item gender
      *
      */
-    public function itemGenderDeleteAction($_locale, $id)
+    public function itemGenderDeleteAction( $id)
     {
         $response = new Response(); 
 
