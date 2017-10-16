@@ -128,7 +128,7 @@ class Item
 
         if($this->images!==null){
 
-            foreach ($image as $this->images) {
+            foreach ( $this->images as $image ) {
 
                 $oldFileNames[]=$image->getUrl();
             }
@@ -155,7 +155,7 @@ class Item
         }
 
 
-        foreach ($file as $this->files) {
+        foreach ( $this->files as $file) {
 
             if ($file instanceof UploadedFile) {
 
@@ -163,10 +163,18 @@ class Item
                 $image->setAlt($file->getClientOriginalName());
                 $fileName=md5(uniqid()).'.'.$file->guessExtension();
                 $image->setUrl($fileName);                
-                $this->images->addImage($image);
+                $this->addImage($image);
                 
                 
             }
+        }
+
+        if(null !== $this->stocks){
+
+            foreach ($this->stocks as $stock) {
+                $stock->setItem($this);
+            }
+
         }
 
         
@@ -186,7 +194,7 @@ class Item
 
         // remove old images item
         if (null !== $this->oldFileNames) {
-          foreach ($oldFileName as $oldFileNames) {
+          foreach ( $this->oldFileNames as $oldFileName) {
               if (file_exists($oldFileName)) {
                 unlink($oldFileName);
               }
@@ -199,10 +207,10 @@ class Item
         $nbImages=count($this->files);
 
         // move picture to the directory /web/bundles/vanofashioneshopping/images
-        for ($i=0; $i < nbImages ; $i++) { 
+        for ($i=0; $i < $nbImages ; $i++) { 
             if($this->files[$i] instanceof UploadedFile){
 
-                $this->files[$i]->move($this->getParameter('%kernel.project_dir%/web/bundles/vanofashioneshopping/images'),
+                $this->files[$i]->move('%kernel.project_dir%/web/bundles/vanofashioneshopping/images',
                 $this->images->get($i)->getUrl());
 
             }

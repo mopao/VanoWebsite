@@ -159,4 +159,12 @@ class Image
     {
         return $this->item;
     }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ismain=false;
+    }
 }
