@@ -290,12 +290,26 @@ class ItemStock
         return $this->soldQuantity;
     }
 
-
+    /** 
+     *increase soldQuantity with quantity
+     *
+     * @param integer $quantity
+     *
+     * 
+     */
     public function increaseSoldQuantity($quantity){
 
         $this->setSoldQuantity($this->getSoldQuantity()+ $quantity);
 
     }
+
+    /** 
+     *decrease soldQuantity with quantity
+     *
+     * @param integer $quantity
+     *
+     * 
+     */
 
     public function decreaseSoldQuantity($quantity){
 
