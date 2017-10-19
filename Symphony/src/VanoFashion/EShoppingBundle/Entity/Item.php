@@ -162,8 +162,9 @@ class Item
                 $image = new \VanoFashion\EShoppingBundle\Entity\Image();
                 $image->setAlt($file->getClientOriginalName());
                 $fileName=md5(uniqid()).'.'.$file->guessExtension();
-                $image->setUrl($fileName);                
+                $image->setUrl($fileName);                           
                 $this->addImage($image);
+
                 
                 
             }
@@ -191,7 +192,7 @@ class Item
         if (null === $this->files) {
           return;
         }
-
+         dump($this->files);
         // remove old images item
         if (null !== $this->oldFileNames) {
           foreach ( $this->oldFileNames as $oldFileName) {
@@ -210,7 +211,7 @@ class Item
         for ($i=0; $i < $nbImages ; $i++) { 
             if($this->files[$i] instanceof UploadedFile){
 
-                $this->files[$i]->move('%kernel.project_dir%/web/bundles/vanofashioneshopping/images',
+                $this->files[$i]->move(__DIR__.'/../../../../web/bundles/vanofashioneshopping/images',
                 $this->images->get($i)->getUrl());
 
             }
