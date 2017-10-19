@@ -57,6 +57,13 @@ class ItemStock
     private $quantity;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="soldQuantity", type="integer")
+     */
+    private $soldQuantity;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="addingDate", type="datetime")
@@ -123,7 +130,7 @@ class ItemStock
      */
     public function setTypeSize($typeSize)
     {
-        $this->typeSize = $typeSize;
+        $this->typeSize = strtolower($typeSize);
 
         return $this;
     }
@@ -232,5 +239,29 @@ class ItemStock
     public function getItem()
     {
         return $this->item;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return ItemStock
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

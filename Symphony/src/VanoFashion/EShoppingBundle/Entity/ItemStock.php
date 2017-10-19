@@ -57,6 +57,13 @@ class ItemStock
     private $quantity;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="soldQuantity", type="integer")
+     */
+    private $soldQuantity;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="addingDate", type="datetime")
@@ -79,6 +86,7 @@ class ItemStock
     public function __construct(){
 
         $this->addingDate= new \Datetime();
+        $this->soldQuantity=0;
     }
     /**
      * Get id
@@ -256,5 +264,42 @@ class ItemStock
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set soldQuantity
+     *
+     * @param integer $soldQuantity
+     *
+     * @return ItemStock
+     */
+    public function setSoldQuantity($soldQuantity)
+    {
+        $this->soldQuantity = $soldQuantity;
+
+        return $this;
+    }
+
+    /**
+     * Get soldQuantity
+     *
+     * @return integer
+     */
+    public function getSoldQuantity()
+    {
+        return $this->soldQuantity;
+    }
+
+
+    public function increaseSoldQuantity($quantity){
+
+        $this->setSoldQuantity($this->getSoldQuantity()+ $quantity);
+
+    }
+
+    public function decreaseSoldQuantity($quantity){
+
+        $this->setSoldQuantity($this->getSoldQuantity()- $quantity);
+
     }
 }
