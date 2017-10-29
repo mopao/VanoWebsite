@@ -175,4 +175,27 @@ class ItemCategory
     {
         return $this->updatedAt;
     }
+
+    /**
+     * return corresponding array 
+     */
+    public function toArray(){
+
+        $array_category=array();
+        $array_products=array();
+
+        $array_category['id']=$this->getId();
+        $array_category['name']=$this->getName();
+        $array_category['updatedAt']=$this->getUpdatedAt();
+        $array_category['addingDate']=$this->getAddingDate();
+
+        for ($i=0; $i < $this->products->count(); $i++) { 
+            $array_products[]=$this->products->get($i)->toArray();
+        }
+        $array_category['products']=$array_products;
+
+        return $array_category;
+
+    }
+
 }

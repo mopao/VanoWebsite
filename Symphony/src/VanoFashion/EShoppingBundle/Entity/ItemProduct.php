@@ -224,4 +224,21 @@ class ItemProduct
     {
         return $this->gender;
     }
+
+    /**
+     * return corresponding array 
+     */
+    public function toArray(){
+
+        $array_product=array();
+        $array_product['id']=$this->getId();
+        $array_product['category']=$this->getCategory()->getName();
+        $array_product['gender']=$this->getGender()->getGender();
+        $array_product['addingDate']=$this->getAddingDate();
+        $array_product['updatedAt']=$this->getUpdatedAt();
+        $array_product['name']=$this->getName();
+
+        return $array_product;
+
+    }
 }

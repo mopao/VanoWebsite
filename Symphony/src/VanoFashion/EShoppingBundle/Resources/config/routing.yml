@@ -103,6 +103,11 @@ vano_fashion_e_shopping_website_management_itemcategory_add:
     requirements:
         _locale: en|fr
 
+vano_fashion_e_shopping_website_management_itemcategory_get:
+    path: /websitemanagement/itemCategory/{id}
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:getCategory}
+    
+
 
 vano_fashion_e_shopping_website_management_itemproduct_list:
     path: /websitemanagement/{_locale}/itemProduct/list/{page}

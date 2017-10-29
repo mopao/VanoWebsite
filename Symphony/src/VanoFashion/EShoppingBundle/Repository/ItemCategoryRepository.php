@@ -15,14 +15,14 @@ class ItemCategoryRepository extends \Doctrine\ORM\EntityRepository
 {
 
 	/**
-	 *get category with its products in database
+	 *get categories with its products in database
 	 */
 
 	public function getCategories($page, $nbPerPage){
 
 		$qb=$this->createQueryBuilder('c')
-                 //->innerJoin('c.products', 'p')
-                 //->addSelect('p')
+                 ->innerJoin('c.products', 'p')
+                 ->addSelect('p')
                  ->orderBy('c.name', 'ASC')
                  ->getQuery();         
 
@@ -35,4 +35,25 @@ class ItemCategoryRepository extends \Doctrine\ORM\EntityRepository
         
 
 	}
+
+        /**
+         *get a category with its products in database
+         */
+
+        public function getCategory($id){
+
+                $qb=$this->createQueryBuilder('c')
+                 ->where('c.id = :id')
+                 ->setParameter('id', $id)                  
+                 ->innerJoin('c.products', 'p')
+                 ->addSelect('p')                                
+                 ->getQuery();         
+
+                return $qb->getSingleResult();
+        
+
+        }
+
+
+
 }

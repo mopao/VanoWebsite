@@ -16,6 +16,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ItemController extends Controller
 {   
@@ -315,6 +316,37 @@ class ItemController extends Controller
           'form' => $form->createView()));
 
     }
+
+
+    /**
+     * return a catgegory
+     */
+
+    public function getCategoryAction($id){
+
+        try {
+
+            $em = $this->getDoctrine()->getManager();                       
+            $category=$em->getRepository('VanoFashionEShoppingBundle:ItemCategory')->getCategory($id);
+            if (!$category) {
+                throw $this->createNotFoundException(
+                    'No product found for id '.$id
+                );
+            }
+            else{
+
+                $array_category=$category->toArray();
+                 return new JsonResponse($array_category);
+            }
+            
+        } catch (NotFoundHttpException $e) {
+
+            $response->setContent("The resource has not been found");    
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);    
+            return $response;        
+        }
+
+    }
     
     /**
      *return the view for the editing of item category
@@ -322,6 +354,8 @@ class ItemController extends Controller
      */
     public function itemCategoryEditAction($_locale, $id)
     {
+
+
 
     }
     
