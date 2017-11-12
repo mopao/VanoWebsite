@@ -4,6 +4,7 @@ namespace VanoFashion\EShoppingBundle\Repository;
 
 
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * ItemRepository
@@ -17,24 +18,23 @@ class ItemRepository extends \Doctrine\ORM\EntityRepository
   /**
    * get all items
    */
-	public function getItems(){
+	public function getItems($page, $nbPerPage){
 
 		$qb=$this->createQueryBuilder('i')
-                 ->innerJoin('i.stock', 's')
-                 ->addSelect('s');
-
-        $qb->innerJoin('i.type', 't')
-           ->addSelect('t');
-
-        $qb->innerJoin('i.product', 'p')
-           ->addSelect('p');
-
-        $qb->innerJoin('i.images', 'img')
-           ->addSelect('img');
+                 ->innerJoin('i.stocks', 's')
+                 ->addSelect('s')
+                 ->innerJoin('i.images', 'img')
+                 ->addSelect('img')
+                 ->groupBy('i.codeItem')
+                 ->orderBy('i.addingDate', 'DESC')
+                 ->getQuery();
         
 
-        return $qb->getQuery()
-                  ->getResult();
+    $qb->setFirstResult(($page-1) * $nbPerPage);      
+
+    $qb->setMaxResults($nbPerPage);       
+
+    return new Paginator($qb, true);
 
 	}
 
@@ -128,23 +128,16 @@ class ItemRepository extends \Doctrine\ORM\EntityRepository
   public function getItem($id){
 
     $qb=$this->createQueryBuilder('i')
-                 ->innerJoin('i.stock', 's')
-                 ->addSelect('s');
-
-        $qb->innerJoin('i.type', 't')
-           ->addSelect('t');
-
-        $qb->innerJoin('i.product', 'p')
-           ->addSelect('p');
-
-        $qb->innerJoin('i.images', 'img')
-           ->addSelect('img');
-        
-        $qb->where('i.id = :id');
-        $qb->setParameter('id',$id);
-
-        return $qb->getQuery()
-                  ->getSingleResult();
+            ->where('i.id = :id')
+            ->setParameter('id',$id)
+            ->innerJoin('i.stocks', 's')
+            ->addSelect('s')
+            ->innerJoin('i.images', 'img')
+            ->addSelect('img');
+    
+   
+    return $qb->getQuery()
+              ->getSingleResult();
 
   }
 }

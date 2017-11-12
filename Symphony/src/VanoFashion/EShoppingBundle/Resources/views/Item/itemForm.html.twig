@@ -24,30 +24,18 @@
     <div class="form-group">
 
     	{# Generate label. #}
-	    {{ form_label(form.title, "Name:", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+	    {{ form_label(form.name, "Name:", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
 
 	    {# errors display. #}
-	    {{ form_errors(form.title) }}
+	    {{ form_errors(form.name) }}
         <div class="col-sm-10">
 	    {# Generate input. #}
-	    {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+	    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
 	    </div>
 
     </div>
 
-    <div class="form-group">
-
-    	{# Generate label. #}
-	    {{ form_label(form.color, "Color:", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
-
-	    {# errors display. #}
-	    {{ form_errors(form.color) }}
-        <div class="col-sm-10">
-	    {# Generate input. #}
-	    {{ form_widget(form.color, {'attr': {'class': 'form-control'}}) }}
-	    </div>
-
-    </div>
+    
 
     <div class="form-group">
 
@@ -63,19 +51,20 @@
 
     </div>
 
-    <div class="form-group">
+     <div class="form-group">
 
     	{# Generate label. #}
-	    {{ form_label(form.price, "Price:", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+	    {{ form_label(form.name, "Color:", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
 
 	    {# errors display. #}
-	    {{ form_errors(form.price) }}
+	    {{ form_errors(form.color) }}
         <div class="col-sm-10">
 	    {# Generate input. #}
-	    {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
+	    {{ form_widget(form.color, {'attr': {'class': 'form-control'}}) }}
 	    </div>
 
     </div>
+
 
     <div class="form-group">
 
@@ -134,18 +123,30 @@
 
     </div>
 
-    
+    <div class="form-group">
+
+    	{# Generate label. #}
+	    {{ form_label(form.mainFile, "Main image:", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+
+	    {# errors display. #}
+	    {{ form_errors(form.mainFile) }}
+        <div class="col-sm-10">
+	    {# Generate input. #}
+	    {{ form_widget(form.mainFile) }}
+	    </div>
+
+    </div>
 
     <div class="form-group">
 
     	{# Generate label. #}
-	    {{ form_label(form.files, "Image(s):", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+	    {{ form_label(form.otherFiles, "Others image(s):", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
 
 	    {# errors display. #}
-	    {{ form_errors(form.product) }}
+	    {{ form_errors(form.otherFiles) }}
         <div class="col-sm-10">
 	    {# Generate input. #}
-	    {{ form_widget(form.files) }}
+	    {{ form_widget(form.otherFiles) }}
 	    </div>
 
     </div>
@@ -156,7 +157,7 @@
     	{# Generate label. #}
 	    {{ form_label(form.stocks, "Stock(s):", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
 
-	    <div class="col-sm-10" >            
+	    <div class="col-sm-9" >            
             {# Generate input. #}
 	        {{ form_widget(form.stocks) }}
 	        <a href="#" id="add_stock" class="  btn btn-default"> Ajouter un stock </a>

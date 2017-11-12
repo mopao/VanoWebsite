@@ -135,4 +135,22 @@ class ItemGender
     {
         return $this->updatedAt;
     }
+
+    /**
+     * return corresponding array 
+     */
+    public function toArray(){
+
+        $array_gender=array();
+        
+        $array_gender['id']=$this->getId();
+        $array_gender['gender']=$this->getGender();
+        $array_gender['updatedAt']=$this->getUpdatedAt();
+        $array_gender['addingDate']=$this->getAddingDate();
+
+        
+
+        return $array_gender;
+
+    }
 }

@@ -44,6 +44,14 @@ vano_fashion_e_shopping_view_item:
 
 
 
+
+vano_fashion_e_shopping_website_management:
+    path: /websitemanagement/{_locale}
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:websitemanagement , _locale: en }
+    requirements:
+        _locale: en|fr
+
+
 vano_fashion_e_shopping_website_management_item_list:
     path: /websitemanagement/{_locale}/item/list/{page}
     defaults: { _controller: VanoFashionEShoppingBundle:Item:managementListItemView , _locale: en , page: 1 }
@@ -51,6 +59,12 @@ vano_fashion_e_shopping_website_management_item_list:
         _locale: en|fr
         page:   \d*
 
+vano_fashion_e_shopping_website_management_item_view:
+    path: /websitemanagement/{_locale}/item/{id}
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:managementItemView , _locale: en }
+    requirements:
+        _locale: en|fr
+        id:   \d*
 
 vano_fashion_e_shopping_website_management_item_edit:
     path: /websitemanagement/{_locale}/item/edit/{id}
@@ -70,14 +84,6 @@ vano_fashion_e_shopping_website_management_item_add:
     requirements:
         _locale: en|fr
 
-
-vano_fashion_e_shopping_website_management:
-    path: /websitemanagement/{_locale}
-    defaults: { _controller: VanoFashionEShoppingBundle:Item:websitemanagement , _locale: en }
-    requirements:
-        _locale: en|fr
-
-
 vano_fashion_e_shopping_website_management_itemcategory_list:
     path: /websitemanagement/{_locale}/itemCategory/list/{page}
     defaults: { _controller: VanoFashionEShoppingBundle:Item:managementListCategoryView , _locale: en , page: 1 }
@@ -95,7 +101,7 @@ vano_fashion_e_shopping_website_management_itemcategory_edit:
 vano_fashion_e_shopping_website_management_itemcategory_delete:
     path: /websitemanagement/itemCategory/delete/{id}
     defaults: { _controller: VanoFashionEShoppingBundle:Item:itemCategoryDelete  }
-    
+
 
 vano_fashion_e_shopping_website_management_itemcategory_add:
     path: /websitemanagement/{_locale}/itemCategory/add
@@ -105,8 +111,8 @@ vano_fashion_e_shopping_website_management_itemcategory_add:
 
 vano_fashion_e_shopping_website_management_itemcategory_get:
     path: /websitemanagement/itemCategory/{id}
-    defaults: { _controller: VanoFashionEShoppingBundle:Item:getCategory}
-    
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:getItemCategory}
+
 
 
 vano_fashion_e_shopping_website_management_itemproduct_list:
@@ -126,13 +132,17 @@ vano_fashion_e_shopping_website_management_itemproduct_edit:
 vano_fashion_e_shopping_website_management_itemproduct_delete:
     path: /websitemanagement/itemProduct/delete/{id}
     defaults: { _controller: VanoFashionEShoppingBundle:Item:itemProductDelete }
-    
+
 
 vano_fashion_e_shopping_website_management_itemproduct_add:
     path: /websitemanagement/{_locale}/itemProduct/add
     defaults: { _controller: VanoFashionEShoppingBundle:Item:itemProductAdd , _locale: en }
     requirements:
         _locale: en|fr
+vano_fashion_e_shopping_website_management_itemproduct_get:
+    path: /websitemanagement/itemProduct/{id}
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:getItemProduct }
+
 
 vano_fashion_e_shopping_website_management_itemgender_list:
     path: /websitemanagement/{_locale}/itemGender/list/{page}
@@ -151,7 +161,7 @@ vano_fashion_e_shopping_website_management_itemgender_edit:
 vano_fashion_e_shopping_website_management_itemgender_delete:
     path: /websitemanagement/itemGender/delete/{id}
     defaults: { _controller: VanoFashionEShoppingBundle:Item:itemGenderDelete }
-    
+
 
 vano_fashion_e_shopping_website_management_itemgender_add:
     path: /websitemanagement/{_locale}/itemGender/add

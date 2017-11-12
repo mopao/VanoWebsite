@@ -28,53 +28,7 @@ class ItemController extends Controller
         return $this->render('VanoFashionEShoppingBundle:Item:index.html.twig');
     }
 
-    /**
-     *return the view of items  by customerType
-     *
-     */
-    public function viewCustomerTypeAction($customerType, $catalogType, $_locale, $page, Request $request)
-    {
-
-    }
-
-    /**
-     *return the view of items  by product
-     *
-     */
-    public function viewProductAction($customerType, $product , $catalogType, $_locale, $page, Request $request)
-    {
-
-    }
-
-    /**
-     *return the view of items  by category
-     *
-     */
-
-    public function viewCategoryAction($customerType, $product ,$category, $catalogType, $_locale, $page, Request $request)
-    {
-
-    }
-
-    /**
-     *return the view of item
-     *
-     */
-
-    public function viewAction($_locale, $id, Request $request)
-    {
-
-    }
-
-    /**
-     *return the management view of items  
-     *
-     */
-    public function managementListItemViewAction($_locale, $page, Request $request)
-    {
-
-    }
-
+   
 
     /**
      *return menu website management
@@ -110,13 +64,120 @@ class ItemController extends Controller
           $em->persist($item);
           $em->flush();
 
-          $this->get('session')->getFlashBag()->add('notice', 'Item has been registered !');
+          $this->get('session')->getFlashBag()->add('success', 'Item has been registered !');
 
           //return $this->redirectToRoute('oc_platform_view', array('id' => $advert->getId()));
         }
 
         return $this->render('VanoFashionEShoppingBundle:Item:itemAdd.html.twig', array(
           'form' => $form->createView()));
+
+    }
+
+         /**
+     * return the view for the list of items categories
+     * at management side
+     */
+
+    public function managementListItemViewAction($_locale, $page, Request $request){
+
+       try {
+
+         if ($page < 1) {
+      
+            throw new NotFoundHttpException("page does'nt exist!");
+
+        }
+
+        $limit=10;   
+        if($request->query->get('limit')) {
+            $limit=$request->query->get('limit');
+        }
+
+
+        $items= $this->getDoctrine()
+        ->getManager()
+        ->getRepository('VanoFashionEShoppingBundle:Item')
+        ->getItems($page, $limit);
+
+        $total=count($items);
+        $nbPages = ceil($total / $limit);
+        
+        if ($nbPages===0) {
+            # code...
+             $this->get('session')->getFlashBag()->add('info', 'no item registered!');
+        }
+        if ($nbPages>0 and $page > $nbPages) {
+
+          throw $this->createNotFoundException("page does'nt exist!");
+
+        }
+
+        return $this->render('VanoFashionEShoppingBundle:Item:managementListItem.html.twig',
+            array(
+                  'items' => $items,
+                  'nbPages'     => $nbPages,
+                  'page'        => $page,
+                  'limit'       =>$limit,
+                  'total'       =>$total
+                  ));
+           
+       } catch (NotFoundHttpException $e) {
+        $this->get('session')->getFlashBag()->add('danger', $e->getMessage());
+        return $this->render('VanoFashionEShoppingBundle:Item:managementListItem.html.twig',
+            array(
+                  'items' => $items,
+                  'nbPages'     => $nbPages,
+                  'page'        => 1,
+                  'limit'       =>$limit,
+                  'total'       =>$total
+                  ));           
+       }
+
+    }
+
+    /**
+     *
+     * return the item's view at management side
+     */
+
+    public function managementItemViewAction($id, request $request){
+
+        try {
+
+            $em = $this->getDoctrine()->getManager();                       
+            $item=$em->getRepository('VanoFashionEShoppingBundle:Item')->getItem($id);
+            if (!$item) {
+                throw $this->createNotFoundException(
+                    'No product found for id '.$id
+                );
+            }
+            else{
+
+                if ($request->isXmlHttpRequest()) {
+                    # code...
+                    $array_item=$item->toArray();
+                    return new JsonResponse($array_item);
+
+                }
+
+                
+                return $this->render('VanoFashionEShoppingBundle:Item:managementItemView.html.twig',
+                    array(
+                          'item' => $item,                          
+                          'returnPage'        => $request->query->get('returnPage'),
+                          'limit'       =>$request->query->get('limit'), 
+                          'mainImage'   =>$item->getMainImage()                     
+                          ));
+            }
+            
+        } catch (NotFoundHttpException $e) {
+
+            $response->setContent("The resource has not been found");    
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);    
+            return $response;        
+        }
+
 
     }
     
@@ -175,6 +236,36 @@ class ItemController extends Controller
           'form' => $form->createView()));
 
     }
+
+    /**
+     * return a product
+     */
+
+    public function getItemProductAction($id){
+
+        try {
+
+            $em = $this->getDoctrine()->getManager();                       
+            $product=$em->getRepository('VanoFashionEShoppingBundle:ItemProduct')->find($id);
+            if (!$product) {
+                throw $this->createNotFoundException(
+                    'No product found for id '.$id
+                );
+            }
+            else{
+
+                $array_product=$product->toArray();
+                 return new JsonResponse($array_product);
+            }
+            
+        } catch (NotFoundHttpException $e) {
+
+            $response->setContent("The resource has not been found");    
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);    
+            return $response;        
+        }
+
+    }
     
     /**
      *return the view for the editing of item product
@@ -184,6 +275,9 @@ class ItemController extends Controller
     {
 
     }
+
+
+
     
     /**
      * delete an item product
@@ -322,7 +416,7 @@ class ItemController extends Controller
      * return a catgegory
      */
 
-    public function getCategoryAction($id){
+    public function getItemCategoryAction($id){
 
         try {
 

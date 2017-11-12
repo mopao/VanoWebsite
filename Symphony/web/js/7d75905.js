@@ -80,7 +80,7 @@ function deleteGender(id){
     }
 
 
-function showCategory(id){
+function showModalCategory(id){
 
        $.getJSON("/vanofashion/websitemanagement/itemCategory/"+id, function(category, status){
         
@@ -89,11 +89,32 @@ function showCategory(id){
           $("#category-modal-nberProducts").text(category.products.length);
           $("#category-modal-list-products").empty();
           for (var i = 0; i < category.products.length; i++) {
-            $("#category-modal-list-products").append("<li>"+category.products[i].name +"</li>");
+            $("#category-modal-list-products").append("<li>"+category.products[i].name +" ----> "+
+              category.products[i].gender+"</li>");
           };
 
+          var d = new Date(category.addingDate.date);
+          $("#category-added-date").text(d.toUTCString());
           console.log(category);
           $("#categoryModal").modal();
+
+
+        }
+    });
+       
+}
+
+function showModalProduct(id){
+
+       $.getJSON("/vanofashion/websitemanagement/itemProduct/"+id, function(product, status){
+        
+        if(status==="success"){
+          $("#product-modal-name").text(product.name);          
+          $("#productCategory").text(product.category);
+          var d = new Date(product.addingDate.date);
+          $("#product-added-date").text(d.toUTCString());
+          console.log(product);
+          $("#productModal").modal();
 
 
         }

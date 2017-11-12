@@ -53,16 +53,16 @@ class Item
     /**
      * @var string
      *
-     * @ORM\Column(name="codeItem", type="string", length=255, unique=true)
+     * @ORM\Column(name="codeItem", type="string", length=255)
      */
     private $codeItem;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $title;
+    private $name;
 
     /**
      * @var string
@@ -78,12 +78,7 @@ class Item
      */
     private $descrip;
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="price", type="float")
-     */
-    private $price;
+   
 
     /**
      * @var string
@@ -107,38 +102,79 @@ class Item
     private $itemLabel;
 
     /**
-     * @Gedmo\Slug(fields={"title"})
+     * @var \DateTime
+     *
+     * @ORM\Column(name="addingDate", type="datetime")
+     */
+    private $addingDate;
+
+    /**
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
 
-    private $files;
+    private $otherFiles;
+    private $mainFile;
     private $oldFileNames;
     
     
-    public function getFiles()
+    public function getOtherFiles()
     {
-        return $this->files;
+        return $this->otherFiles;
     }
 
     
-    public function setFiles(array $files=null)
+    public function setOtherFiles(array $files=null)
     {
-        $this->files = $files;
+        $this->otherFiles = $files;
 
         if($this->images!==null){
 
             foreach ( $this->images as $image ) {
 
-                $oldFileNames[]=$image->getUrl();
+                if (!$image->getIsmain()) {
+                    $oldFileNames[]=$image->getUrl();
+                    $this->removeImage($image);
+                
+                }
             }
 
-            $this->images->clear();
+            
 
-        }
-
-
+        }       
         
+    }
+
+    public function getMainFile()
+    {
+        return $this->mainFile;
+    }
+
+    
+    public function setMainFile( $file=null)
+    {
+        $this->mainFile = $file;
+
+        if($this->images!==null){
+
+            foreach ( $this->images as $image ) {
+
+                if ($image->getIsmain()) {
+                    $oldFileNames[]=$image->getUrl();
+                    $this->removeImage($image);
+                    break;
+                }
+            }
+
+            
+
+        }        
 
         return $this;
     }
@@ -150,23 +186,41 @@ class Item
       public function preUpload()
       {
         
-        if (null === $this->files) {
+        if (null === $this->mainFile && null === $this->otherFiles) {
           return;
         }
+      
+        if (null !== $this->mainFile) {
+            
 
-
-        foreach ( $this->files as $file) {
-
-            if ($file instanceof UploadedFile) {
+            if ($this->mainFile instanceof UploadedFile) {
 
                 $image = new \VanoFashion\EShoppingBundle\Entity\Image();
-                $image->setAlt($file->getClientOriginalName());
-                $fileName=md5(uniqid()).'.'.$file->guessExtension();
-                $image->setUrl($fileName);                           
-                $this->addImage($image);
+                $image->setAlt($this->mainFile->getClientOriginalName());
+                $fileName=md5(uniqid()).'.'.$this->mainFile->guessExtension();
+                $image->setUrl($fileName);
+                $image->setIsmain(true) ;                          
+                $this->images[0]=$image; 
+                $this->addImage($image);               
+                
+            }
+            
+        }
 
-                
-                
+        if (null !== $this->otherFiles) {
+            foreach ( $this->otherFiles as $file) {
+
+                if ($file instanceof UploadedFile) {
+
+                    $image = new \VanoFashion\EShoppingBundle\Entity\Image();
+                    $image->setAlt($file->getClientOriginalName());
+                    $fileName=md5(uniqid()).'.'.$file->guessExtension();
+                    $image->setUrl($fileName);                           
+                    $this->addImage($image);
+
+                    
+                    
+                }
             }
         }
 
@@ -189,10 +243,10 @@ class Item
       public function upload()
       {
         
-        if (null === $this->files) {
+        if (null === $this->otherFiles && null === $this->mainFile) {
           return;
         }
-         dump($this->files);
+         
         // remove old images item
         if (null !== $this->oldFileNames) {
           foreach ( $this->oldFileNames as $oldFileName) {
@@ -205,17 +259,32 @@ class Item
           
         }
 
-        $nbImages=count($this->files);
+        if (null !== $this->otherFiles ) {
 
-        // move picture to the directory /web/bundles/vanofashioneshopping/images
-        for ($i=0; $i < $nbImages ; $i++) { 
-            if($this->files[$i] instanceof UploadedFile){
+            $nbImages=count($this->otherFiles);
+            // move picture to the directory /web/bundles/vanofashioneshopping/images
+            for ($i=0; $i < $nbImages ; $i++) { 
+                if($this->otherFiles[$i] instanceof UploadedFile){
 
-                $this->files[$i]->move(__DIR__.'/../../../../web/bundles/vanofashioneshopping/images',
-                $this->images->get($i)->getUrl());
+                    $this->otherFiles[$i]->move(__DIR__.'/../../../../web/bundles/vanofashioneshopping/images',
+                    $this->images->get($i+1)->getUrl());
+
+                }
+            }
+          
+        }
+
+        if ( null !== $this->mainFile) {
+
+            if($this->mainFile instanceof UploadedFile){
+
+                $this->mainFile->move(__DIR__.'/../../../../web/bundles/vanofashioneshopping/images',
+                $this->images->get(0)->getUrl());
 
             }
         }
+
+        
       }
 
 
@@ -281,27 +350,27 @@ class Item
     }
 
     /**
-     * Set title
+     * Set name
      *
      * @param string $title
      *
      * @return item
      */
-    public function setTitle($title)
+    public function setName($title)
     {
-        $this->title = strtolower($title);
+        $this->name = strtolower($title);
 
         return $this;
     }
 
     /**
-     * Get title
+     * Get name
      *
      * @return string
      */
-    public function getTitle()
+    public function getName()
     {
-        return $this->title;
+        return $this->name;
     }
 
     /**
@@ -352,29 +421,7 @@ class Item
         return $this->descrip;
     }
 
-    /**
-     * Set price
-     *
-     * @param float $price
-     *
-     * @return item
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get price
-     *
-     * @return float
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
+   
 
     /**
      * Set brand
@@ -503,12 +550,32 @@ class Item
     /**
      * Get images
      *
+     * @return \VanoFashion\EShoppingBundle\Entity\Image $image
+     */
+    public function getMainImage()
+    {
+        
+        foreach ($this->images as $image) {
+            # code...
+            if($image->ismain()){
+                return $image;
+            }
+        }
+
+        return null;
+    }
+
+
+    /**
+     * Get item's main image
+     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getImages()
     {
         return $this->images;
     }
+
 
     /**
      * Set gender
@@ -577,6 +644,7 @@ class Item
         $this->stocks = new \Doctrine\Common\Collections\ArrayCollection();
         $this->available=true;
         $this->oldFileNames= array();
+        $this->addingDate= new \Datetime();
     }
 
 
@@ -602,5 +670,90 @@ class Item
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set addingDate
+     *
+     * @param \DateTime $addingDate
+     *
+     * @return Item
+     */
+    public function setAddingDate($addingDate)
+    {
+        $this->addingDate = $addingDate;
+
+        return $this;
+    }
+
+    /**
+     * Get addingDate
+     *
+     * @return \DateTime
+     */
+    public function getAddingDate()
+    {
+        return $this->addingDate;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Item
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * return corresponding array 
+     */
+    public function toArray(){
+
+        $array_item=array();
+        $array_images=array();
+        $array_stocks=array();
+
+        $array_item['id']=$this->getId();
+        $array_item['codeItem']=$this->getCodeItem();
+        $array_item['name']=$this->getName();
+        $array_item['color']=$this->getColor();
+        $array_item['descrip']=$this->getDescrip();
+        $array_item['brand']=$this->getBrand();
+        $array_item['available']=$this->getAvailable();
+        $array_item['gender']=$this->getGender()->toArray();
+        $array_item['addingDate']=$this->getAddingDate();
+        $array_item['updatedAt']=$this->getUpdatedAt();
+        $array_item['itemLabel']=$this->getItemLabel();
+        $array_item['product']=$this->getProduct()->toArray();
+
+        for ($i=0; $i < $this->stocks->count(); $i++) { 
+            $array_stocks[]=$this->stocks->get($i)->toArray();
+        }
+
+        for ($i=0; $i < $this->images->count(); $i++) { 
+            $array_images[]=$this->images->get($i)->toArray();
+        }
+
+        $array_item['stocks']=$array_stocks;
+        $array_item['images']=$array_images;
+
+        return $array_item;
+
     }
 }

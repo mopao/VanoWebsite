@@ -49,7 +49,7 @@ ul.nav.nav-pills.nav-stacked{
     color: white;
     border: 2px solid #B4AF91;
     border-radius: 15px;
-    min-width: 60px;
+    width: 100px;
 
  }
 
@@ -66,7 +66,7 @@ ul.nav.nav-pills.nav-stacked{
     border: 2px solid #B4AF91;
     border-radius: 15px;
     text-decoration: none;
-    min-width: 60px;
+    width: 100px;
  }
 
  .btn-delete{
@@ -76,7 +76,7 @@ ul.nav.nav-pills.nav-stacked{
     border: 2px solid #B4AF91;
     border-radius: 15px;
     color: white;    
-    min-width: 60px;
+    width: 100px;
  }
  .btn-delete:hover{
     background-color:#5D6B84;
@@ -92,6 +92,13 @@ ul.nav.nav-pills.nav-stacked{
 
  .form-btn{
     margin-top: 45px;
+ }
+
+ .div-btn{
+
+  margin-bottom: 25px;
+  margin-top: 20px;
+
  }
 
  .list{
@@ -132,14 +139,73 @@ div.text-nb-result{
 
 .modal-header {
       
-      padding:35px 50px;
+      padding:35px 50px 0px;
   }
+.modal-body{
+    padding:40px 50px;
+}
   .modal-footer {
       background-color: #f9f9f9;
   }
 
   .modal-body ul >li {
     text-transform: capitalize;
+  }
+
+  .modal-right{
+    float: right;
+    width: 250px;
+    padding-bottom: 0px;
+  }
+
+  .management-item-details{
+    padding-left: 180px;
+    text-transform: capitalize;
+
+  }
+
+  .management-item-details strong {
+    font-size: 16px;
+
+
+  }
+
+  div.management-item-details > div.row{
+    margin-bottom: 15px;
+
+  }
+
+   div.management-images{
+    width: 500px;
+    height: 400px;
+    background-color: #eee;
+    overflow-y: auto;
+
+  }
+
+  div.management-images > div.row{
+    padding-left: 5px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+
+  }
+
+
+  div.management-images > div.row > a > img:hover {
+    border:  3px solid #B5A8B6;
+
+  }
+
+  div.item-stocks{
+
+     overflow-x: auto;
+      width: 650px;
+
+  }
+
+  img.item-main-image{
+     display: block;
+    margin: 0 auto;
   }
 
 

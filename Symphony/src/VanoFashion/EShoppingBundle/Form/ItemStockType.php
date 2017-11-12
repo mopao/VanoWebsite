@@ -25,6 +25,7 @@ class ItemStockType extends AbstractType
                     'EU' => 'eu',
                     
              ), 'label'=> 'Size type:'))
+                ->add('price', NumberType::class)                
                 ->add('quantity', integerType::class ,  array('label'=> 'Quantity:'));
                 //->add('addingDate', DateTimeType::class);
     }

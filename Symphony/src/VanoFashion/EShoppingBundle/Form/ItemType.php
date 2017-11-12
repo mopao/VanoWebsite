@@ -24,14 +24,15 @@ class ItemType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('codeItem',  TextType::class)
-                ->add('title', TextType::class)
+                ->add('name', TextType::class)
                 ->add('color', TextType::class)
-                ->add('descrip', TextareaType::class)
-                ->add('price', TextType::class)
+                ->add('descrip', TextareaType::class, array('required' => false))                
                 ->add('brand', TextType::class)
                 ->add('available' , CheckboxType::class, array('required' => false))
                 ->add('itemLabel', TextType::class)
-                ->add('files',  FileType::class,  array('multiple' =>true ) )
+                ->add('mainFile',  FileType::class )// to upload the main image of  item
+                //to upload the other images of  item
+                ->add('otherFiles',  FileType::class,  array('multiple' =>true , 'required' => false) )
                 ->add('gender', EntityType::class, array(
                         'class'        => 'VanoFashionEShoppingBundle:ItemGender',
                         'choice_label' => 'gender',

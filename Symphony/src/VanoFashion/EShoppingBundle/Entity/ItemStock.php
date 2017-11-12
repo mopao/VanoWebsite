@@ -42,6 +42,13 @@ class ItemStock
      */
     private $itemSize;
 
+     /**
+     * @var float
+     *
+     * @ORM\Column(name="price", type="float")
+     */
+    private $price;
+
     /**
      * @var string
      *
@@ -49,6 +56,7 @@ class ItemStock
      */
     private $typeSize;
 
+    
     /**
      * @var int
      *
@@ -316,4 +324,51 @@ class ItemStock
         $this->setSoldQuantity($this->getSoldQuantity()- $quantity);
 
     }
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     *
+     * @return item
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+
+    /**
+     * return corresponding array 
+     */
+    public function toArray(){
+
+        $array_stock=array();       
+
+        $array_stock['id']=$this->getId();
+        $array_stock['itemSize']=$this->getItemSize();
+        $array_stock['updatedAt']=$this->getUpdatedAt();
+        $array_stock['addingDate']=$this->getAddingDate();
+        $array_stock['typeSize']=$this->getTypeSize();
+        $array_stock['quantity']=$this->getQuantity();
+        $array_stock['price']=$this->getPrice();
+        $array_stock['soldQuantity']=$this->getSoldQuantity();
+        $array_stock['dateOfEnd']=$this->getDateOfEnd();        
+
+        return $array_stock;
+
+    }
+
 }

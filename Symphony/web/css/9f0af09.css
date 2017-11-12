@@ -80,7 +80,7 @@
 		}
 		/* general font */
 
-	  .police{
+	  body{
 	  	color:     #2e4053  ;
 	  	
 	  		  	
@@ -283,10 +283,11 @@
 		margin: 0px;
 		background-color: #fff;
 	}
-	.affix {
-       top: 0;
-      width: 100%;
-    }
+	.main-menu{
+		
+
+
+	}
 
    
     h1{

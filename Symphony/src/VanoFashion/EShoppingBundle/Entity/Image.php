@@ -131,7 +131,7 @@ class Image
      *
      * @return bool
      */
-    public function getIsmain()
+    public function ismain()
     {
         return $this->ismain;
     }
@@ -166,5 +166,21 @@ class Image
     public function __construct()
     {
         $this->ismain=false;
+    }
+
+    /**
+     * return corresponding array 
+     */
+    public function toArray(){
+
+        $array_image=array();        
+
+        $array_image['id']=$this->getId();
+        $array_image['url']=$this->getUrl();
+        $array_image['alt']=$this->getAlt();
+        $array_image['ismain']=$this->getIsmain();       
+
+        return $array_image;
+
     }
 }
