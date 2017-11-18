@@ -22,6 +22,103 @@
     {% endfor %}
 {% endfor %}
 
+<div class="management-item-filter">
+	<form class="form-horizontal">
+
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="item-gender"> Gender:</label>
+					<div class="col-sm-9">
+						<select class="form-control " id="item-gender">
+				        <option>all</option>
+				        <option>2</option>
+				        <option>3</option>
+				        <option>4</option>
+				    </select>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="item-category"> Category: </label>
+					<div class="col-sm-9">
+						<select class="form-control " id="item-category">
+					        <option>all</option>
+					        <option>2</option>
+					        <option>3</option>
+					        <option>4</option>
+					    </select>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="item-product"> Product: </label>
+					<div class="col-sm-9">
+						<select class="form-control " id="item-product">
+					        <option>all</option>
+					        <option>2</option>
+					        <option>3</option>
+					        <option>4</option>
+					    </select>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="item-color"> Color:</label>
+					<div class="col-sm-9">
+						<select multiple class="form-control " id="item-color">
+				        
+				        <option>2</option>
+				        <option>3</option>
+				        <option>4</option>
+				    </select>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="item-brand"> Brand: </label>
+					<div class="col-sm-9">
+						<select multiple class="form-control " id="item-brand">
+					       
+					        <option>2</option>
+					        <option>3</option>
+					        <option>4</option>
+					    </select>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="item-label"> Item label: </label>
+					<div class="col-sm-9">
+						<select class="form-control " id="item-label">
+					        <option>all</option>
+					        <option>2</option>
+					        <option>3</option>
+					        <option>4</option>
+					    </select>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row  text-right">
+			<button class="btn  btn-lg" id="item-filter"> Filtered </button>
+		</div>
+
+	</form>
+</div>
 <h1 class="text-center"> List of items </h1>
 <div class="row">
 <div class="col-sm-8"></div>

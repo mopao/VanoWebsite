@@ -80,6 +80,21 @@ function deleteGender(id){
     }
 
 
+function deleteItem(id){
+      $.get("/vanofashion/websitemanagement/item/delete/"+id, function(data, status){
+        
+        if(status==="success"){
+          $('#'+id).remove();
+          var total=$("#nb-results").html();
+          total=total-1;          
+          $("#nb-results").html(total--);
+
+
+        }
+    });
+    }
+
+
 function showModalCategory(id){
 
        $.getJSON("/vanofashion/websitemanagement/itemCategory/"+id, function(category, status){

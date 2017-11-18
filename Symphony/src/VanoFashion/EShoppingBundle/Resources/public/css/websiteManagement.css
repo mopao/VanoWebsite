@@ -99,6 +99,7 @@ ul.nav.nav-pills.nav-stacked{
   margin-bottom: 25px;
   margin-top: 20px;
 
+
  }
 
  .list{
@@ -208,6 +209,21 @@ div.text-nb-result{
     margin: 0 auto;
   }
 
+.management-item-filter{
+  padding: 5px;
+  border: 1px solid #5D6B84;
+  margin-bottom: 25px;
+}
+
+button#item-filter{
+  width: 35%;
+  margin-right: 13px;
+  margin-top: 30px;
+  background-color: #5A429E;
+  color: white;
+  text-transform: uppercase;
+  
+}
 
 
  

@@ -194,8 +194,35 @@ class ItemController extends Controller
      * delete an item
      *
      */
-    public function itemDeleteAction($_locale, $id)
+    public function itemDeleteAction( $id)
     {
+
+      $response = new Response(); 
+
+        try {
+
+            $em = $this->getDoctrine()->getManager();                       
+            $item=$em->getRepository('VanoFashionEShoppingBundle:Item')->find($id);
+            if (!$item) {
+                throw $this->createNotFoundException(
+                    'No product found for id '.$id
+                );
+            }
+            else{
+
+                $em->remove($item);
+                $em->flush(); 
+                $response->setContent("Request successfully processed");    
+                $response->setStatusCode(Response::HTTP_OK);
+                return $response;
+            }
+            
+        } catch (NotFoundHttpException $e) {
+
+            $response->setContent("The resource has not been found");    
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);    
+            return $response;        
+        }
 
     }
 
