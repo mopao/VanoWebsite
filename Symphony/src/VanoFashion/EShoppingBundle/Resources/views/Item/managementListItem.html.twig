@@ -29,7 +29,7 @@
     {% endfor %}
 {% endfor %}
 
-<div class="management-item-filter">
+<div id="management-item-filter" >
 	<form class="form-horizontal">
 
 		<div class="row">
@@ -111,10 +111,16 @@
 
 	<div class="row  text-right">
 
-			<button class="btn  btn-lg" id="item-filter" onclick="refineListItems()"> Refine search </button>
+			<button class="btn  btn-lg" id="btn-filter" onclick="refineListItems()"> Refine search </button>
 		</div>
 </div>
-<h1 class="text-center"> List of items </h1>
+
+<div id="flip" class="text-center"> 
+	<span class="glyphicon glyphicon-chevron-down " id="btn-chevron"></span></div>
+
+<div id="list-items">
+
+	<h1 class="text-center"> List of items </h1>
 <div class="row">
 <div class="col-sm-8"></div>
 <div class="col-sm-2 text-nb-result"> Result(s): <span id="nb-results">{{total}}</span></div>
@@ -135,7 +141,7 @@
     </div>
 </div>
 </div>
-<div class="well">
+<div class="well" >
   
 	{% for item in items %}
 	
@@ -163,6 +169,7 @@
     {% endfor %}
 
 
+</div>
 </div>
 
 
