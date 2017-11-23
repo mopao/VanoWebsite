@@ -1,5 +1,20 @@
 $(document).ready(function(){
 
+
+    $("#btn-chevron-up").hide();
+
+    $("#btn-chevron-down").click(function(){
+        $("#management-item-filter").slideDown("slow");
+        $(this).hide();
+        $("#btn-chevron-up").show();
+    });
+
+    $("#btn-chevron-up").click(function(){
+        $("#management-item-filter").slideUp("slow");
+        $(this).hide();
+        $("#btn-chevron-down").show();
+    });
+
     // get navigator language
     var userLang = navigator.language || navigator.userLanguage; 
     

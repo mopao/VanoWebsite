@@ -209,40 +209,34 @@ div.text-nb-result{
     margin: 0 auto;
   }
 
-#management-item-filter, #flip{
+#management-item-filter{
   padding: 5px;
   border: 1px solid #5D6B84;
   background-color: #e5eecc;
   
 }
 
-#management-item-filter, #flip{
-  padding: 5px;
-  border: 1px solid #5D6B84;
+ #flip{
+  
+  padding: 0px;
   background-color: #e5eecc;
+  height: 13px;
+   font-size: 30px;
   
 }
 
- #btn-chevron{
-  position: absolute;
-  font-size: 30px;  
-  padding-bottom: 0px;
-  padding-top: 4px;
-  
-  
-}
+ 
 
 #list-items{
   padding-top: 20px;
 }
 
 #management-item-filter{
-  
-  margin-bottom: 25px;  
+    
   display: none;
 }
 
-button#item-filter{
+button#btn-filter{
   width: 35%;
   margin-right: 13px;
   margin-top: 30px;
