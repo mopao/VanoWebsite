@@ -22,8 +22,7 @@ class ItemProductRepository extends \Doctrine\ORM\EntityRepository
 	public function getProducts($page, $nbPerPage){
 
 		$qb=$this->createQueryBuilder('p')
-                 //->innerJoin('c.products', 'p')
-                 //->addSelect('p')
+                 
                  ->orderBy('p.name', 'ASC')
                  ->getQuery();         
 

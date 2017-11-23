@@ -178,7 +178,7 @@ class Image
         $array_image['id']=$this->getId();
         $array_image['url']=$this->getUrl();
         $array_image['alt']=$this->getAlt();
-        $array_image['ismain']=$this->getIsmain();       
+        $array_image['ismain']=$this->ismain();       
 
         return $array_image;
 

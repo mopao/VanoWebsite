@@ -21,7 +21,7 @@ class ItemCategoryRepository extends \Doctrine\ORM\EntityRepository
 	public function getCategories($page, $nbPerPage){
 
 		$qb=$this->createQueryBuilder('c')
-                 ->innerJoin('c.products', 'p')
+                 ->leftJoin('c.products', 'p')
                  ->addSelect('p')
                  ->orderBy('c.name', 'ASC')
                  ->getQuery();         
@@ -45,7 +45,7 @@ class ItemCategoryRepository extends \Doctrine\ORM\EntityRepository
                 $qb=$this->createQueryBuilder('c')
                  ->where('c.id = :id')
                  ->setParameter('id', $id)                  
-                 ->innerJoin('c.products', 'p')
+                 ->leftJoin('c.products', 'p')
                  ->addSelect('p')                                
                  ->getQuery();         
 

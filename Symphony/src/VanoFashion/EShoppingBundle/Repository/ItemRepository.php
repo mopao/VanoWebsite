@@ -18,17 +18,38 @@ class ItemRepository extends \Doctrine\ORM\EntityRepository
   /**
    * get all items
    */
-	public function getItems($page, $nbPerPage){
+	public function getItems($page, $nbPerPage, array $filter=null){
 
 		$qb=$this->createQueryBuilder('i')
                  ->innerJoin('i.stocks', 's')
                  ->addSelect('s')
+                 ->innerJoin('i.gender', 'g')
+                 ->addSelect('g')
+                 ->innerJoin('i.product', 'p')
+                 ->addSelect('p')
                  ->innerJoin('i.images', 'img')
-                 ->addSelect('img')
-                 ->groupBy('i.codeItem')
+                 ->addSelect('img');
+                 
+        
+    if($filter!==null or count($filter>0)){
+      foreach ($filter as $key => $value) {
+        # code...
+         if($key==="product"){
+          $qb->andWhere($qb->expr()->in('p.name', $value));
+         }
+         elseif ($key==="gender") {
+           # code...
+          $qb->andWhere($qb->expr()->in('g.'.$key, $value));
+         }
+         else{
+          $qb->andWhere($qb->expr()->in('i.'.$key, $value));
+         }
+      }
+    }
+
+    $qb->groupBy('i.codeItem')
                  ->orderBy('i.addingDate', 'DESC')
                  ->getQuery();
-        
 
     $qb->setFirstResult(($page-1) * $nbPerPage);      
 
@@ -38,86 +59,6 @@ class ItemRepository extends \Doctrine\ORM\EntityRepository
 
 	}
 
-   /**
-   * get  items belonging to a given product
-   */
-  public function getItemsByProduct($products){
-
-    $qb=$this->createQueryBuilder('i')
-                 ->innerJoin('i.stock', 's')
-                 ->addSelect('s');
-
-        $qb->innerJoin('i.type', 't')
-           ->addSelect('t');
-
-        $qb->innerJoin('i.product', 'p')
-           ->addSelect('p');
-
-        $qb->innerJoin('i.images', 'img')
-           ->addSelect('img');
-
-        
-        $qb->where($qb->expr()->in('p.name', $products));
-
-        return $qb->getQuery()
-                  ->getResult();
-
-  }
-
-  /**
-   * get  items belonging to the given products 
-   * and itemTypes
-   */
-  public function getItemsByProductAndTypes($products, $types){
-
-    $qb=$this->createQueryBuilder('i')
-                 ->innerJoin('i.stock', 's')
-                 ->addSelect('s');
-
-        $qb->innerJoin('i.type', 't')
-           ->addSelect('t');
-
-        $qb->innerJoin('i.product', 'p')
-           ->addSelect('p');
-
-        $qb->innerJoin('i.images', 'img')
-           ->addSelect('img');
-
-        
-        $qb->where($qb->expr()->in('p.name', $products));
-        $qb->andWhere($qb->expr()->in('t.type', $types));
-
-        return $qb->getQuery()
-                  ->getResult();
-
-  }
-
-  /**
-   * get  items belonging to a given itemType
-   */
-  public function getItemsByTYpe($types){
-
-    $qb=$this->createQueryBuilder('i')
-                 ->innerJoin('i.stock', 's')
-                 ->addSelect('s');
-
-        $qb->innerJoin('i.type', 't')
-           ->addSelect('t');
-
-        $qb->innerJoin('i.product', 'p')
-           ->addSelect('p');
-
-        $qb->innerJoin('i.images', 'img')
-           ->addSelect('img');
-
-       
-       $qb->where($qb->expr()->in('t.type', $types));
-        
-
-        return $qb->getQuery()
-                  ->getResult();
-
-  }
 
 
 

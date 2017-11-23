@@ -81,6 +81,23 @@ class ItemController extends Controller
 
     public function managementListItemViewAction($_locale, $page, Request $request){
 
+      if($request->isXmlHttpRequest()) {
+        # code ajax request
+        $array_items=array();
+        $items= $this->getDoctrine()
+        ->getManager()
+        ->getRepository('VanoFashionEShoppingBundle:Item')
+        ->findAll();
+
+        foreach ($items as $item) {
+          # code...
+          $array_items[]=$item->toArray();
+        }
+        
+        return new JsonResponse($array_items);
+
+      }
+      # code if is not an ajax request
        try {
 
          if ($page < 1) {
@@ -94,11 +111,42 @@ class ItemController extends Controller
             $limit=$request->query->get('limit');
         }
 
+        $filter=array();
+        if($request->query->get('color')){
+          $filter['color']=explode(",",$request->query->get('color'));
+
+
+        }
+
+        if($request->query->get('brand')){
+          $filter['brand']=explode(",",$request->query->get('brand'));
+
+
+        }
+
+        if($request->query->get('itemlabel') and $request->query->get('itemlabel')!=="all"){
+          $filter['itemLabel']=explode(",",$request->query->get('itemlabel'));
+
+
+        }
+
+        if($request->query->get('product') and $request->query->get('product')!=="all"){
+          $filter['product']=explode(",",$request->query->get('product'));
+
+
+        }
+
+        if($request->query->get('gender') and $request->query->get('gender')!=="all"){
+          $filter['gender']=explode(",",$request->query->get('gender'));
+
+
+        }
+
 
         $items= $this->getDoctrine()
         ->getManager()
         ->getRepository('VanoFashionEShoppingBundle:Item')
-        ->getItems($page, $limit);
+        ->getItems($page, $limit, $filter);
 
         $total=count($items);
         $nbPages = ceil($total / $limit);
@@ -349,6 +397,23 @@ class ItemController extends Controller
 
     public function managementListProductViewAction($_locale, $page, Request $request){
 
+      if($request->isXmlHttpRequest()) {
+        # code ajax request
+        $array_products=array();
+        $products= $this->getDoctrine()
+        ->getManager()
+        ->getRepository('VanoFashionEShoppingBundle:ItemProduct')
+        ->findAll();
+
+        foreach ($products as $product) {
+          # code...
+          $array_products[]=$product->toArray();
+        }
+        
+        return new JsonResponse($array_products);
+
+      }
+      # code if is not an ajax request
        try {
 
          if ($page < 1) {
@@ -445,6 +510,8 @@ class ItemController extends Controller
 
     public function getItemCategoryAction($id){
 
+       $response = new Response();
+
         try {
 
             $em = $this->getDoctrine()->getManager();                       
@@ -523,6 +590,23 @@ class ItemController extends Controller
 
     public function managementListCategoryViewAction($_locale, $page, Request $request){
 
+      if($request->isXmlHttpRequest()) {
+        # code ajax request
+        $array_categories=array();
+        $categories= $this->getDoctrine()
+        ->getManager()
+        ->getRepository('VanoFashionEShoppingBundle:ItemCategory')
+        ->findAll();
+
+        foreach ($categories as $category) {
+          # code...
+          $array_categories[]=$category->toArray();
+        }
+        
+        return new JsonResponse($array_categories);
+
+      }
+      # code if is not an ajax request
        try {
 
          if ($page < 1) {
@@ -666,6 +750,26 @@ class ItemController extends Controller
      */
 
     public function managementListGenderViewAction($_locale, $page, Request $request){
+
+
+      if($request->isXmlHttpRequest()) {
+        # code ajax request
+        $array_genders=array();
+        $genders= $this->getDoctrine()
+        ->getManager()
+        ->getRepository('VanoFashionEShoppingBundle:ItemGender')
+        ->findAll();
+
+        foreach ($genders as $gender) {
+          # code...
+          $array_genders[]=$gender->toArray();
+        }
+        
+        return new JsonResponse($array_genders);
+
+      }
+
+      # code if is not an ajax request
 
        try {
 
