@@ -15,6 +15,7 @@
 	  {% block stylesheets%} 	    
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lobster+Two" />
+	
 	  {% stylesheets 'bundles/vanofashioneshopping/css/general.css' filter='cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
       {% endstylesheets %}
@@ -28,7 +29,7 @@
 	<body >
     
     <div class="container-fluid  " >
-    	<div class="  main-menu">
+    	<div id="main-menu"  >
 		    <div class="container-fluid">
 		      <div class="row discount">
 		      {% block discount %}
@@ -58,7 +59,7 @@
 
 		            <div class="col-sm-5"> 
 		             	{% image 'bundles/vanofashioneshopping/images/logo3.png' %}
-					   <img  class="img-responsive logo rotating" src="{{ asset_url }}" alt="Logo" width="180" height="175"> 
+					   <img  class="img-responsive logo rotating cover" src="{{ asset_url }}" alt="Logo" width="180" height="175"> 
 					    {% endimage %}
 		            </div>
 
@@ -303,6 +304,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    
     {% endblock %}
 	</body>
 

@@ -122,6 +122,7 @@ class Item
     private $otherFiles;
     private $mainFile;
     private $oldFileNames;
+    private $newFileNames;
     
     
     public function getOtherFiles()
@@ -138,7 +139,7 @@ class Item
 
             foreach ( $this->images as $image ) {
 
-                if (!$image->getIsmain()) {
+                if (!$image->ismain()) {
                     $oldFileNames[]=$image->getUrl();
                     $this->removeImage($image);
                 
@@ -165,7 +166,7 @@ class Item
 
             foreach ( $this->images as $image ) {
 
-                if ($image->getIsmain()) {
+                if ($image->ismain()) {
                     $oldFileNames[]=$image->getUrl();
                     $this->removeImage($image);
                     break;
@@ -199,15 +200,16 @@ class Item
                 $image->setAlt($this->mainFile->getClientOriginalName());
                 $fileName=md5(uniqid()).'.'.$this->mainFile->guessExtension();
                 $image->setUrl($fileName);
-                $image->setIsmain(true) ;                          
-                $this->images[0]=$image; 
-                $this->addImage($image);               
+                $image->setIsmain(true) ;          
+                $this->addImage($image);
+                $this->newFileNames[0]=$fileName;               
                 
             }
             
         }
 
         if (null !== $this->otherFiles) {
+            $i=1;
             foreach ( $this->otherFiles as $file) {
 
                 if ($file instanceof UploadedFile) {
@@ -217,6 +219,8 @@ class Item
                     $fileName=md5(uniqid()).'.'.$file->guessExtension();
                     $image->setUrl($fileName);                           
                     $this->addImage($image);
+                    $this->newFileNames[$i]=$fileName;
+                    $i++;
 
                     
                     
@@ -250,8 +254,8 @@ class Item
         // remove old images item
         if (null !== $this->oldFileNames) {
           foreach ( $this->oldFileNames as $oldFileName) {
-              if (file_exists($oldFileName)) {
-                unlink($oldFileName);
+              if (file_exists(__DIR__.'/../../../../web/bundles/vanofashioneshopping/images/'.$oldFileName)) {
+                unlink(__DIR__.'/../../../../web/bundles/vanofashioneshopping/images/'.$oldFileName);
               }
           }
 
@@ -267,7 +271,7 @@ class Item
                 if($this->otherFiles[$i] instanceof UploadedFile){
 
                     $this->otherFiles[$i]->move(__DIR__.'/../../../../web/bundles/vanofashioneshopping/images',
-                    $this->images->get($i+1)->getUrl());
+                    $this->newFileNames[$i+1]);
 
                 }
             }
@@ -279,10 +283,12 @@ class Item
             if($this->mainFile instanceof UploadedFile){
 
                 $this->mainFile->move(__DIR__.'/../../../../web/bundles/vanofashioneshopping/images',
-                $this->images->get(0)->getUrl());
+                $this->newFileNames[0]);
 
             }
         }
+
+        $this->newFileNames= array();
 
         
       }
@@ -294,7 +300,7 @@ class Item
       public function preRemoveUpload()
       {
 
-        foreach ($image as $this->images) {
+        foreach ( $this->images as $image) {
             $this->oldFileNames[]=$image->getUrl();
         }
       }
@@ -305,10 +311,10 @@ class Item
       public function removeUpload()
       {
         // remove all item images
-        foreach ($fileName as $this->oldFileNames) {
-            if (file_exists($fileName)) {
+        foreach ( $this->oldFileNames as $fileName) {
+            if (file_exists(__DIR__.'/../../../../web/bundles/vanofashioneshopping/images/'.$fileName)) {
               // delete the image file
-              unlink($fileName);
+              unlink(__DIR__.'/../../../../web/bundles/vanofashioneshopping/images/'.$fileName);
             }
         }
 
@@ -644,6 +650,7 @@ class Item
         $this->stocks = new \Doctrine\Common\Collections\ArrayCollection();
         $this->available=true;
         $this->oldFileNames= array();
+        $this->newFileNames= array();
         $this->addingDate= new \Datetime();
     }
 

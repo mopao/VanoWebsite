@@ -12,10 +12,10 @@
 {% block vanofashioneshopping_management_body %}
 
 
-<div class="jumbotron ">
+<div  class="jumbotron" id="main-image">
 	{% if mainImage != null%} 
 
-	<img  class="img-responsive  item-main-image" src="{{ asset("bundles/vanofashioneshopping/images/" ~ mainImage.url ) }} " alt="{{mainImage.alt}}" width="60%"  >
+	<img  class="img-responsive"  id='item-main-image'  src="{{ asset("bundles/vanofashioneshopping/images/" ~ mainImage.url ) }} " alt="{{mainImage.alt}}"  >
 
 	{% endif %}
 
@@ -108,7 +108,7 @@
 			      <tr>
 			      	<td> {{stock.itemSize}}</td>
 			      	<td> {{stock.typeSize | upper}}</td>
-			      	<td> {{stock.price}} $</td>
+			      	<td> {{stock.price}} </td>
 			      	<td> {{stock.quantity}}</td>
 			      	<td> {{stock.soldQuantity}}</td>
 			      	<td> {{stock.dateOfEnd}}</td>

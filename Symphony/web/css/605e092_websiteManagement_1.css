@@ -49,9 +49,17 @@ ul.nav.nav-pills.nav-stacked{
     color: white;
     border: 2px solid #B4AF91;
     border-radius: 15px;
-    width: 100px;
+    width: 80px;
+
 
  }
+
+ .affix {
+      top: 0;
+      width: 12%;
+      z-index: 9999 !important;
+
+      }
 
  .btn-submit:hover{
 
@@ -66,7 +74,7 @@ ul.nav.nav-pills.nav-stacked{
     border: 2px solid #B4AF91;
     border-radius: 15px;
     text-decoration: none;
-    width: 100px;
+    width: 80px;
  }
 
  .btn-delete{
@@ -76,9 +84,9 @@ ul.nav.nav-pills.nav-stacked{
     border: 2px solid #B4AF91;
     border-radius: 15px;
     color: white;    
-    width: 100px;
+    width: 80px;
  }
- .btn-delete:hover{
+ .btn-delete:focus, .btn-delete:hover{
     background-color:#5D6B84;
     color: white;
  }
@@ -145,8 +153,11 @@ div.text-nb-result{
 .modal-body{
     padding:40px 50px;
 }
-  .modal-footer {
-      background-color: #f9f9f9;
+  .modal-footer {   
+      text-align: center;
+      padding-top: 15px;   
+      border-top-style: solid;
+      border-width: 5px; 
   }
 
   .modal-body ul >li {
@@ -204,9 +215,10 @@ div.text-nb-result{
 
   }
 
-  img.item-main-image{
-     display: block;
-    margin: 0 auto;
+  img#item-main-image{     
+    object-fit: contain;
+
+    margin-bottom: 20px;
   }
 
 #management-item-filter{
@@ -244,5 +256,26 @@ button#btn-filter{
   color: white;
   text-transform: uppercase;
   
+}
+
+div#main-image{
+  display: block;
+    margin: 0 auto;
+  width: 600px;
+  height: 600px;
+}
+
+div#dialog-confirm-delete-item{
+  display: none;
+}
+
+.dialog-footer {   
+      text-align: center;
+       
+  }
+
+#dialog-ui-icon{
+  color: orange;
+  padding-right: 10px;
 }
 

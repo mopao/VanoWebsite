@@ -203,3 +203,60 @@ function refineListItems(){
    
     
 }
+
+
+function deleteItem(id){
+
+
+    $( "#dialog-confirm-delete-item" ).dialog({
+      resizable: false,      
+      modal: true,
+      draggable: false,
+      dialogClass: 'dialogButtons',
+      buttons: [
+            {
+               text: "Delete",
+               class:"btn btn-reset btn-md",
+               
+               click: function() { 
+
+                console.log(id);
+                $.get("/vanofashion/websitemanagement/item/delete/"+id, function(data, status){
+        
+                     if(status==="success"){
+                      $('#'+id).remove();
+                      var total=$("#nb-results").html();
+                      total=total-1;          
+                      $("#nb-results").html(total--);
+
+                      }
+                });                    
+                $(this).dialog("close"); 
+               }
+            },
+            
+          ]     
+      
+    });
+
+   
+
+
+
+     
+          /*$.get("/vanofashion/websitemanagement/item/delete/"+id, function(data, status){
+        
+         if(status==="success"){
+          $('#'+id).remove();
+          var total=$("#nb-results").html();
+          total=total-1;          
+          $("#nb-results").html(total--);
+
+
+        }
+    });*/
+        
+       
+       
+      
+    }

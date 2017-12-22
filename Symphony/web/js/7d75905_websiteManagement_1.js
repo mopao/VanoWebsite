@@ -29,6 +29,17 @@ $(document).ready(function(){
     });
 
 
+   /*$("#addGender-menuItem").click(function(){
+        $("#management-container").load("/vanofashion/websitemanagement/en/itemGender/add", function(responseTxt, statusTxt, xhr){
+        if(statusTxt == "success")
+          console.log(responseTxt);
+            alert(responseTxt);
+        if(statusTxt == "error")
+            alert("Error: " + xhr.status + ": " + xhr.statusText);
+    });       
+    });*/
+
+
 
    
     
@@ -80,19 +91,7 @@ function deleteGender(id){
     }
 
 
-function deleteItem(id){
-      $.get("/vanofashion/websitemanagement/item/delete/"+id, function(data, status){
-        
-        if(status==="success"){
-          $('#'+id).remove();
-          var total=$("#nb-results").html();
-          total=total-1;          
-          $("#nb-results").html(total--);
 
-
-        }
-    });
-    }
 
 
 function showModalCategory(id){
@@ -110,7 +109,7 @@ function showModalCategory(id){
 
           var d = new Date(category.addingDate.date);
           $("#category-added-date").text(d.toUTCString());
-          console.log(category);
+          //console.log(category);
           $("#categoryModal").modal();
 
 
@@ -128,7 +127,7 @@ function showModalProduct(id){
           $("#productCategory").text(product.category);
           var d = new Date(product.addingDate.date);
           $("#product-added-date").text(d.toUTCString());
-          console.log(product);
+          //console.log(product);
           $("#productModal").modal();
 
 

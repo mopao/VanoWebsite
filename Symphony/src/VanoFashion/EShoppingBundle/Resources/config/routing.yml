@@ -73,10 +73,9 @@ vano_fashion_e_shopping_website_management_item_edit:
         _locale: en|fr
 
 vano_fashion_e_shopping_website_management_item_delete:
-    path: /websitemanagement/{_locale}/item/delete/{id}
-    defaults: { _controller: VanoFashionEShoppingBundle:Item:itemDelete , _locale: en }
-    requirements:
-        _locale: en|fr
+    path: /websitemanagement/item/delete/{id}
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:itemDelete }
+
 
 vano_fashion_e_shopping_website_management_item_add:
     path: /websitemanagement/{_locale}/item/add

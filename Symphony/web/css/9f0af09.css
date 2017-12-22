@@ -134,7 +134,10 @@
         color: #5C1F79;
       }   
 
-       
+      .contain {object-fit: contain;}
+      .cover {object-fit: cover;}
+      .scale-down {object-fit: scale-down;}
+      
       .search-input {
        width: 100px;
        transition: ease-in-out, width .35s ease-in-out;
