@@ -1,9 +1,10 @@
+
 {% extends "VanoFashionEShoppingBundle:Item:websiteManagement.html.twig" %}
 
 
 {% block title %}
 
-   {{ parent() }} - add items Product
+   {{ parent() }} - add items category
 
 {% endblock %}
 
@@ -11,13 +12,9 @@
 {% block vanofashioneshopping_management_body %}
 
 
-
-	
-
-
     
 	<div class="page-header">
-	<h1 class="text-center"> Adding a product </h1>
+	<h1 class="text-center"> Modified  a category </h1>
 	</div>
 
 	{% for label, messages in app.flashes %}
@@ -28,13 +25,10 @@
 	    {% endfor %}
     {% endfor %}
 	<div >
-		<h3> Complete the form below to add an Items product</h3>
 
-
-    {{ include("VanoFashionEShoppingBundle:Item:itemProductForm.html.twig") }}
+    <h3> Complete the form below to modify the category   </h3>
+    {{ include("VanoFashionEShoppingBundle:Item:itemCategoryForm.html.twig") }}
 
     </div>
-
-
 
 {% endblock %}

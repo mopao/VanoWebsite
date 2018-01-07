@@ -11,6 +11,7 @@ use VanoFashion\EShoppingBundle\Entity\ItemProduct;
 use VanoFashion\EShoppingBundle\Form\ItemGenderType;
 use VanoFashion\EShoppingBundle\Entity\ItemGender;
 use VanoFashion\EShoppingBundle\Form\ItemType;
+use VanoFashion\EShoppingBundle\Form\ItemEditType;
 use VanoFashion\EShoppingBundle\Entity\Item;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -247,7 +248,7 @@ class ItemController extends Controller
      *return the view for the editing of item
      *
      */
-    public function itemEditAction($_locale, $id)
+    public function itemEditAction( $id, Request $request)
     {
 
       $response = new Response(); 
@@ -264,13 +265,12 @@ class ItemController extends Controller
             }
             else{
 
-              $form = $this->createForm(ItemType::class, $item);
+              $form = $this->createForm(ItemEditType::class, $item);
 
               if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
                 try {
 
                   $item->setUpdatedAt(new \Datetime());
-                  $em->persist($item);
                   $em->flush();
 
                   $this->get('session')->getFlashBag()->add('success', 'Item has been modified !');
@@ -280,13 +280,13 @@ class ItemController extends Controller
                 } catch (UniqueConstraintViolationException $e) {
 
                   $this->get('session')->getFlashBag()->add('info', $e->getMessage());
-                  return $this->render('VanoFashionEShoppingBundle:Item:itemProductAdd.html.twig', array(
+                  return $this->render('VanoFashionEShoppingBundle:Item:itemEdit.html.twig', array(
                 'form' => $form->createView()));
                   
                 }
               }
 
-              return $this->render('VanoFashionEShoppingBundle:Item:itemAdd.html.twig', array(
+              return $this->render('VanoFashionEShoppingBundle:Item:itemEdit.html.twig', array(
                 'form' => $form->createView()));
 
                
@@ -409,7 +409,7 @@ class ItemController extends Controller
      *return the view for the editing of item product
      *
      */
-    public function itemProductEditAction($_locale, $id)
+    public function itemProductEditAction($id, Request $request)
     {
 
        try {
@@ -430,7 +430,6 @@ class ItemController extends Controller
                 try {
 
                    $product->setUpdatedAt(new \Datetime());
-                   $em->persist($product);
                    $em->flush();
 
                    $this->get('session')->getFlashBag()->add('success', 'The item product has been modified successfully !');
@@ -652,7 +651,7 @@ class ItemController extends Controller
      *return the view for the editing of item category
      *
      */
-    public function itemCategoryEditAction($_locale, $id)
+    public function itemCategoryEditAction( $id, Request $request)
     {
 
        $response = new Response();
@@ -674,8 +673,7 @@ class ItemController extends Controller
               if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
                
                 try {
-                  $category->setUpdatedAt(new \Datetime());
-                  $em->persist($category);
+                  $category->setUpdatedAt(new \Datetime());                  
                   $em->flush();  
                 
                   $this->get('session')->getFlashBag()->add('success', 'The item category has been modified successfully!');
@@ -684,7 +682,7 @@ class ItemController extends Controller
                 } catch (UniqueConstraintViolationException $e) {
 
                   $this->get('session')->getFlashBag()->add('info', 'This category already exists in database !');
-                  return $this->render('VanoFashionEShoppingBundle:Item:itemCategoryAdd.html.twig', array(
+                  return $this->render('VanoFashionEShoppingBundle:Item:itemCategoryEdit.html.twig', array(
                 'form' => $form->createView()));
                     
                 }
@@ -693,7 +691,7 @@ class ItemController extends Controller
                 
               }
 
-              return $this->render('VanoFashionEShoppingBundle:Item:itemCategoryAdd.html.twig', array(
+              return $this->render('VanoFashionEShoppingBundle:Item:itemCategoryEdit.html.twig', array(
                 'form' => $form->createView()));
 
                 
@@ -866,7 +864,7 @@ class ItemController extends Controller
      *return the view for the editing of items gender
      *
      */
-    public function itemGenderEditAction($_locale, $id)
+    public function itemGenderEditAction( $id, Request $request)
     {
 
       $response = new Response(); 
@@ -888,7 +886,6 @@ class ItemController extends Controller
                 try {
 
                   $gender->setUpdatedAt(new \Datetime());
-                  $em->persist($gender);
                   $em->flush();
 
                   $this->get('session')->getFlashBag()->add('success', 'The item gender has been modified successfully!');
@@ -898,7 +895,7 @@ class ItemController extends Controller
                 } catch (UniqueConstraintViolationException $e) {
 
                   $this->get('session')->getFlashBag()->add('info', 'This gender already exists in database !');
-                  return $this->render('VanoFashionEShoppingBundle:Item:itemGenderAdd.html.twig', array(
+                  return $this->render('VanoFashionEShoppingBundle:Item:itemGenderEdit.html.twig', array(
                 'form' => $form->createView()));
               
                }
@@ -906,7 +903,7 @@ class ItemController extends Controller
 
               }
 
-              return $this->render('VanoFashionEShoppingBundle:Item:itemGenderAdd.html.twig', array(
+              return $this->render('VanoFashionEShoppingBundle:Item:itemGenderEdit.html.twig', array(
           'form' => $form->createView()));
 
                 

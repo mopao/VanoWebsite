@@ -124,7 +124,8 @@
 
 
 <div class="text-center div-btn">
-<a href="{{ path('vano_fashion_e_shopping_website_management_item_list', {'page': returnPage}) }}?limit={{limit}}" class="btn btn-delete btn-lg"> Back </a> <a href="" class="btn btn-submit btn-lg"> Edit </a>
+<a href="{{ path('vano_fashion_e_shopping_website_management_item_list', {'page': returnPage}) }}?limit={{limit}}" class="btn btn-delete btn-lg"> Back </a>
+ <a href="{{path('vano_fashion_e_shopping_website_management_item_edit', {'id':item.id})}}" class="btn btn-submit btn-lg"> Edit </a>
 </div>
 
 {% endblock %}

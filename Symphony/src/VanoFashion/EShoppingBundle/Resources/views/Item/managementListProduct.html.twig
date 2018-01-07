@@ -52,7 +52,7 @@
 			 <div class="col-sm-9">   <a onclick="showModalProduct('{{product.id}}')" > {{product.name|capitalize}} 
 			 	</a>
 			 </div>
-			 <div class="col-sm-1"> <a  class="btn btn-submit btn-sm"> Edit </a></div> 
+			 <div class="col-sm-1"> <a href="{{path('vano_fashion_e_shopping_website_management_itemproduct_edit', {'id':product.id})}}" class="btn btn-submit btn-sm"> Edit </a></div> 
 			 <div class="col-sm-2"> <button class="btn btn-delete btn-sm"
 			 	onclick="deleteProduct('{{product.id}}')"> Delete</button></div>
 		</div>
@@ -62,7 +62,7 @@
 			 <div class="col-sm-9">  <a onclick="showModalProduct('{{product.id}}')" > {{product.name|capitalize}} 
 			 	</a>
 			 </div>
-			 <div class="col-sm-1"> <a href="" class="btn btn-submit btn-sm"> Edit </a></div> 
+			 <div class="col-sm-1"> <a href="{{path('vano_fashion_e_shopping_website_management_itemproduct_edit', {'id':product.id})}}" class="btn btn-submit btn-sm"> Edit </a></div> 
 			 <div class="col-sm-2"> <button class="btn btn-delete btn-sm" 
 			 	onclick="deleteProduct('{{product.id}}')"> Delete</button></div>
 		</div>

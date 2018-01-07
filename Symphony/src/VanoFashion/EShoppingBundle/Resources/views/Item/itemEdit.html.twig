@@ -3,10 +3,17 @@
 
 {% block title %}
 
-   {{ parent() }} - add items Product
+   {{ parent() }} - add item
 
 {% endblock %}
 
+{% block javascripts %}
+
+{{ parent()}}
+    {% javascripts 'bundles/vanofashioneshopping/js/itemForm.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
 
 {% block vanofashioneshopping_management_body %}
 
@@ -14,10 +21,9 @@
 
 	
 
-
     
 	<div class="page-header">
-	<h1 class="text-center"> Adding a product </h1>
+	<h1 class="text-center"> Modified an item  </h1>
 	</div>
 
 	{% for label, messages in app.flashes %}
@@ -28,10 +34,10 @@
 	    {% endfor %}
     {% endfor %}
 	<div >
-		<h3> Complete the form below to add an Items product</h3>
 
+		<h3> Complete the form below to modify an item</h3>
 
-    {{ include("VanoFashionEShoppingBundle:Item:itemProductForm.html.twig") }}
+    {{ include("VanoFashionEShoppingBundle:Item:itemForm.html.twig") }}
 
     </div>
 
