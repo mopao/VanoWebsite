@@ -3,6 +3,7 @@
 namespace VanoFashion\EShoppingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Image
@@ -21,6 +22,7 @@ class Image
     /**
      * @ORM\ManyToOne(targetEntity="VanoFashion\EShoppingBundle\Entity\Item" , inversedBy="images")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
      */
     private $item;
     /**
@@ -36,6 +38,7 @@ class Image
      * @var string
      *
      * @ORM\Column(name="url", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $url;
 
@@ -43,6 +46,7 @@ class Image
      * @var string
      *
      * @ORM\Column(name="alt", type="string", length=255, nullable=true)
+     * @Assert\NotBlank()
      */
     private $alt;
 
@@ -50,6 +54,7 @@ class Image
      * @var bool
      *
      * @ORM\Column(name="ismain", type="boolean")
+     * @Assert\Type("bool")
      */
     private $ismain;
 

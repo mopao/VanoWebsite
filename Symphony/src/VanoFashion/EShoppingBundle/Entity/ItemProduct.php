@@ -4,6 +4,7 @@ namespace VanoFashion\EShoppingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ItemProduct
@@ -22,12 +23,14 @@ class ItemProduct
     /**
      * @ORM\ManyToOne(targetEntity="VanoFashion\EShoppingBundle\Entity\ItemCategory", inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
      */
     private $category;
 
     /**
      * @ORM\ManyToOne(targetEntity="VanoFashion\EShoppingBundle\Entity\ItemGender")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
      */
     private $gender;
 
@@ -44,6 +47,7 @@ class ItemProduct
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -51,11 +55,13 @@ class ItemProduct
      * @var \DateTime
      *
      * @ORM\Column(name="addingDate", type="datetime")
+     * @Assert\DateTime()
      */
     private $addingDate;
 
     /**
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * @Assert\DateTime()
      */
     private $updatedAt;
 

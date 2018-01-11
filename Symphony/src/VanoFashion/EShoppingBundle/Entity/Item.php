@@ -5,6 +5,7 @@ namespace VanoFashion\EShoppingBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * item
@@ -21,22 +22,34 @@ class Item
      */
     /**
      * @ORM\OneToMany(targetEntity="VanoFashion\EShoppingBundle\Entity\Image", mappedBy="item",cascade={"persist","remove"})
+     *
+     * @Assert\All({
+     *     @Assert\Valid()
+     *     
+     * })
+     *
      */
     private $images; 
     /**
      * @ORM\ManyToOne(targetEntity="VanoFashion\EShoppingBundle\Entity\ItemGender")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
      */
     private $gender;
     /**
      * @ORM\ManyToOne(targetEntity="VanoFashion\EShoppingBundle\Entity\ItemProduct")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
      */
     private $product;
     
      /**
      * @ORM\OneToMany(targetEntity="VanoFashion\EShoppingBundle\Entity\ItemStock", mappedBy="item",cascade={"persist","remove"})
      * @ORM\JoinColumn(nullable=false)
+     *@Assert\All({
+     *     @Assert\Valid()
+     *     
+     * })
      */    
      private $stocks;
 
@@ -54,6 +67,7 @@ class Item
      * @var string
      *
      * @ORM\Column(name="codeItem", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $codeItem;
 
@@ -61,6 +75,7 @@ class Item
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -68,6 +83,7 @@ class Item
      * @var string
      *
      * @ORM\Column(name="color", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $color;
 
@@ -84,6 +100,7 @@ class Item
      * @var string
      *
      * @ORM\Column(name="brand", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $brand;
 
@@ -91,6 +108,7 @@ class Item
      * @var bool
      *
      * @ORM\Column(name="available", type="boolean")
+     * @Assert\Type("bool")
      */
     private $available;
 
@@ -105,11 +123,13 @@ class Item
      * @var \DateTime
      *
      * @ORM\Column(name="addingDate", type="datetime")
+     * @Assert\DateTime()
      */
     private $addingDate;
 
     /**
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * @Assert\DateTime()
      */
     private $updatedAt;
 
@@ -118,8 +138,9 @@ class Item
      * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
-
+   
     private $otherFiles;
+    
     private $mainFile;
     private $oldFileNames;
     private $newFileNames;

@@ -3,6 +3,7 @@
 namespace VanoFashion\EShoppingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ItemStock
@@ -24,6 +25,7 @@ class ItemStock
     /**
      * @ORM\ManyToOne(targetEntity="VanoFashion\EShoppingBundle\Entity\Item", inversedBy="stocks")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
      */
     private $item;
     /**
@@ -36,9 +38,10 @@ class ItemStock
     private $id;
 
     /**
-     * @var int
+     * @var float
      *
      * @ORM\Column(name="itemSize", type="float")
+     *  @Assert\Range(min=0, minMessage=" the value must be equal or higher than {{limit}}.",invalidMessage="Enter a valid integer.")
      */
     private $itemSize;
 
@@ -46,6 +49,7 @@ class ItemStock
      * @var float
      *
      * @ORM\Column(name="price", type="float")
+     *  @Assert\Range(min=1, minMessage=" the price must be equal or higher than {{limit}}.",invalidMessage="Enter a valid price.")
      */
     private $price;
 
@@ -53,6 +57,7 @@ class ItemStock
      * @var string
      *
      * @ORM\Column(name="typeSize", type="string", length=4)
+     * @Assert\NotBlank()
      */
     private $typeSize;
 
@@ -61,6 +66,7 @@ class ItemStock
      * @var int
      *
      * @ORM\Column(name="quantity", type="integer")
+     * @Assert\Range(min=0, minMessage=" the value must be equal or higher than {{limit}}.",invalidMessage="Enter a valid integer.")
      */
     private $quantity;
 
@@ -68,6 +74,7 @@ class ItemStock
      * @var int
      *
      * @ORM\Column(name="soldQuantity", type="integer")
+     * @Assert\Range(min=0, minMessage=" the value must be equal or higher than {{limit}}.",invalidMessage="Enter a valid integer.")
      */
     private $soldQuantity;
 
@@ -75,6 +82,7 @@ class ItemStock
      * @var \DateTime
      *
      * @ORM\Column(name="addingDate", type="datetime")
+     * @Assert\Datetime()
      */
     private $addingDate;
 
@@ -82,11 +90,13 @@ class ItemStock
      * @var \DateTime
      *
      * @ORM\Column(name="dateOfEnd", type="datetime", nullable=true)
+     * @Assert\Datetime()
      */
     private $dateOfEnd;
 
     /**
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * @Assert\Datetime()
      */
     private $updatedAt;
 

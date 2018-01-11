@@ -3,6 +3,7 @@
 namespace VanoFashion\EShoppingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ItemCategory
@@ -20,6 +21,10 @@ class ItemCategory
 
     /**
      * @ORM\OneToMany(targetEntity="VanoFashion\EShoppingBundle\Entity\ItemProduct", mappedBy="category")
+     * @Assert\All({
+     *     @Assert\Valid()
+     *     
+     * })
      */
     private $products;
     /**
@@ -35,6 +40,7 @@ class ItemCategory
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -42,11 +48,13 @@ class ItemCategory
      * @var \DateTime
      *
      * @ORM\Column(name="addingDate", type="datetime")
+     * @Assert\DateTime()
      */
     private $addingDate;
 
     /**
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * @Assert\DateTime()
      */
     private $updatedAt;
 
