@@ -81,20 +81,41 @@ $(document).ready(function(){
         if(status==="success"){
            // console.log(items);
             
-
+            var colors=[];
+            var brands=[];
+            var labels=[];
             for (var i = 0; i < items.length; i++) {
-                
-                var elt=$("<option>  </option>").text(items[i].color).attr('value', items[i].color);
+                if(colors.indexOf(items[i].color)<0){
+                    colors.push(items[i].color);
+                }
+
+                if(brands.indexOf(items[i].brand)<0){
+                    brands.push(items[i].brand);
+                }
+
+                if(labels.indexOf(items[i].itemLabel)<0){
+                    labels.push(items[i].itemLabel);
+                }         
                
-                $('#item-color').append(elt);
-
-                elt=$("<option>  </option>").text(items[i].brand).attr('value', items[i].brand);
-                $('#item-brand').append(elt);
-
-                elt=$("<option>  </option>").text(items[i].itemLabel).attr('value', items[i].itemLabel);
-                $('#item-label').append(elt);
            
             }
+
+            for (var i = 0; i < colors.length; i++) {
+                var elt=$("<option>  </option>").text(colors[i]).attr('value', colors[i]);
+                $('#item-color').append(elt);
+            };
+
+            for (var i = 0; i < brands.length; i++) {
+                var elt=$("<option>  </option>").text(brands[i]).attr('value', brands[i]);
+                $('#item-brand').append(elt);
+            };
+
+            for (var i = 0; i < labels.length; i++) {
+                var elt=$("<option>  </option>").text(labels[i]).attr('value', labels[i]);
+                $('#item-label').append(elt);
+            };           
+
+            
 
         }
     });
@@ -163,8 +184,8 @@ $(document).ready(function(){
 
 function refineListItems(){
 
-    var filter="product="+$('#item-product').val()+"&gender="+$('#item-gender').val()+"&itemlabel="+$('#item-label').val();
-    if($('#item-color').val().length>0){
+    var filter="category="+$('#item-category').val()+"&product="+$('#item-product').val()+"&gender="+$('#item-gender').val()+"&itemlabel="+$('#item-label').val();
+    if($('#item-color').val()!==null && $('#item-color').val().length>0){
 
         filter+="&color=";
         for (var i = 0; i < $('#item-color').val().length; i++) {
@@ -178,7 +199,7 @@ function refineListItems(){
 
     }
 
-    if($('#item-brand').val().length>0){
+    if($('#item-brand').val()!==null && $('#item-brand').val().length>0){
 
         filter+="&brand=";
         for (var i = 0; i < $('#item-brand').val().length; i++) {
@@ -199,7 +220,7 @@ function refineListItems(){
     }
     var userLang = navigator.language || navigator.userLanguage; 
     window.location.href ="/vanofashion/websitemanagement/"+userLang+"/item/list?"+filter;
-    console.log(filter);
+    alert("filter="+filter);
    
     
 }

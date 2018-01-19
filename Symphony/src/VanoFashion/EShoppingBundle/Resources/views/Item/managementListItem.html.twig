@@ -154,8 +154,14 @@
 </div>
 </div>
 <div class="well" >
-  
-	{% for item in items %}
+
+
+	{% if nbPages == 0 %}    
+    <span> No result found!</span>
+
+    {% else %}
+
+    {% for item in items %}
 	
 		{% if  loop.first %}
 		<div class="row list-first" id="{{item.id}}">
@@ -180,6 +186,11 @@
     	{% endif%} 
     {% endfor %}
 
+    {% endif %}
+
+  
+	
+
 
 </div>
 </div>
@@ -202,9 +213,10 @@
 
 <ul class="pagination">
 
-  {# On utilise la fonction range(a, b) qui crée un tableau de valeurs entre a et b #}
+  
 
-  {% for p in range(1, nbPages) %}
+  {% if nbPages > 0 %}
+    {% for p in range(1, nbPages) %}
 
     <li{% if p == page %} class="active"{% endif %}>
 
@@ -213,6 +225,7 @@
     </li>
 
   {% endfor %}
+ {% endif %}
 
 </ul>
 

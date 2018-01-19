@@ -21,10 +21,7 @@ class ItemCategory
 
     /**
      * @ORM\OneToMany(targetEntity="VanoFashion\EShoppingBundle\Entity\ItemProduct", mappedBy="category")
-     * @Assert\All({
-     *     @Assert\Valid()
-     *     
-     * })
+     *
      */
     private $products;
     /**
@@ -130,6 +127,7 @@ class ItemCategory
      * Get products
      *
      * @return \Doctrine\Common\Collections\Collection
+     * @Assert\Valid()
      */
     public function getProducts()
     {

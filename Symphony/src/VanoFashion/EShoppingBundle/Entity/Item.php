@@ -23,10 +23,6 @@ class Item
     /**
      * @ORM\OneToMany(targetEntity="VanoFashion\EShoppingBundle\Entity\Image", mappedBy="item",cascade={"persist","remove"})
      *
-     * @Assert\All({
-     *     @Assert\Valid()
-     *     
-     * })
      *
      */
     private $images; 
@@ -46,10 +42,6 @@ class Item
      /**
      * @ORM\OneToMany(targetEntity="VanoFashion\EShoppingBundle\Entity\ItemStock", mappedBy="item",cascade={"persist","remove"})
      * @ORM\JoinColumn(nullable=false)
-     *@Assert\All({
-     *     @Assert\Valid()
-     *     
-     * })
      */    
      private $stocks;
 
@@ -578,6 +570,7 @@ class Item
      * Get images
      *
      * @return \VanoFashion\EShoppingBundle\Entity\Image $image
+     * @Assert\Valid()
      */
     public function getMainImage()
     {
@@ -657,6 +650,7 @@ class Item
      * Get stocks
      *
      * @return \Doctrine\Common\Collections\Collection
+     * @Assert\Valid()
      */
     public function getStocks()
     {

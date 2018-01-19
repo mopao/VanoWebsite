@@ -146,6 +146,19 @@ class ItemController extends Controller
 
 
         }
+        elseif($request->query->get('category') and $request->query->get('category')!=="all") {
+           # code...
+          $em = $this->getDoctrine()->getManager();                       
+          $category=$em->getRepository('VanoFashionEShoppingBundle:ItemCategory')->getCategory($request->query->get('category'));
+          $products=[];
+          foreach ($category->getProducts() as $product) {
+            # code...
+            $products[]=$product->getName();
+          }
+
+          $filter['product']=$products;
+
+        }
 
         if($request->query->get('gender') and $request->query->get('gender')!=="all"){
           $filter['gender']=explode(",",$request->query->get('gender'));
@@ -164,7 +177,7 @@ class ItemController extends Controller
         
         if ($nbPages===0) {
             # code...
-             $this->get('session')->getFlashBag()->add('info', 'no item registered!');
+             $this->get('session')->getFlashBag()->add('info', 'no item found!');
         }
         if ($nbPages>0 and $page > $nbPages) {
 
