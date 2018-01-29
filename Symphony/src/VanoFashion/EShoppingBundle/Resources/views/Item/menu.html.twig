@@ -1,0 +1,169 @@
+<nav class="navbar navbar-default navbar-fixed">
+			  <div class="container-fluid">
+			    <div class="navbar-header">
+			      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>	     
+			    </div>
+			    <div class="collapse navbar-collapse" id="myNavbar">
+			      <ul class=" col-sm-2"> </ul>
+			      <ul class="nav navbar-nav col-sm-6">
+			        <li class="dropdown dropdown-large menu ">
+			        	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Men</a>
+			        	<ul class="dropdown-menu dropdown-menu-large container ">
+			        	  <li class="col-sm-3">
+			        	  	
+						      <a href="#">
+						      	{% image 'bundles/vanofashioneshopping/images/model_new_arrivals.jpg' %}
+						        <img src="{{ asset_url }}" alt="Lights" style="width:100%">
+						        {% endimage %}
+						        <div class="text-center dropdown-menu-new-arrival" >
+						          <p >New Arrivals</p>
+						        </div>
+						      </a>
+						    
+			        	  </li>
+				          <li class="col-sm-3"> 
+				          	<ul>
+								<li class="dropdown-header">Shop by Category</li>
+								{% for category in menu.men.categories %}
+								<li><a href="#"> {{category.name|capitalize}} </a></li>
+								{% endfor%}
+								{% if menu.men.categories | length > menu.nberpermenu %}					
+								<li><a href="#">View all ...</a></li>
+								{% endif %}
+							</ul>
+				          </li>
+				          <li class="col-sm-3">
+				          	<ul>
+								<li class="dropdown-header">Shop by Product</li>
+								{% for product in menu.men.products %}
+								<li><a href="#"> {{product.name|capitalize}} </a></li>
+								{% endfor%}
+								{% if menu.men.products | length > menu.nberpermenu %}						
+								<li><a href="#">View all ...</a></li>
+								{% endif %}
+								
+							</ul>
+				          </li>
+				          <li class="col-sm-3">
+				          	<ul>
+								<li class="dropdown-header">Shop by Designer</li>
+								{% for designer in menu.men.designers %}
+								<li><a href="#"> {{designer|capitalize}} </a></li>
+								{% endfor%}
+								{% if menu.men.designers | length > menu.nberpermenu %}						
+								<li><a href="#">View all ...</a></li>
+								{% endif %}
+							</ul>
+				          </li>
+				        </ul>
+			        </li>
+				    <li class="dropdown dropdown-large menu ">
+				    	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Women</a>
+				    	<ul class="dropdown-menu dropdown-menu-large container center">
+			        	  <li class="col-sm-3">
+			        	  	
+						      <a href="#">
+						      	{% image 'bundles/vanofashioneshopping/images/home_loafers_model_women.jpg' %}
+						        <img src="{{ asset_url }}" alt="Lights" style="width:100%">
+						        {% endimage %}
+						        <div class="text-center dropdown-menu-new-arrival" >
+						          <p >New Arrivals</p>
+						        </div>
+						      </a>
+						    
+			        	  </li>
+				          <li class="col-sm-3"> 
+				          	<ul>
+								<li class="dropdown-header">Shop by Category</li>
+								{% for category in menu.women.categories %}
+								<li><a href="#"> {{category.name|capitalize}} </a></li>
+								{% endfor%}
+								{% if menu.women.categories | length > menu.nberpermenu %}						
+								<li><a href="#">View all ...</a></li>
+								{% endif %}
+							</ul>
+				          </li>
+				          <li class="col-sm-3">
+				          	<ul>
+								<li class="dropdown-header">Shop by Procuct</li>
+								{% for product in menu.women.products %}
+								<li><a href="#"> {{product.name|capitalize}} </a></li>
+								{% endfor%}
+								{% if menu.women.products | length > menu.nberpermenu %}						
+								<li><a href="#">View all ...</a></li>
+								{% endif %}
+								
+							</ul>
+				          </li>
+				          <li class="col-sm-3">
+				          	<ul>
+								<li class="dropdown-header">Shop by Designer</li>
+								{% for designer in menu.women.designers %}
+								<li><a href="#"> {{designer|capitalize}} </a></li>
+								{% endfor%}
+								{% if menu.women.designers | length > menu.nberpermenu %}						
+								<li><a href="#">View all ...</a></li>
+								{% endif %}
+							</ul>
+				          </li>
+				        </ul>
+				    </li>
+				    <li class="dropdown dropdown-large menu "><a href="#">Designers</a></li>
+				    <li class="dropdown dropdown-large menu ">
+				    	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Website Management</a>
+				    	<ul class="dropdown-menu dropdown-menu-large container center">
+				    		<li class="col-sm-3">
+				    			<ul>
+									<li class="dropdown-header">Item</li>
+									<li><a href="#">view items</a></li>
+									<li><a href="#">view products</a></li>
+									<li><a href="#">view categories</a></li>
+									<li><a href="#">add item</a></li>
+									<li><a href="#">add product</a></li>						
+									<li><a href="#">add category</a></li>
+									
+							    </ul>
+				    		</li>
+
+				    		<li class="col-sm-3">
+				    			<ul>
+									<li class="dropdown-header">Discount</li>
+									<li><a href="#">ongoing discounts</a></li>							
+									<li><a href="#">add discount</a></li>								
+							    </ul>
+				    		</li>
+				    		<li class="col-sm-3">
+				    			<ul>
+									<li class="dropdown-header">User</li>
+									<li><a href="#">view users</a></li>
+									<li><a href="#">add user</a></li>								
+							    </ul>
+				    		</li>
+
+				    		<li class="col-sm-3">
+				    			<ul>
+									<li class="dropdown-header">Customer</li>
+									<li><a href="#">view customers</a></li>
+									<li><a href="#">custormers' orders</a></li>								
+							    </ul>
+				    		</li>
+				    	</ul>
+				    </li>
+			      </ul>
+			      <form class="navbar-form navbar-right  col-sm-3">
+			        <div class="input-group">
+					    <input type="text" id="navbar-search-input" class="btn btn-default search-input" placeholder="Search">
+					    <div class="input-group-btn">
+					      <button id="btn-search" class="btn btn-default" type="submit">
+					        <i class="glyphicon glyphicon-search"></i>
+					      </button>
+					    </div>
+				    </div>
+		          </form> 
+			    </div>
+			  </div>
+		    </nav> 

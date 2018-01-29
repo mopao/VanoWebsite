@@ -19,12 +19,27 @@ class ItemProductRepository extends \Doctrine\ORM\EntityRepository
 	 *get products in database
 	 */
 
-	public function getProducts($page, $nbPerPage){
+	public function getProducts($page, $nbPerPage , array $filter=null){
 
 		$qb=$this->createQueryBuilder('p')
+		         ->leftJoin('p.gender', 'g')
+                 ->addSelect('g');
+
+
+        if($filter!==null and count($filter)>0){
+		      foreach ($filter as $key => $value) {
+		        if ($key==="gender") {
+		           # code...
+		          $qb->andWhere($qb->expr()->in('g.'.$key, $value));
+		         }
+		         else{
+		          $qb->andWhere($qb->expr()->in('i.'.$key, $value));
+		         }
+		      }
+        }               
                  
-                 ->orderBy('p.name', 'ASC')
-                 ->getQuery();         
+        $qb->orderBy('p.name', 'ASC')
+           ->getQuery();         
 
          $qb->setFirstResult(($page-1) * $nbPerPage);      
 

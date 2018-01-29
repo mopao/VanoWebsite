@@ -31,7 +31,7 @@ class ItemRepository extends \Doctrine\ORM\EntityRepository
                  ->addSelect('img');
                  
         
-    if($filter!==null or count($filter>0)){
+    if($filter!==null and count($filter)>0){
       foreach ($filter as $key => $value) {
         # code...
          if($key==="product"){
@@ -81,4 +81,6 @@ class ItemRepository extends \Doctrine\ORM\EntityRepository
               ->getSingleResult();
 
   }
+
+  
 }

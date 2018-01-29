@@ -25,11 +25,92 @@ class ItemController extends Controller
 	// return home page
     public function indexAction(Request $request)
     {
-    	
+        
         return $this->render('VanoFashionEShoppingBundle:Item:index.html.twig');
     }
 
    
+    /**
+     *return the main menu management
+     *
+     */
+
+    public function menuAction(){
+
+      $nberpermenu=6;
+        $menu=array();
+        $menu['nberpermenu']=$nberpermenu;
+
+        /* get men general menu */
+        $menMenu=array();
+        // get men categories
+        $categories= $this->getDoctrine()
+        ->getManager()
+        ->getRepository('VanoFashionEShoppingBundle:ItemCategory')
+        ->getCategories(1, $nberpermenu);
+
+        // get men products
+        $menProducts= $this->getDoctrine()
+        ->getManager()
+        ->getRepository('VanoFashionEShoppingBundle:ItemProduct')
+        ->getProducts(1, $nberpermenu, array('gender' => array('men','unisex')));
+
+        // get men designers
+        $menItems= $this->getDoctrine()
+        ->getManager()
+        ->getRepository('VanoFashionEShoppingBundle:Item')
+        ->getItems(1, $nberpermenu, array('gender' => array('men','unisex')));
+        $menDesigners=array();
+        foreach ($menItems as $item) {
+          if (!array_search($item->getBrand(),$menDesigners)) {
+            # code...
+            $menDesigners[]=$item->getBrand();
+          }
+        
+        }
+
+        $menMenu['categories']=$categories;
+        $menMenu['products']=$menProducts; 
+        $menMenu['designers']=$menDesigners;   
+
+        
+      /* get women general menu */
+        $womenMenu=array();
+         // get women products
+        $womenProducts= $this->getDoctrine()
+        ->getManager()
+        ->getRepository('VanoFashionEShoppingBundle:ItemProduct')
+        ->getproducts(1, $nberpermenu, array('gender' => array('women','unisex')));
+         
+         // get women designers
+         $womenItems= $this->getDoctrine()
+        ->getManager()
+        ->getRepository('VanoFashionEShoppingBundle:Item')
+        ->getItems(1, $nberpermenu, array('gender' => array('women','unisex')));
+        $womenDesigners=array();
+        foreach ($womenItems as $item) {
+          if (!array_search($item->getBrand(),$womenDesigners)) {
+            # code...
+            $womenDesigners[]=$item->getBrand();
+          }
+        
+        }
+        
+        $womenMenu['categories']=$categories;
+        $womenMenu['products']=$womenProducts;
+        $womenMenu['designers']=$womenDesigners;
+
+
+        $menu['men']=$menMenu;
+        $menu['women']=$womenMenu;
+
+
+
+        return $this->render('VanoFashionEShoppingBundle:Item:menu.html.twig',
+           array('menu' => $menu));
+
+    }
+
 
     /**
      *return menu website management

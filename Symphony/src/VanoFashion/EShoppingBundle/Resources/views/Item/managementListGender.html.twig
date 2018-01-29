@@ -32,6 +32,11 @@
 </div>
 <div class="well">
 
+	{% if nbPages == 0 %}    
+    <span> No result found!</span>
+
+    {% else %}
+
 	{% for gender in genders %}
 	
 		{% if  loop.first %}
@@ -56,6 +61,8 @@
 
     	{% endif%} 
     {% endfor %}
+
+    {% endif %}
 
 
 </div>
