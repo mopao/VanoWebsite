@@ -1110,6 +1110,42 @@ class ItemController extends Controller
     }
 
 
+  /**
+   *
+   *this function display all pages about men shopping
+   *
+   *
+   **/
+  public function menShopAction( $_locale, Request $request){
+    
+    $category="";
+    $selectedProduct="";
+    if($request->query->get('dept')) {
+      $category=$request->query->get('dept');
+      // get products of the category
+      $menProducts= $this->getDoctrine()
+      ->getManager()
+      ->getRepository('VanoFashionEShoppingBundle:ItemProduct')
+      ->getAllProducts( array('gender' => array('men','unisex'), 'category'=>array(''.$category)));
+    }
+
+    if($request->query->get('product')) {
+      $selectedProduct=$request->query->get('product');
+      
+    }
+
+
+
+
+    return $this->render('VanoFashionEShoppingBundle:Item:menShop.html.twig',
+      array(
+        'category'=> $category,
+        'selectedProduct' => $selectedProduct,
+        'products' => $menProducts));
+
+  }
+
+
 
 
 

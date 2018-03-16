@@ -8,7 +8,7 @@
 			      </button>	     
 			    </div>
 			    <div class="collapse navbar-collapse" id="myNavbar">
-			      <ul class=" col-sm-2"> </ul>
+			       <ul class=" col-sm-2"> </ul> 
 			      <ul class="nav navbar-nav col-sm-6">
 			        <li class="dropdown dropdown-large menu ">
 			        	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Men</a>
@@ -29,7 +29,7 @@
 				          	<ul>
 								<li class="dropdown-header">Shop by Category</li>
 								{% for category in menu.men.categories %}
-								<li><a href="#"> {{category.name|capitalize}} </a></li>
+								<li><a href="{{ path('vano_fashion_e_shopping_men_shop')}}?dept={{category.name}}"> {{category.name|capitalize}} </a></li>
 								{% endfor%}
 								{% if menu.men.categories | length > menu.nberpermenu %}					
 								<li><a href="#">View all ...</a></li>

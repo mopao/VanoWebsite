@@ -4,43 +4,13 @@ vano_fashion_e_shopping_homepage:
     requirements:
         _locale: en|fr
 
-vano_fashion_e_shopping_view_customerType:
-    path: /{customerType}/{catalogType}/{_locale}/list/{page}
-    defaults:
-        _controller: VanoFashionEShoppingBundle:Item:viewCustomerType 
-        _locale: en 
-        page: 1 
-        catalogType: catalog    
+
+
+vano_fashion_e_shopping_men_shop:
+    path:     /{_locale}/men
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:menShop, _locale: en }
     requirements:
         _locale: en|fr
-        page:   \d*
-        catalogType: sale|catalog
-
-vano_fashion_e_shopping_view_itemProduct:
-    path: /{customerType}/{catalogType}/{product}/{_locale}/list/{page}
-    defaults: { _controller: VanoFashionEShoppingBundle:Item:viewProduct , _locale: en , page: 1 , catalogType:catalog}
-    requirements:
-        _locale: en|fr
-        page:   \d*
-        catalogType: sale|catalog
-
-
-
-vano_fashion_e_shopping_view_itemCategory:
-    path: /{customerType}/{catalogType}/{product}/{category}/{_locale}/list/{page}
-    defaults: { _controller: VanoFashionEShoppingBundle:Item:viewCategory , _locale: en , page: 1 , catalogType:catalog}
-    requirements:
-        _locale: en|fr
-        page:   \d*
-        catalogType: sale|catalog
-
-vano_fashion_e_shopping_view_item:
-    path: /item/{id}/{_locale}
-    defaults: { _controller: VanoFashionEShoppingBundle:Item:view , _locale: en }
-    requirements:
-        _locale: en|fr
-
-
 
 
 

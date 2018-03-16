@@ -16,14 +16,16 @@ class ItemProductRepository extends \Doctrine\ORM\EntityRepository
 
 
 	/**
-	 *get products in database
+	 *get products in database and paginate
 	 */
 
 	public function getProducts($page, $nbPerPage , array $filter=null){
 
 		$qb=$this->createQueryBuilder('p')
 		         ->leftJoin('p.gender', 'g')
-                 ->addSelect('g');
+                 ->addSelect('g')
+                 ->leftJoin('p.category', 'c')
+                 ->addSelect('c');
 
 
         if($filter!==null and count($filter)>0){
@@ -31,6 +33,10 @@ class ItemProductRepository extends \Doctrine\ORM\EntityRepository
 		        if ($key==="gender") {
 		           # code...
 		          $qb->andWhere($qb->expr()->in('g.'.$key, $value));
+		         }
+		         elseif ($key==="category") {
+		         	# code...
+		         	$qb->andWhere($qb->expr()->in('c.'.$key, $value));
 		         }
 		         else{
 		          $qb->andWhere($qb->expr()->in('i.'.$key, $value));
@@ -50,6 +56,47 @@ class ItemProductRepository extends \Doctrine\ORM\EntityRepository
         
 
 	}
+
+
+
+/**
+ *get products in database 
+ */
+
+	public function getAllProducts(array $filter=null){
+
+		$qb=$this->createQueryBuilder('p')
+		         ->leftJoin('p.gender', 'g')
+                 ->addSelect('g')
+                 ->leftJoin('p.category', 'c')
+                 ->addSelect('c');
+
+
+        if($filter!==null and count($filter)>0){
+		      foreach ($filter as $key => $value) {
+		        if ($key==="gender") {
+		           # code...
+		          $qb->andWhere($qb->expr()->in('g.'.$key, $value));
+		         }
+		         elseif ($key==="category") {
+		         	# code...
+		         	$qb->andWhere($qb->expr()->in('c.name', $value));
+		         }
+		         else{
+		          $qb->andWhere($qb->expr()->in('i.'.$key, $value));
+		         }
+		      }
+        }               
+                 
+        $qb->orderBy('p.name', 'ASC');                  
+
+        
+        return $qb->getQuery()->getResult();
+
+        
+
+	}
+
 
 	
 

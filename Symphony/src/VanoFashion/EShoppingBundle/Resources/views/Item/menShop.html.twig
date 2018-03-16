@@ -1,0 +1,62 @@
+{% extends "VanoFashionEShoppingBundle::bundleLayout.html.twig" %}
+
+
+{% block title %}
+
+  Home - {{ parent() }}
+
+{% endblock %}
+
+{% block stylesheets%}
+{{ parent() }}
+
+
+
+
+{% endblock %}
+
+
+{% block vanofashioneshopping_body %}
+
+<div class="container-fluid">
+
+
+	<div class="col-sm-2 filter"> 
+		<div class="sort-list">  Sort by: 
+				  	    <span class="dropdown" id="listing-sort-dropdown">
+						  <span class="dropdown-toggle"  data-toggle="dropdown"><span  > All</span>
+						  <span id="sort-method"></span><span  class="caret"></span></span>
+						  <ul id="sorting-methods" class="dropdown-menu">
+						    <li><a href="#">Just in</a></li>			    
+						    <li><a href="#">Low price</a></li>
+						    <li><a href="#">High price</a></li>
+						    
+						  </ul>
+						  </span> 
+		</div>
+		<div class="category-listed"> {{ category }}</div>
+		<ul class="listing-filter">
+			{% for product in products%}
+
+			  <li class="listing-filter-header "> 
+			  	<a {% if product.name ==selectedProduct%} class='listing-filter-header-focus' {% endif%} 
+			  	href=" {{path(app.request.attributes.get('_route'))}}?dept={{category}}&product={{product.name}}"> {{product.name}} </a></li>	 
+
+
+			{% endfor%}
+
+		</ul>
+	</div>
+
+	<div class="col-sm-10 listing-items">		
+		<div class="row">
+			<div class="col-sm-3"> Item 1</div>
+			<div class="col-sm-3"> Item 2  </div>
+			<div class="col-sm-3"> Item 3 </div>
+			<div class="col-sm-3"> Item 4 </div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
