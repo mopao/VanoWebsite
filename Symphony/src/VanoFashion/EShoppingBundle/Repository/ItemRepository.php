@@ -47,7 +47,11 @@ class ItemRepository extends \Doctrine\ORM\EntityRepository
       }
     }
 
-    $qb->groupBy('i.codeItem')
+    $qb->addGroupBy('i.codeItem')
+       ->addGroupBy('s.id')
+       ->addGroupBy('g.id')
+       ->addGroupBy('p.id')
+       ->addGroupBy('img.id')
                  ->orderBy('i.addingDate', 'DESC')
                  ->getQuery();
 

@@ -85,3 +85,8 @@ stof_doctrine_extensions:
     orm:
         default:
             sluggable: true
+
+
+# maker-bundle configuration
+maker:
+    root_namespace: 'VanoFashion\EShopping'

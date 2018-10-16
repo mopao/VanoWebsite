@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ItemCategory
- *
+ * represent item's category
  * @ORM\Table(name="item_category")
  * @ORM\Entity(repositoryClass="VanoFashion\EShoppingBundle\Repository\ItemCategoryRepository")
  */
@@ -15,9 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class ItemCategory
 {
-    /**
-     * represent item's category
-     */
+    
 
     /**
      * @ORM\OneToMany(targetEntity="VanoFashion\EShoppingBundle\Entity\ItemProduct", mappedBy="category")
