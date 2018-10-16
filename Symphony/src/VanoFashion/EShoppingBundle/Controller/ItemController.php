@@ -21,7 +21,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ItemController extends Controller
 {   
+   
 
+   //private const integer =25;
 	// return home page
     public function indexAction(Request $request)
     {
@@ -1120,6 +1122,8 @@ class ItemController extends Controller
     
     $category="";
     $selectedProduct="";
+    $menProducts=null;
+    $items=null;
     if($request->query->get('dept')) {
       $category=$request->query->get('dept');
       // get products of the category
@@ -1129,8 +1133,31 @@ class ItemController extends Controller
       ->getAllProducts( array('gender' => array('men','unisex'), 'category'=>array(''.$category)));
     }
 
+  $nberItems=$this->getParameter('nber_items_per_page');
+    
+    // get items' product
     if($request->query->get('product')) {
-      $selectedProduct=$request->query->get('product');
+      $selectedProduct=$request->query->get('product');      
+       $items= $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository('VanoFashionEShoppingBundle:Item')
+                    ->getItems( 1,$nberItems,array('gender' => array('men','unisex'), 'product'=>array(''.$selectedProduct)));
+      
+    }
+    // get items' category
+    elseif ($menProducts!==null) {
+      $productNames=array();
+
+      foreach ($menProducts as $product) {
+        # code...
+        $productNames[]=$product->getName();
+      }
+
+      $items= $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository('VanoFashionEShoppingBundle:Item')
+                    ->getItems( 1,$nberItems,array('gender' => array('men','unisex'), 'product'=>$productNames));
+
       
     }
 
@@ -1141,7 +1168,9 @@ class ItemController extends Controller
       array(
         'category'=> $category,
         'selectedProduct' => $selectedProduct,
-        'products' => $menProducts));
+        'products' => $menProducts,
+        'items'    => $items)
+        );
 
   }
 

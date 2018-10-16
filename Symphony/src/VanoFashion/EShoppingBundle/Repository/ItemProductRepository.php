@@ -36,10 +36,10 @@ class ItemProductRepository extends \Doctrine\ORM\EntityRepository
 		         }
 		         elseif ($key==="category") {
 		         	# code...
-		         	$qb->andWhere($qb->expr()->in('c.'.$key, $value));
+		         	$qb->andWhere($qb->expr()->in('c.name', $value));
 		         }
 		         else{
-		          $qb->andWhere($qb->expr()->in('i.'.$key, $value));
+		          $qb->andWhere($qb->expr()->in('p.'.$key, $value));
 		         }
 		      }
         }               
