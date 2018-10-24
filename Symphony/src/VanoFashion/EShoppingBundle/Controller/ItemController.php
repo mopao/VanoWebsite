@@ -1133,7 +1133,7 @@ class ItemController extends Controller
       ->getAllProducts( array('gender' => array('men','unisex'), 'category'=>array(''.$category)));
     }
 
-  $nberItems=$this->getParameter('nber_items_per_page');
+  $limit=$this->getParameter('nber_items_per_page');
     
     // get items' product
     if($request->query->get('product')) {
@@ -1141,7 +1141,7 @@ class ItemController extends Controller
        $items= $this->getDoctrine()
                     ->getManager()
                     ->getRepository('VanoFashionEShoppingBundle:Item')
-                    ->getItems( 1,$nberItems,array('gender' => array('men','unisex'), 'product'=>array(''.$selectedProduct)));
+                    ->getItems( 1,$limit,array('gender' => array('men','unisex'), 'product'=>array(''.$selectedProduct)));
       
     }
     // get items' category
@@ -1156,9 +1156,19 @@ class ItemController extends Controller
       $items= $this->getDoctrine()
                     ->getManager()
                     ->getRepository('VanoFashionEShoppingBundle:Item')
-                    ->getItems( 1,$nberItems,array('gender' => array('men','unisex'), 'product'=>$productNames));
+                    ->getItems( 1,$limit,array('gender' => array('men','unisex'), 'product'=>$productNames));
 
       
+    }
+    $page=($request->query->get('page'))? $request->query->get('page') : 1 ;
+    $total=count($items);
+    $nbPages = ceil($total / $limit);
+
+    
+    if ($nbPages>0 and $page > $nbPages) {
+
+      throw $this->createNotFoundException("page does'nt exist!");
+
     }
 
 
@@ -1169,7 +1179,9 @@ class ItemController extends Controller
         'category'=> $category,
         'selectedProduct' => $selectedProduct,
         'products' => $menProducts,
-        'items'    => $items)
+        'items'    => $items,
+        'page' => $page,
+        'nbPages' => $nbPages)
         );
 
   }

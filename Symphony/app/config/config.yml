@@ -78,6 +78,7 @@ assetic:
     use_controller: '%kernel.debug%'
     filters:
         cssrewrite: ~
+    
 
 
 # Stof\DoctrineExtensionsBundle configuration

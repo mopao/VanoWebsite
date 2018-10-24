@@ -10,9 +10,9 @@
 {% block stylesheets%}
 {{ parent() }}
 
-
-
-
+{% stylesheets 'bundles/vanofashioneshopping/css/shop.css' filter='cssrewrite' %}
+<link rel="stylesheet" href="{{ asset_url }}"  />
+{% endstylesheets %}
 {% endblock %}
 
 
@@ -48,15 +48,94 @@
 		</ul>
 	</div>
 
-	<div class="col-sm-10 listing-items">		
-		<div class="row">
-			<div class="col-sm-3"> Item 1</div>
-			<div class="col-sm-3"> Item 2  </div>
-			<div class="col-sm-3"> Item 3 </div>
-			<div class="col-sm-3"> Item 4 </div>
-		</div>
+	<div class="col-sm-10 listing-items">
+			
+		{% set nberItems,nberItemsPrinted, step= items|length, 0, 4 %}
+		{% set nberOfRows= (nberItems % step==0)? nberItems / step : ((nberItems-(nberItems % step))/step)  %}
+		
+        {% if nberItems - nberItemsPrinted > 0 %}			
+			
+			{% if nberItems - nberItemsPrinted < step %}
+				<div class="row">
+					{% for i in range(nberItemsPrinted, nberItems -1, 1) %}  
+					<div class="col-sm-3 list-item-display">						
+							<div class="list-item-image-display"> {% for image in items[i].images if image.ismain=="true"  %}
+								<img  class="img-responsive img-rounded"    src="{{ asset("bundles/vanofashioneshopping/images/" ~ image.url ) }} " alt="{{image.alt}}">
+								 {% endfor %}
+							</div>
+							<div>
+							<p class="text-strong"> {{items[i].brand}}</p>
+							<p>{{items[i].name}}</p>
+							<p class="text-strong"><span class="glyphicon glyphicon-usd"></span> {{items[i].stocks[0].price}}</p>
+							</div>
+					</div>     				        
+				    {% endfor %}
+				</div>
+
+			{% else%}
+				{% for k in range(1,nberOfRows)%}
+				
+					<div class="row">
+						{% for i in range(nberItemsPrinted, step + nberItemsPrinted-1, 1) %}  
+						<div class="col-sm-3 list-item-display">							
+							<p> {% for image in items[i].images if image.ismain=="true"  %}
+								<img  class="img-responsive img-rounded"    src="{{ asset("bundles/vanofashioneshopping/images/" ~ image.url ) }} " alt="{{image.alt}}">
+								 {% endfor %}
+							</p>
+						</div>     				        
+					    {% endfor %}
+				    </div>
+				    {% set nberItemsPrinted=nberItemsPrinted+step %}
+
+			    {% endfor %}
+
+			    {% if nberItemsPrinted < nberItems and nberItems - nberItemsPrinted < step  %}
+			    	<div class="row">
+						{% for i in range(nberItemsPrinted, nberItems -1, 1) %}  
+						<div class="col-sm-3">{{items[i].id}}</div>     				        
+					    {% endfor %}
+				   </div>
+
+			    {%endif%}
+
+	        {%endif%}
+
+				
+			
+		{% else %}
+
+		<div class="alert alert-info"> <strong> no product has been found ! </strong>  </div>
+					
+		{%endif%}
+
+
+
+			
+			
 	</div>
 </div>
+
+{% if nbPages > 0 %}
+	<div class="div-pagination">
+
+		<ul class="vano-pagination  ">  
+				  
+				    {% for p in range(1, nbPages) %}
+
+				    <li{% if p == page %} class="active"{% endif %}>
+
+				      <a href="{{ path('vano_fashion_e_shopping_website_management_item_list', {'page': p}) }} ">{{ p }}</a>
+
+				    </li>
+
+				  {% endfor %}
+				
+
+		</ul>
+			
+	</div>
+
+ {% endif %}
 
 
 {% endblock %}

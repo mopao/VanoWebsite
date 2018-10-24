@@ -82,6 +82,8 @@
 
 	  body{
 	  	color:     #2e4053  ;
+	  	margin: 0 px;
+	  	padding: 0 px;
 	  	
 	  		  	
 	  }
@@ -301,5 +303,46 @@
     	font-weight: bold;
     }
 
+   .div-pagination {
+    text-align: right;
+    border-bottom: 3px solid #5C1F79;
+    margin-bottom: 1px;
+    }
+
+	ul.vano-pagination {
+	    display: inline-block;
+	    list-style: none;
+	}
+
+	ul.vano-pagination > li {
+	    color: black;
+	    float: left;
+	    padding: 6px 12px;
+	    text-decoration: none;
+	    transition: background-color .3s;	    
+	    margin: 0 4px;
+	}
+
+	ul.vano-pagination > li > a {
+	    
+	    text-decoration: none;
+	   
+	}
+
+	ul.vano-pagination > li.active > a {
+	    
+	    text-decoration: none;
+	    color: #5C1F79;   
+	}
+
+	ul.vano-pagination > li.active{
+	        
+	    border-bottom: 2px solid #5C1F79;
+	}
+
+	ul.vano-pagination > li:hover:not(.active) {background-color: #ddd;}
+
+
+   
     
    

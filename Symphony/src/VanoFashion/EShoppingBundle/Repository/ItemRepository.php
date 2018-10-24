@@ -59,8 +59,8 @@ class ItemRepository extends \Doctrine\ORM\EntityRepository
 
     $qb->setMaxResults($nbPerPage);       
 
-    return new Paginator($qb, true);
-
+     return $qb->getQuery()
+              ->getResult();
 	}
 
 
