@@ -34,18 +34,21 @@
 						  </ul>
 						  </span> 
 		</div>
-		<div class="category-listed"> {{ category }}</div>
-		<ul class="listing-filter">
-			{% for product in products%}
 
-			  <li class="listing-filter-header "> 
-			  	<a {% if product.name ==selectedProduct%} class='listing-filter-header-focus' {% endif%} 
-			  	href=" {{path(app.request.attributes.get('_route'))}}?dept={{category}}&product={{product.name}}"> {{product.name}} </a></li>	 
+		<div class="header-filter-listed"> <p> {{ category }} </p>
+			<ul class="listing-filter">
+				{% for product in products%}
+
+				  <li > 
+				  	<a {% if product.name ==selectedProduct%} class='filter-active link-disable' {% endif%} 
+				  	href=" {{path(app.request.attributes.get('_route'))}}?dept={{category}}&product={{product.name}}"> {{product.name}} </a>
+				  </li>	 
 
 
-			{% endfor%}
+				{% endfor%}
 
-		</ul>
+			</ul>
+		</div>
 	</div>
 
 	<div class="col-sm-10 listing-items">
@@ -58,7 +61,8 @@
 			{% if nberItems - nberItemsPrinted < step %}
 				<div class="row">
 					{% for i in range(nberItemsPrinted, nberItems -1, 1) %}  
-					<div class="col-sm-3 list-item-display">						
+					<div class="col-sm-3 list-item-display">	
+					<a href="">				
 							<div class="list-item-image-display"> {% for image in items[i].images if image.ismain=="true"  %}
 								<img  class="img-responsive img-rounded"    src="{{ asset("bundles/vanofashioneshopping/images/" ~ image.url ) }} " alt="{{image.alt}}">
 								 {% endfor %}
@@ -68,6 +72,7 @@
 							<p>{{items[i].name}}</p>
 							<p class="text-strong"><span class="glyphicon glyphicon-usd"></span> {{items[i].stocks[0].price}}</p>
 							</div>
+					</a>			
 					</div>     				        
 				    {% endfor %}
 				</div>
@@ -77,12 +82,19 @@
 				
 					<div class="row">
 						{% for i in range(nberItemsPrinted, step + nberItemsPrinted-1, 1) %}  
-						<div class="col-sm-3 list-item-display">							
-							<p> {% for image in items[i].images if image.ismain=="true"  %}
+						<div class="col-sm-3 list-item-display">
+						<a href="">						
+							<div class="list-item-image-display"> {% for image in items[i].images if image.ismain=="true"  %}
 								<img  class="img-responsive img-rounded"    src="{{ asset("bundles/vanofashioneshopping/images/" ~ image.url ) }} " alt="{{image.alt}}">
 								 {% endfor %}
-							</p>
-						</div>     				        
+							</div>
+							<div>
+							<p class="text-strong"> {{items[i].brand}}</p>
+							<p>{{items[i].name}}</p>
+							<p class="text-strong"><span class="glyphicon glyphicon-usd"></span> {{items[i].stocks[0].price}}</p>
+							</div>
+						</a>
+					    </div>        				        
 					    {% endfor %}
 				    </div>
 				    {% set nberItemsPrinted=nberItemsPrinted+step %}
@@ -92,7 +104,19 @@
 			    {% if nberItemsPrinted < nberItems and nberItems - nberItemsPrinted < step  %}
 			    	<div class="row">
 						{% for i in range(nberItemsPrinted, nberItems -1, 1) %}  
-						<div class="col-sm-3">{{items[i].id}}</div>     				        
+							<div class="col-sm-3 list-item-display">
+							<a href="">						
+								<div class="list-item-image-display"> {% for image in items[i].images if image.ismain=="true"  %}
+									<img  class="img-responsive img-rounded"    src="{{ asset("bundles/vanofashioneshopping/images/" ~ image.url ) }} " alt="{{image.alt}}">
+									 {% endfor %}
+									</div>
+									<div>
+									<p class="text-strong"> {{items[i].brand}}</p>
+									<p>{{items[i].name}}</p>
+									<p class="text-strong"><span class="glyphicon glyphicon-usd"></span> {{items[i].stocks[0].price}}</p>
+								</div>
+							</a>
+					        </div>        				        
 					    {% endfor %}
 				   </div>
 
@@ -114,6 +138,7 @@
 			
 	</div>
 </div>
+{% set productParam= (selectedProduct !="")? '&product='~selectedProduct : "" %}
 
 {% if nbPages > 0 %}
 	<div class="div-pagination">
@@ -122,9 +147,10 @@
 				  
 				    {% for p in range(1, nbPages) %}
 
-				    <li{% if p == page %} class="active"{% endif %}>
-
-				      <a href="{{ path('vano_fashion_e_shopping_website_management_item_list', {'page': p}) }} ">{{ p }}</a>
+				    <li{% if p == page %} class="active link-disable"{% endif %}>
+                 
+				      <a href="{{path(app.request.attributes.get('_route'))}}?dept={{category ~ productParam}}
+				      &page={{p}}  ">{{ p }}</a>
 
 				    </li>
 

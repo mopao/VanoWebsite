@@ -6,6 +6,10 @@
     	border-color: #E5E8E8  ;
     	margin-bottom: 10px;
     	padding-left: 0px;
+        list-style: none;
+        font-size: 14px;
+        text-transform: capitalize;
+
     }
 
     div.filter{
@@ -13,49 +17,22 @@
     	padding-left: 0px;
     	padding-top: 30px;
 
-
-    }
-
+    }   
    
-    ul.listing-filter li {
-    	list-style: none;
 
-    }    
-
-   ul.listing-filter  >li.listing-filter-header{
-    	
-    	font-size: 14px;
-    	text-transform: uppercase;
-    }
-
-    .listing-filter-header-focus{
+    .filter-active{
 
     	font-weight: bold;
     	color: black;
     	
-    }
+    }   
 
 
-    ul.listing-filter >li{
-    	   	
-    	font-size: 14px;
-    	text-transform: capitalize;
-
-
-
-    }
-
-
-    ul.listing-filter  >li.listing-filter-header:not(:first-child){
+    ul.listing-filter  >li:not(:first-child){
     	padding-top: 5px;
     }
 
-    .listing-items > div.row > div {
-
-    	text-align: center;
-    	padding-top: 5px;
-
-    }
+  
 
     span#listing-sort-dropdown{
 
@@ -76,12 +53,14 @@
 
    }
 
-   .category-listed{
+   div.header-filter-listed > p:first-child{
 
    	    font-weight: bold;
     	color: #4a235a;
     	font-size: 16px;
     	text-transform: uppercase;
+        padding: 0px;
+        margin: 0px;
 
    }
    .text-strong{
@@ -96,18 +75,32 @@
     div.list-item-display{
         margin-right: 12px;
         margin-bottom: 10px;
+        padding: 0px;
     }
-    div.list-item-display p{
+    div.list-item-display  p{
         margin: 0px;
-        padding: 0px;        
+        padding: 0px;  
+        text-align: center;      
     }
-    div.list-item-display p {
-        text-align: center;
-
-    }
+   
 
     div.list-item-display img{
 
         height: 300px;
+
+    }
+
+    div.list-item-display img:hover{
+        
+        width:  275px;
+    }
+
+    div.list-item-display > a{
+        text-decoration: none;
+    }
+
+    div.list-item-display:hover{
+        border: 2px outset #e6e6e6;
+        
 
     }
