@@ -4,7 +4,7 @@
     	border-style: dashed; 
     	background-color:  #F2F4F4;
     	border-color: #E5E8E8  ;
-    	margin-bottom: 10px;
+    	margin-bottom: 20px;
     	padding-left: 0px;
         list-style: none;
         font-size: 14px;
@@ -53,10 +53,10 @@
 
    }
 
-   div.header-filter-listed > p:first-child{
+   div.header-filter-listed > p > a, div.header-filter-listed > p {
 
    	    font-weight: bold;
-    	color: #4a235a;
+    	color:  #5C1F79;
     	font-size: 16px;
     	text-transform: uppercase;
         padding: 0px;
@@ -95,7 +95,7 @@
         width:  275px;
     }
 
-    div.list-item-display > a{
+   div.header-filter-listed a, div.list-item-display > a{
         text-decoration: none;
     }
 

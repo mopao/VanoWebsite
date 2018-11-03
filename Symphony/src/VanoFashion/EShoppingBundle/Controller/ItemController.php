@@ -1124,25 +1124,31 @@ class ItemController extends Controller
     $selectedProduct="";
     $menProducts=null;
     $items=null;
+    $designers= array( );
+    $colors=array( );
+    $selectedDesigners= array( );
+    $selectedColors=array( );
+    $requestedPrices=array( );
+    $MinPrice=null;
+    $MaxPrice=null;
+    $itemFilter=array('gender' => array('men','unisex'));
+    
+    // get products of the category
     if($request->query->get('dept')) {
       $category=$request->query->get('dept');
-      // get products of the category
+      
       $menProducts= $this->getDoctrine()
       ->getManager()
       ->getRepository('VanoFashionEShoppingBundle:ItemProduct')
       ->getAllProducts( array('gender' => array('men','unisex'), 'category'=>array(''.$category)));
     }
 
-  $limit=$this->getParameter('nber_items_per_page');
+    $limit=$this->getParameter('nber_items_per_page');
     
     // get items' product
     if($request->query->get('product')) {
-      $selectedProduct=$request->query->get('product');      
-       $items= $this->getDoctrine()
-                    ->getManager()
-                    ->getRepository('VanoFashionEShoppingBundle:Item')
-                    ->getItems( 1,$limit,array('gender' => array('men','unisex'), 'product'=>array(''.$selectedProduct)));
-      
+      $selectedProduct=$request->query->get('product'); 
+      $itemFilter['product']=array(''.$selectedProduct);       
     }
     // get items' category
     elseif ($menProducts!==null) {
@@ -1153,13 +1159,46 @@ class ItemController extends Controller
         $productNames[]=$product->getName();
       }
 
-      $items= $this->getDoctrine()
-                    ->getManager()
-                    ->getRepository('VanoFashionEShoppingBundle:Item')
-                    ->getItems( 1,$limit,array('gender' => array('men','unisex'), 'product'=>$productNames));
-
+      $itemFilter['product']=$productNames;
       
     }
+
+    // get items of selected designers
+    if($request->query->get('designer')) {
+      $selectedDesigners=explode(',',$request->query->get('designer')); 
+      $itemFilter['brand']=$selectedDesigners;       
+    }
+
+    // get items of selected designers
+    if($request->query->get('color')) {
+      $selectedColors=explode(',',$request->query->get('color')); 
+      $itemFilter['color']=$selectedColors;       
+    }
+
+    // get items in between the selected price(s)
+    if($request->query->get('price')) {
+      $requestedPrices=explode('-',$request->query->get('price')); 
+      $itemFilter['price']=$requestedPrices;       
+    }
+
+    $items= $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository('VanoFashionEShoppingBundle:Item')
+                    ->getItems( 1,$limit,$itemFilter);
+
+
+    // collect colors and brands' items
+    foreach ($items as $item) {
+      # code...
+      if(!in_array($item->getBrand(), $designers )){
+        $designers[]=$item->getBrand();
+      }
+
+      if(!in_array($item->getColor(),$colors )){
+        $colors[]=$item->getColor();
+      }
+    }
+
     $page=($request->query->get('page'))? $request->query->get('page') : 1 ;
     $total=count($items);
     $nbPages = ceil($total / $limit);
@@ -1180,6 +1219,8 @@ class ItemController extends Controller
         'selectedProduct' => $selectedProduct,
         'products' => $menProducts,
         'items'    => $items,
+        'designers'    => $designers,
+        'colors'    => $colors,
         'page' => $page,
         'nbPages' => $nbPages)
         );

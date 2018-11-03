@@ -22,7 +22,7 @@
 
 
 	<div class="col-sm-2 filter"> 
-		<div class="sort-list">  Sort by: 
+		<div class=" sort-list">  Sort by: 
 				  	    <span class="dropdown" id="listing-sort-dropdown">
 						  <span class="dropdown-toggle"  data-toggle="dropdown"><span  > All</span>
 						  <span id="sort-method"></span><span  class="caret"></span></span>
@@ -35,7 +35,7 @@
 						  </span> 
 		</div>
 
-		<div class="header-filter-listed"> <p> {{ category }} </p>
+		<div class="header-filter-listed"> <p> <a href="{{path(app.request.attributes.get('_route'))}}?dept={{category}} "> {{ category }} </a> </p>
 			<ul class="listing-filter">
 				{% for product in products%}
 
@@ -48,6 +48,38 @@
 				{% endfor%}
 
 			</ul>
+		</div>
+
+		<div  class="header-filter-listed">
+			<p> Designers </p>
+			<ul class="listing-filter">
+				{% for designer in designers%}
+
+				  <li > 
+				  	<a > {{designer}} </a>
+				  </li>	 
+
+
+				{% endfor%}
+
+			</ul>
+			
+		</div>
+
+		<div  class="header-filter-listed">
+			<p> Colors </p>
+			<ul class="listing-filter">
+				{% for color in colors%}
+
+				  <li > 
+				  	<a > {{color}} </a>
+				  </li>	 
+
+
+				{% endfor%}
+
+			</ul>
+			
 		</div>
 	</div>
 

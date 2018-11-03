@@ -30,7 +30,7 @@ class ItemRepository extends \Doctrine\ORM\EntityRepository
                  ->innerJoin('i.images', 'img')
                  ->addSelect('img');
                  
-        
+        //$qb->expr()->between('u.id', '1', '10')
     if($filter!==null and count($filter)>0){
       foreach ($filter as $key => $value) {
         # code...
@@ -40,6 +40,17 @@ class ItemRepository extends \Doctrine\ORM\EntityRepository
          elseif ($key==="gender") {
            # code...
           $qb->andWhere($qb->expr()->in('g.'.$key, $value));
+         }
+         elseif ($key==="price") {
+           # code...
+          if ($value[1]==="Inf") {
+            # code...
+             $qb->andWhere($qb->expr()->gte('s.'.$key, $value[0]));
+          } else {
+            # code...
+            $qb->andWhere($qb->expr()->between('s.'.$key, $value[0], $value[1]));
+          }          
+          
          }
          else{
           $qb->andWhere($qb->expr()->in('i.'.$key, $value));
