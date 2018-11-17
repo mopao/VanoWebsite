@@ -16,6 +16,22 @@
                  transition: width 2s;	
               }
 
+    ::-webkit-scrollbar {
+    width: 12px;
+    }
+ 
+	::-webkit-scrollbar-track {
+	    
+	     border-radius: 10px;
+	    -webkit-box-shadow: inset 0 0 6px #E5E8E8;
+	}
+ 
+	::-webkit-scrollbar-thumb {
+	     border-radius: 10px;
+	    -webkit-box-shadow: inset 0 0 6px #b3b3b3;
+	    
+	}
+
 		  /* Safari 4.0 - 8.0 */
 		@-webkit-keyframes example {
 		    from {
@@ -348,7 +364,12 @@
         text-decoration: none;
 
 	}
-
+    .right{
+    	float: right;
+    }
+    .left{
+    	float: left;
+    }
 
    
     

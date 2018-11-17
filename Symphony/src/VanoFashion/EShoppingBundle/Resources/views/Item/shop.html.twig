@@ -1,0 +1,335 @@
+{% extends "VanoFashionEShoppingBundle::bundleLayout.html.twig" %}
+
+
+{% block title %}
+
+  Home - {{ parent() }}
+
+{% endblock %}
+
+{% block javascripts %}
+
+{{ parent()}}
+    {% javascripts 'bundles/vanofashioneshopping/js/shop.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}
+
+{% block stylesheets%}
+{{ parent() }}
+
+{% stylesheets 'bundles/vanofashioneshopping/css/shop.css' filter='cssrewrite' %}
+<link rel="stylesheet" href="{{ asset_url }}"  />
+{% endstylesheets %}
+{% endblock %}
+
+
+{% block vanofashioneshopping_body %}
+
+<div class="container-fluid">
+
+
+	<div class="col-sm-2 filter"> 
+		<div class=" sort-list">  Sort by: 
+				  	    <span class="dropdown" id="listing-sort-dropdown">
+						  <span class="dropdown-toggle"  data-toggle="dropdown"><span  > All</span>
+						  <span id="sort-method"></span><span  class="caret"></span></span>
+						  <ul id="sorting-methods" class="dropdown-menu">
+						    <li><a href="#">Just in</a></li>			    
+						    <li><a href="#">Low price</a></li>
+						    <li><a href="#">High price</a></li>
+						    
+						  </ul>
+						  </span> 
+		</div>
+
+		<div class="header-filter-listed"> <p> <a href="{{path(app.request.attributes.get('_route'))}}?dept={{category}} "> {{ category }} </a> </p>
+			<ul class="listing-filter">
+				{% for product in products%}
+
+				  <li > 
+				  	<a {% if product.name ==selectedProduct %} class='filter-active link-disable' {% endif%} 
+				  	href=" {{path(app.request.attributes.get('_route'))}}?dept={{category}}&product={{product.name}}"> {{product.name}} </a>
+				  </li>	 
+
+
+				{% endfor%}
+
+			</ul>
+		</div>
+        {% set route=path(app.request.attributes.get('_route'))~"?dept="~category %}
+        {% if selectedProduct !="" %}
+        	{% set route=route~"&product="~selectedProduct %}
+        {% endif%} 
+        
+		<div  class="header-filter-listed">
+			<p> Designers </p>			
+			<ul class="listing-filter">
+				{% set route2=route %}
+				{% if selectedColors|length > 0 %} 
+					{% set route2=route~"&color=" %}
+					{% for color in selectedColors %}
+	                   {% set route2=route2~color %}
+	                   {% if not loop.last %} {% set route2=route2~"," %} {% endif%}
+					{% endfor%}
+                {% endif%}
+				{% for designer in designers %}
+                  {% set find='false' %}
+				  <li > 
+				  	{% set param="" %}
+				  	{% for design in selectedDesigners %}
+				  		{% if designer==design %}
+
+				  		    {% set find='true' %}				  		    
+
+				  		{% else %}
+                         	
+                         	 {% if param =="" %} 
+                         	 	{% set param=param~design%}
+                         	 {% else %}
+                         	 	{% set param=param~","~design%}
+
+                         	 {% endif%}
+
+				  		{% endif%}
+				    {% endfor%}
+
+				    {% if find=='false' %}	
+				       {% if price|length !=2 %}			  		
+				  	       <a href="{{route2}}&designers={{param}},{{designer}}"> {{designer}} </a>	
+				  	   {% else %}	
+                           <a href="{{route2}}&designers={{param}},{{designer}}&price={{price[0]}}-{{price[1]}}"> {{designer}} </a>
+				  	   {% endif%}	
+                    
+                    {% else %}
+                        {% if param !="" %}
+	                    	{% if price|length !=2 %}			  		
+					  	       <a href="{{route2}}&designers={{param}}"> {{designer}} </a>	
+					  	    {% else %}	
+	                           <a href="{{route2}}&designers={{param}}&price={{price[0]}}-{{price[1]}}"> {{designer}} </a>
+					  	    {% endif%}
+                        {% else %}
+                        	{% if price|length !=2 %}			  		
+					  	       <a href="{{route2}}"> {{designer}} </a>	
+					  	    {% else %}	
+	                           <a href="{{route2}}&price={{price[0]}}-{{price[1]}}"> {{designer}} </a>
+					  	    {% endif%}
+
+					  	{% endif%}
+
+				  	    <span class="right glyphicon glyphicon-hand-left"> </span>
+
+				  	{% endif%}
+                    
+				  </li>	 
+                  
+				{% endfor%}
+
+			</ul>
+			
+		</div>
+
+		<div  class="header-filter-listed">
+			<p> Colors </p>
+			<ul class="listing-filter">
+
+				{% set route3=route~"" %}
+				{% if selectedDesigners|length > 0 %}
+					{% for designer in selectedDesigners %}
+	                   {% set route3=route3~designer %}
+	                   {% if not loop.last %} {% set route3=route3~"," %} {% endif%}
+					{% endfor%}
+                {% endif%}
+				{% for color in colors%}
+                {% set find2='false' %}
+				  <li > 
+                    {% set param2="" %}
+				  	{% for color1 in selectedColors %}
+				  		{% if color==color1 %}
+
+				  		  {% set find2='true' %}
+
+				  		{% else %}
+                         	
+                         	 {% if param2 =="" %} 
+                         	 	{% set param2=param2~color1%}
+                         	 {% else %}
+                         	 	{% set param2=param2~","~color1%}
+
+                         	 {% endif%}
+				  		{% endif%}
+				    {% endfor%}
+
+				    {% if find2=='false' %}	
+				        {% if price|length !=2 %}			  		
+				  	     	<a href="{{route3}}&color={{param2}},{{color}}"> {{color}} </a>	
+				  	    {% else %}	
+	                     	<a href="{{route3}}&color={{param2}},{{color}}&price={{price[0]}}-{{price[1]}}"> {{color}} </a>
+				  	    {% endif%}
+                    
+                    {% else %}
+                    
+                    	{% if param2!=""%}
+                        	{% if price|length !=2 %}			  		
+				  	     		<a href="{{route3}}&color={{color}}"> {{color}} </a>	
+				  	        {% else %}	
+	                     		<a href="{{route3}}&color={{color}}&price={{price[0]}}-{{price[1]}}"> {{color}} </a>
+				  	        {% endif%}
+
+                    	{% else %}
+
+                    		{% if price|length !=2 %}			  		
+				  	     		<a href="{{route3}}"> {{color}} </a>	
+				  	        {% else %}	
+	                     		<a href="{{route3}}&price={{price[0]}}-{{price[1]}}"> {{color}} </a>
+				  	        {% endif%}
+
+                    	{% endif%}
+
+				  	{% endif%}
+				  	
+				  </li>	 
+
+
+				{% endfor%}
+
+			</ul>
+			
+		</div>
+
+
+		<div  class="header-filter-listed">
+			<p> Price </p>
+			<div  class="listing-filter">				
+                
+				<div><span> <input type="number" id="minPrice" maxlength="5" 
+				{% if price|length == 2  %} value={{price[0]}} {% endif %}
+				 placeholder="Min price" > </span>				
+				
+				<span class="glyphicon glyphicon-minus"></span>
+				<span class="right"> <input type="number" id="maxPrice" maxlength="5"
+				{% if price|length == 2  and  price[1]!="Inf" %} value={{price[1]}} {% endif %}
+				placeholder="Max price" > </span>
+				</div>
+				<div class="filter-search-refine"> <button class="btn btn-default" id="price-filter">Refine search</button></div>
+				
+			</div>
+			
+		</div>
+	</div>
+
+	<div class="col-sm-10 listing-items">
+			
+		{% set nberItems,nberItemsPrinted, step= items|length, 0, 4 %}
+		{% set nberOfRows= (nberItems % step==0)? nberItems / step : ((nberItems-(nberItems % step))/step)  %}
+		
+        {% if nberItems - nberItemsPrinted > 0 %}			
+			
+			{% if nberItems - nberItemsPrinted < step %}
+				<div class="row">
+					{% for i in range(nberItemsPrinted, nberItems -1, 1) %}  
+					<div class="col-sm-3 list-item-display">	
+					<a href="">				
+							<div class="list-item-image-display"> {% for image in items[i].images if image.ismain=="true"  %}
+								<img  class="img-responsive img-rounded"    src="{{ asset("bundles/vanofashioneshopping/images/" ~ image.url ) }} " alt="{{image.alt}}">
+								 {% endfor %}
+							</div>
+							<div>
+							<p class="text-strong"> {{items[i].brand}}</p>
+							<p>{{items[i].name}}</p>
+							<p class="text-strong"><span class="glyphicon glyphicon-usd"></span> {{items[i].stocks[0].price}}</p>
+							</div>
+					</a>			
+					</div>     				        
+				    {% endfor %}
+				</div>
+
+			{% else%}
+				{% for k in range(1,nberOfRows)%}
+				
+					<div class="row">
+						{% for i in range(nberItemsPrinted, step + nberItemsPrinted-1, 1) %}  
+						<div class="col-sm-3 list-item-display">
+						<a href="">						
+							<div class="list-item-image-display"> {% for image in items[i].images if image.ismain=="true"  %}
+								<img  class="img-responsive img-rounded"    src="{{ asset("bundles/vanofashioneshopping/images/" ~ image.url ) }} " alt="{{image.alt}}">
+								 {% endfor %}
+							</div>
+							<div>
+							<p class="text-strong"> {{items[i].brand}}</p>
+							<p>{{items[i].name}}</p>
+							<p class="text-strong"><span class="glyphicon glyphicon-usd"></span> {{items[i].stocks[0].price}}</p>
+							</div>
+						</a>
+					    </div>        				        
+					    {% endfor %}
+				    </div>
+				    {% set nberItemsPrinted=nberItemsPrinted+step %}
+
+			    {% endfor %}
+
+			    {% if nberItemsPrinted < nberItems and nberItems - nberItemsPrinted < step  %}
+			    	<div class="row">
+						{% for i in range(nberItemsPrinted, nberItems -1, 1) %}  
+							<div class="col-sm-3 list-item-display">
+							<a href="">						
+								<div class="list-item-image-display"> {% for image in items[i].images if image.ismain=="true"  %}
+									<img  class="img-responsive img-rounded"    src="{{ asset("bundles/vanofashioneshopping/images/" ~ image.url ) }} " alt="{{image.alt}}">
+									 {% endfor %}
+									</div>
+									<div>
+									<p class="text-strong"> {{items[i].brand}}</p>
+									<p>{{items[i].name}}</p>
+									<p class="text-strong"><span class="glyphicon glyphicon-usd"></span> {{items[i].stocks[0].price}}</p>
+								</div>
+							</a>
+					        </div>        				        
+					    {% endfor %}
+				   </div>
+
+			    {%endif%}
+
+	        {%endif%}
+
+				
+			
+		{% else %}
+
+		<div class="alert alert-info"> <strong> no product has been found ! </strong>  </div>
+					
+		{%endif%}
+
+
+
+			
+			
+	</div>
+</div>
+{% set productParam= (selectedProduct !="")? '&product='~selectedProduct : "" %}
+
+{% if nbPages > 0 %}
+	<div class="div-pagination">
+
+		<ul class="vano-pagination  ">  
+				  
+				    {% for p in range(1, nbPages) %}
+
+				    <li{% if p == page %} class="active link-disable"{% endif %}>
+                 
+				      <a href="{{path(app.request.attributes.get('_route'))}}?dept={{category ~ productParam}}
+				      &page={{p}}  ">{{ p }}</a>
+
+				    </li>
+
+				  {% endfor %}
+				
+
+		</ul>
+			
+	</div>
+
+ {% endif %}
+
+
+{% endblock %}

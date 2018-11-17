@@ -66,9 +66,12 @@ class ItemRepository extends \Doctrine\ORM\EntityRepository
                  ->orderBy('i.addingDate', 'DESC')
                  ->getQuery();
 
-    $qb->setFirstResult(($page-1) * $nbPerPage);      
+    if ($page!=0 and $nbPerPage!=0) {
+           # code...
+      $qb->setFirstResult(($page-1) * $nbPerPage);      
 
-    $qb->setMaxResults($nbPerPage);       
+      $qb->setMaxResults($nbPerPage);  
+    }     
 
      return $qb->getQuery()
               ->getResult();

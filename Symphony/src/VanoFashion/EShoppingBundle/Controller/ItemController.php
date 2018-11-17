@@ -1164,8 +1164,8 @@ class ItemController extends Controller
     }
 
     // get items of selected designers
-    if($request->query->get('designer')) {
-      $selectedDesigners=explode(',',$request->query->get('designer')); 
+    if($request->query->get('designers')) {
+      $selectedDesigners=explode(',',$request->query->get('designers')); 
       $itemFilter['brand']=$selectedDesigners;       
     }
 
@@ -1181,14 +1181,16 @@ class ItemController extends Controller
       $itemFilter['price']=$requestedPrices;       
     }
 
-    $items= $this->getDoctrine()
+    $repository= $this->getDoctrine()
                     ->getManager()
-                    ->getRepository('VanoFashionEShoppingBundle:Item')
-                    ->getItems( 1,$limit,$itemFilter);
+                    ->getRepository('VanoFashionEShoppingBundle:Item');
+    $items=$repository->getItems( 1,$limit,$itemFilter);
 
 
     // collect colors and brands' items
-    foreach ($items as $item) {
+    $menItems=$repository->getItems( 0,0,array('gender' => array('men','unisex')));
+
+    foreach ($menItems as $item) {
       # code...
       if(!in_array($item->getBrand(), $designers )){
         $designers[]=$item->getBrand();
@@ -1213,14 +1215,17 @@ class ItemController extends Controller
 
 
 
-    return $this->render('VanoFashionEShoppingBundle:Item:menShop.html.twig',
+    return $this->render('VanoFashionEShoppingBundle:Item:shop.html.twig',
       array(
         'category'=> $category,
         'selectedProduct' => $selectedProduct,
+        'selectedDesigners' => $selectedDesigners,
+        'selectedColors' => $selectedColors,
         'products' => $menProducts,
         'items'    => $items,
         'designers'    => $designers,
         'colors'    => $colors,
+        'price'     => $requestedPrices,
         'page' => $page,
         'nbPages' => $nbPages)
         );

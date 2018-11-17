@@ -1,5 +1,5 @@
 
- ul.listing-filter{    	
+ .listing-filter{    	
     	
     	border-style: dashed; 
     	background-color:  #F2F4F4;
@@ -10,6 +10,37 @@
         font-size: 14px;
         text-transform: capitalize;
 
+    }
+
+
+    ul.listing-filter{        
+        overflow-x: hidden; /* Hide horizontal scrollbar */
+        overflow-y: scroll; /* Add vertical scrollbar */  
+        height: 250px;      
+
+    }
+
+   .listing-filter input[type="number"] {
+    width: 80px;
+    text-align:center;
+    
+    }
+
+    .listing-filter span.glyphicon-minus {
+   
+    text-align:center;
+    margin-left: 7px;
+    
+    }
+    div.filter-search-refine{
+        margin-top: 10px;
+        border-top: 1px solid #E5E8E8;
+        text-align: center;
+    }
+
+    div.filter-search-refine button, div.filter-search-refine button:focus{
+        background-color:  #5C1F79;
+        color: white;
     }
 
     div.filter{
@@ -93,14 +124,11 @@
     div.list-item-display img:hover{
         
         width:  275px;
+        height: 350px;
     }
 
    div.header-filter-listed a, div.list-item-display > a{
         text-decoration: none;
     }
 
-    div.list-item-display:hover{
-        border: 2px outset #e6e6e6;
-        
-
-    }
+   
