@@ -1,0 +1,108 @@
+{% extends "VanoFashionEShoppingBundle::bundleLayout.html.twig" %}
+
+
+{% block title %}
+
+  Home - {{ parent() }}
+
+{% endblock %}
+
+{% block javascripts %}
+
+{{ parent()}}
+    {% javascripts 'bundles/vanofashioneshopping/js/shop.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}
+
+{% block stylesheets%}
+{{ parent() }}
+
+{% stylesheets 'bundles/vanofashioneshopping/css/shop.css' filter='cssrewrite' %}
+<link rel="stylesheet" href="{{ asset_url }}"  />
+{% endstylesheets %}
+{% endblock %}
+
+
+{% block vanofashioneshopping_body %}
+
+
+<div class="container-fluid">
+	<div class="row"> <div class=" col-sm-12" > <p class="item-shop-headline">
+		{{item.gender.gender~" / "~item.product.category.name~" / "~item.product.name~" / "~item.brand}}
+
+		
+	</p></div></div>
+	
+	<div class="row ">
+		<div class=" col-sm-1"></div>
+		<div class="col-sm-10 div-item-image">
+			<div class=" col-sm-7 ">
+			<div class="row">
+				<div class=" col-sm-3 dropdown-list-image">
+				 <ul>
+				 	{% for image in item.images %}
+				 	<li> <img  class="img-responsive img-rounded"    src="{{ asset("bundles/vanofashioneshopping/images/" ~ image.url ) }} " alt="{{image.alt}}"> </li>
+				 	{% endfor %}
+				 </ul>
+				</div>
+
+				<div class=" col-sm-9 " id="div-main-image">  {% for image in item.images if image.ismain=="true"  %}
+								<img  class="img-responsive img-rounded" id="item-main-image"   src="{{ asset("bundles/vanofashioneshopping/images/" ~ image.url ) }} " alt="{{image.alt}}">
+								 {% endfor %}
+				</div>
+			</div>			
+		</div>
+
+		<div class=" col-sm-4 item-div-menu ">
+			<div > 
+				<p class="text-strong-2"> {{item.brand}} </p>	
+				<p> {{item.name}} </p>
+				<p class="text-strong-2"> <span class="glyphicon glyphicon-usd"></span> {{item.stocks[0].price}} </p>
+			</div>
+
+			<div> 
+				<div id="item-active-color"> active color 	</div>
+				<div id="item-list-color">  list colors </div>				
+			</div>
+
+			<div>
+			    <div > size </div>
+				<div id="item-list-size">  list sizes </div> 
+								
+			</div>	
+
+			<div> 
+				<p><button class="btn btn-default text-strong-2 col-sm-12"> add to shopping bag </button>	</p>			
+			</div>
+
+		</div>
+		</div>
+        
+
+	</div>
+
+	<div class="row">
+		<div class=" col-sm-1"></div> <div class="col-sm-5"> manucfaturing country</div>
+		<div class="col-sm-5"> shipping time and costs</div>
+		
+	</div>
+	<div class="row">
+		<div class=" col-sm-1"></div>
+		<div class="col-sm-5"> item composition</div>
+		<div class="col-sm-5"> </div>
+		
+	</div>
+
+	<div class="row">
+		<div class=" col-sm-1"></div>
+		<div class="col-sm-5"> details</div>
+		<div class="col-sm-5">product code </div>
+		
+	</div>
+
+</div>
+
+
+{% endblock %}

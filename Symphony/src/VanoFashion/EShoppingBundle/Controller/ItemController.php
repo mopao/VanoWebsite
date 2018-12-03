@@ -502,7 +502,7 @@ class ItemController extends Controller
     }
     
     /**
-     *return the view for the editing of item product
+     *return the view for the edition of item product
      *
      */
     public function itemProductEditAction($id, Request $request)
@@ -605,7 +605,7 @@ class ItemController extends Controller
     public function managementListProductViewAction($_locale, $page, Request $request){
 
       if($request->isXmlHttpRequest()) {
-        # code ajax request
+        # code for an ajax  request
         $array_products=array();
         $products= $this->getDoctrine()
         ->getManager()
@@ -1114,7 +1114,7 @@ class ItemController extends Controller
 
   /**
    *
-   *this function display all pages about men shopping
+   *this function display all pages about men's items 
    *
    *
    **/
@@ -1211,10 +1211,6 @@ class ItemController extends Controller
       throw $this->createNotFoundException("page does'nt exist!");
 
     }
-
-
-
-
     return $this->render('VanoFashionEShoppingBundle:Item:shop.html.twig',
       array(
         'category'=> $category,
@@ -1229,6 +1225,31 @@ class ItemController extends Controller
         'page' => $page,
         'nbPages' => $nbPages)
         );
+
+  }
+
+
+  /**
+   *
+   *this function display an item for customers 
+   *
+   *
+   **/
+  public function itemShopAction( $_locale, Request $request, $id){
+
+    $itemFilter=array('id' => array($id));
+    $repository= $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository('VanoFashionEShoppingBundle:Item');
+
+    $item=$repository->getItem( $itemFilter);
+
+    return $this->render('VanoFashionEShoppingBundle:Item:itemShop.html.twig',
+      array( 
+        'item'=>$item
+      ));
+
+
 
   }
 

@@ -38,7 +38,8 @@
         text-align: center;
     }
 
-    div.filter-search-refine button, div.filter-search-refine button:focus{
+     div.item-div-menu > div > p > button,div.item-div-menu > div > p > button:hover,
+      div.filter-search-refine button, div.filter-search-refine button:hover{
         background-color:  #5C1F79;
         color: white;
     }
@@ -49,7 +50,9 @@
     	padding-top: 30px;
 
     }   
-   
+    div.item-div-menu > div > p > button{
+        padding: 10px;
+    }
 
     .filter-active{
 
@@ -88,7 +91,7 @@
 
    	    font-weight: bold;
     	color:  #5C1F79;
-    	font-size: 16px;
+    	font-size: 1em;
     	text-transform: uppercase;
         padding: 0px;
         margin: 0px;
@@ -97,16 +100,64 @@
    .text-strong{
 		color:  black;		
 		font-weight: bold;
-		font-size: 17px; 
+		font-size: 1.3em; 
         text-transform: capitalize;
     }
 
-	
+    .text-strong-2{
+        color:  black;      
+        font-weight: bold;
+        font-size: 1.5em; 
+        text-transform: uppercase;
+    }
+
+	.item-div-menu p{
+
+        text-align: center;
+        text-transform: uppercase;
+        margin-top: 0px;
+        padding-top: 0px;
+
+
+    }
+
+    div.item-div-menu{
+        margin-top: 5%;
+    }
+
+    div.item-div-menu > div{
+
+        border-bottom: 2px solid #E5E8E8;
+        margin-bottom: 10px;
+        margin-top: 0px;
+        padding-top: 0px;
+
+    }
+
+    div.div-item-image{
+        border-bottom: 2px solid gray;
+        margin-bottom: 20px;
+    }
+
+    div.item-div-menu > div> div{
+
+        font-size: 0.9em;
+        text-align: center;
+        text-transform: uppercase;
+        
+
+    }
+
+    div#item-list-color,div#item-list-size{
+        margin-top: 10px;
+    }
 
     div.list-item-display{
         margin-right: 12px;
         margin-bottom: 10px;
         padding: 0px;
+        transition: transform .2s;
+        
     }
     div.list-item-display  p{
         margin: 0px;
@@ -117,18 +168,98 @@
 
     div.list-item-display img{
 
-        height: 300px;
+        height: 270px;        
+        margin: auto;
+        display: block;
+        width: 80%;
+
 
     }
 
-    div.list-item-display img:hover{
+    div.list-item-display:hover{
         
-        width:  275px;
-        height: 350px;
+        transform: scale(1.1);
     }
 
    div.header-filter-listed a, div.list-item-display > a{
         text-decoration: none;
     }
+
+    .outer-circle {
+        height: 40px;
+        width: 40px; 
+        border-radius: 50%;
+        background-color:white;       
+        position:relative;
+    }
+
+    
+
+    .inner-circle {
+       position: absolute;       
+       border-radius: 50%;
+       height: 25px;
+       width: 25px;
+       /*
+        Put top edge and left edge in the center
+       */
+       top: 50%;
+       left: 50%;
+       margin: -13px 0px 0px -13px;
+       /* 
+        Offset the position correctly with
+        minus half of the width and minus half of the height 
+       */
+     }
+
+     div.dropdown-list-image{
+        height: 400px;
+        width: 150px;
+        margin: 0px;
+        padding: 0px;   
+        overflow-y: scroll;
+     }
+
+     div.dropdown-list-image ul{
+        list-style-type: none;
+     }
+
+      div.dropdown-list-image ul > li > img{
+         margin: auto;
+         display: block;        
+        
+     }
+
+      div.dropdown-list-image ul > li {
+        border: 2px solid #E5E8E8;
+        margin-bottom: 10px;
+        margin-right: 10px;
+        
+        
+     }
+     
+
+     img#item-main-image{
+
+        width: 400px;       
+        margin: auto;
+        display: block;
+
+     }
+
+     #div-main-image{
+        margin: 0px;
+        padding: 0px;
+     }
+    
+    .item-shop-headline{
+        text-align: center;
+        text-transform: uppercase;
+        color: #5C1F79;
+        margin-top:20px;
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+
 
    

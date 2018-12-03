@@ -11,6 +11,13 @@ vano_fashion_e_shopping_men_shop:
     defaults: { _controller: VanoFashionEShoppingBundle:Item:menShop, _locale: en }
     requirements:
         _locale: en|fr
+
+vano_fashion_e_shopping_display_item:
+    path:     /{_locale}/shop/item/{id}
+    defaults: { _controller: VanoFashionEShoppingBundle:Item:itemShop, _locale: en }
+    requirements:
+        _locale: en|fr
+        id:   \d+
         
        
 

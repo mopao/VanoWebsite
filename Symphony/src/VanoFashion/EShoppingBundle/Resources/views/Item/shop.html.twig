@@ -230,7 +230,7 @@
 				<div class="row">
 					{% for i in range(nberItemsPrinted, nberItems -1, 1) %}  
 					<div class="col-sm-3 list-item-display">	
-					<a href="">				
+					<a href=" {{ path('vano_fashion_e_shopping_display_item', {'id': items[i].id }) }}">				
 							<div class="list-item-image-display"> {% for image in items[i].images if image.ismain=="true"  %}
 								<img  class="img-responsive img-rounded"    src="{{ asset("bundles/vanofashioneshopping/images/" ~ image.url ) }} " alt="{{image.alt}}">
 								 {% endfor %}
@@ -251,7 +251,7 @@
 					<div class="row">
 						{% for i in range(nberItemsPrinted, step + nberItemsPrinted-1, 1) %}  
 						<div class="col-sm-3 list-item-display">
-						<a href="">						
+						<a href=" {{ path('vano_fashion_e_shopping_display_item', {'id': items[i].id }) }}">						
 							<div class="list-item-image-display"> {% for image in items[i].images if image.ismain=="true"  %}
 								<img  class="img-responsive img-rounded"    src="{{ asset("bundles/vanofashioneshopping/images/" ~ image.url ) }} " alt="{{image.alt}}">
 								 {% endfor %}
@@ -273,7 +273,7 @@
 			    	<div class="row">
 						{% for i in range(nberItemsPrinted, nberItems -1, 1) %}  
 							<div class="col-sm-3 list-item-display">
-							<a href="">						
+							<a href=" {{ path('vano_fashion_e_shopping_display_item', {'id': items[i].id }) }}">						
 								<div class="list-item-image-display"> {% for image in items[i].images if image.ismain=="true"  %}
 									<img  class="img-responsive img-rounded"    src="{{ asset("bundles/vanofashioneshopping/images/" ~ image.url ) }} " alt="{{image.alt}}">
 									 {% endfor %}

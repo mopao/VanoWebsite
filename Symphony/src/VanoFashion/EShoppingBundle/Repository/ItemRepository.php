@@ -30,7 +30,7 @@ class ItemRepository extends \Doctrine\ORM\EntityRepository
                  ->innerJoin('i.images', 'img')
                  ->addSelect('img');
                  
-        //$qb->expr()->between('u.id', '1', '10')
+        
     if($filter!==null and count($filter)>0){
       foreach ($filter as $key => $value) {
         # code...
@@ -84,15 +84,28 @@ class ItemRepository extends \Doctrine\ORM\EntityRepository
    * get item with a given id
    */
 
-  public function getItem($id){
+  public function getItem(array $filter){
 
     $qb=$this->createQueryBuilder('i')
-            ->where('i.id = :id')
-            ->setParameter('id',$id)
-            ->innerJoin('i.stocks', 's')
-            ->addSelect('s')
-            ->innerJoin('i.images', 'img')
-            ->addSelect('img');
+             ->innerJoin('i.stocks', 's')
+             ->addSelect('s')
+             ->innerJoin('i.gender', 'g')
+             ->addSelect('g')
+             ->innerJoin('i.product', 'p')
+             ->addSelect('p')
+             ->innerJoin('i.images', 'img')
+             ->addSelect('img');
+           
+
+
+      if($filter!==null and count($filter)>0){
+      foreach ($filter as $key => $value) {
+        # code...
+       
+          $qb->andWhere($qb->expr()->in('i.'.$key, $value));
+         
+      }
+    }
     
    
     return $qb->getQuery()
