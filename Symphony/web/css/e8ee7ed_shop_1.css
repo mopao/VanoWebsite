@@ -141,15 +141,21 @@
 
     div.item-div-menu > div> div{
 
-        font-size: 0.9em;
+        font-size: 15px;
         text-align: center;
         text-transform: uppercase;
+        font-weight: bold;
+        color: black;
+        text-align: center;
         
 
     }
 
     div#item-list-color,div#item-list-size{
-        margin-top: 10px;
+        
+        overflow-x: scroll;
+        width: 100%;
+       
     }
 
     div.list-item-display{
@@ -165,7 +171,41 @@
         text-align: center;      
     }
    
+    div#item-list-size > ul, div#item-list-color > ul{
+        list-style-type: none;
+    }
 
+    
+
+    
+
+    div#item-list-size > ul:first-child{       
+        
+        margin-top: 15px;        
+    }
+
+     div#item-list-color > ul:first-child{       
+        
+        margin-top: 20px;        
+    }
+    
+   div#item-list-size > ul > li {
+        display: inline;
+        margin-right: 30px; 
+        padding: 10px;             
+        
+    }
+
+    div#item-list-color > ul > li{
+        display: inline;
+        margin-right: 20px; 
+        
+    }
+
+    div#item-list-size > ul > li:hover {
+        border: 2px solid black;             
+        
+    }
     div.list-item-display img{
 
         height: 270px;        
@@ -190,12 +230,17 @@
         width: 40px; 
         border-radius: 50%;
         background-color:white;       
-        position:relative;
+        position:relative;        
+        margin: 0px;
+        padding: 0px;
+        display: inline-block;
+
     }
 
     
 
     .inner-circle {
+       display: inline-block;
        position: absolute;       
        border-radius: 50%;
        height: 25px;

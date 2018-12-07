@@ -55,7 +55,7 @@
 			</div>			
 		</div>
 
-		<div class=" col-sm-4 item-div-menu ">
+		<div class=" col-sm-5 item-div-menu ">
 			<div > 
 				<p class="text-strong-2"> {{item.brand}} </p>	
 				<p> {{item.name}} </p>
@@ -63,13 +63,39 @@
 			</div>
 
 			<div> 
-				<div id="item-active-color"> active color 	</div>
-				<div id="item-list-color">  list colors </div>				
+				<div id="item-active-color"> {{item.color}} 	</div>
+				<div id="item-list-color">  
+                <ul id="item-colors">
+
+					
+					<li> 
+						<div class="outer-circle" style="border: 2px solid #5C1F79;"> <div class="inner-circle" style="background-color: {{item.color}}"></div></div>
+					</li>
+
+					<li> 
+						<div class="outer-circle"> <div class="inner-circle" style="background-color: red"></div></div>
+					</li>
+
+					<li> 
+						<div class="outer-circle"> <div class="inner-circle" style="background-color: green"></div></div>
+					</li>
+
+					
+				</ul> 
+				 </div>				
 			</div>
 
 			<div>
-			    <div > size </div>
-				<div id="item-list-size">  list sizes </div> 
+			    <div > size  (<span id="item-typesize">{{item.stocks[0].typeSize}}</span>)</div>
+
+				<div id="item-list-size">  <ul id="item-sizes">
+
+					{% for stock in item.stocks %}
+					<li>  {{stock.itemSize}}  </li>
+					{% endfor %}
+				</ul> 
+				
+			</div> 
 								
 			</div>	
 
@@ -84,7 +110,8 @@
 	</div>
 
 	<div class="row">
-		<div class=" col-sm-1"></div> <div class="col-sm-5"> manucfaturing country</div>
+		<div class=" col-sm-1"></div>
+		 <div class="col-sm-5"> manucfaturing country</div>
 		<div class="col-sm-5"> shipping time and costs</div>
 		
 	</div>
